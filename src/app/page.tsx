@@ -44,7 +44,7 @@ export default function Home() {
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <div className="animate-fade-in-up">
             <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary-light border border-primary/20 mb-6">
-              🚀 Selamat Datang di Portofolio Tim Kami
+              🚀 Selamat Datang di Portofolio Website Tim Kami
             </span>
           </div>
 
