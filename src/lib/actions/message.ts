@@ -13,7 +13,7 @@ export async function sendMessage(data: { name: string; email: string; subject: 
     // Validasi data
     const validation = messageSchema.safeParse(data)
     if (!validation.success) {
-        return { error: validation.error.errors[0].message }
+        return { error: validation.error.issues[0].message }
     }
 
     const { error } = await supabase.from('messages').insert({
