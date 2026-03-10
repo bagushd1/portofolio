@@ -46,3 +46,19 @@ export async function deleteMessage(id: string) {
     revalidatePath('/admin/messages')
     return { success: true }
 }
+
+/**
+ * Tandai pesan sudah dibaca
+ */
+export async function markAsRead(id: string) {
+    const supabase = await createClient()
+
+    const { error } = await supabase.from('messages').update({ is_read: true }).eq('id', id)
+
+    if (error) {
+        return { error: 'Gagal update pesan: ' + error.message }
+    }
+
+    revalidatePath('/admin/messages')
+    return { success: true }
+}

@@ -1,21 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "Portofolio Tim | Web Development",
-  description:
-    "Website portofolio tim kami. Lihat proyek-proyek yang telah kami kerjakan dan hubungi kami untuk kolaborasi.",
+  description: "Website portofolio tim kami. Lihat proyek-proyek yang telah kami kerjakan dan hubungi kami untuk kolaborasi.",
   keywords: ["portofolio", "web development", "tim", "proyek"],
 };
 
@@ -25,11 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en">
+      <body className={`${jakarta.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
         {children}
+        <Toaster theme="light" position="top-right" />
       </body>
     </html>
   );
