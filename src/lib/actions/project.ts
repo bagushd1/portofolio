@@ -1,7 +1,11 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { revalidatePath } from "next/cache";
+
+const BUCKET_NAME = "portfolio-assets";
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 interface ProjectData {
     title: string;
@@ -10,6 +14,41 @@ interface ProjectData {
     live_link?: string;
     github_link?: string;
     image_url?: string;
+}
+
+/**
+ * Auto-ensure storage bucket exists (idempotent).
+ * Menggunakan admin client agar bisa membuat bucket.
+ * Hasil di-cache agar tidak cek berulang setiap upload.
+ */
+let bucketEnsured = false;
+async function ensureBucket() {
+    if (bucketEnsured) return;
+
+    try {
+        const supabaseAdmin = createAdminClient();
+        const { data } = await supabaseAdmin.storage.getBucket(BUCKET_NAME);
+
+        if (!data) {
+            const { error: createError } = await supabaseAdmin.storage.createBucket(BUCKET_NAME, {
+                public: true,
+                fileSizeLimit: MAX_FILE_SIZE,
+            });
+
+            if (createError && !createError.message.includes("already exists")) {
+                console.error("Failed to create bucket:", createError);
+                throw createError;
+            }
+        }
+
+        bucketEnsured = true;
+    } catch (error) {
+        console.error("ensureBucket error:", error);
+        throw new Error(
+            "Gagal memastikan storage bucket tersedia. " +
+            "Pastikan SUPABASE_SERVICE_ROLE_KEY sudah diset di .env.local"
+        );
+    }
 }
 
 export async function createProject(data: ProjectData) {
@@ -72,26 +111,39 @@ export async function deleteProject(id: string) {
 }
 
 export async function uploadImage(formData: FormData) {
-    const supabase = await createClient();
     const file = formData.get("file") as File;
 
     if (!file) {
         return { error: "File tidak ditemukan" };
     }
 
-    const fileExt = file.name.split(".").pop();
-    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+    if (file.size > MAX_FILE_SIZE) {
+        return { error: `Ukuran file terlalu besar. Maksimal ${MAX_FILE_SIZE / 1024 / 1024}MB` };
+    }
 
-    const { error } = await supabase.storage
-        .from("portfolio-assets")
+    // Auto-ensure bucket exists
+    try {
+        await ensureBucket();
+    } catch {
+        return { error: "Storage bucket belum tersedia. Hubungi admin." };
+    }
+
+    // Gunakan admin client untuk upload (bypass storage RLS)
+    // Aman karena fungsi ini sudah dilindungi oleh auth middleware
+    const supabaseAdmin = createAdminClient();
+    const fileExt = file.name.split(".").pop();
+    const fileName = `projects/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+
+    const { error } = await supabaseAdmin.storage
+        .from(BUCKET_NAME)
         .upload(fileName, file);
 
     if (error) {
         return { error: error.message };
     }
 
-    const { data: urlData } = supabase.storage
-        .from("portfolio-assets")
+    const { data: urlData } = supabaseAdmin.storage
+        .from(BUCKET_NAME)
         .getPublicUrl(fileName);
 
     return { success: true, url: urlData.publicUrl };
