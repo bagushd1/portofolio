@@ -1,282 +1,291 @@
 import ContactForm from "@/components/ContactForm";
+import ScrollReveal from "@/components/ScrollReveal";
+import { createClient } from "@/lib/supabase/server";
+import { ArrowRight, CheckCircle2, ChevronRight, Code2, Globe, Laptop, Layout, Server, Database, Smartphone } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+export const revalidate = 60; // Revalidate every 60 seconds
+
+export default async function Home() {
+  const supabase = await createClient();
+  const { data: projects } = await supabase
+    .from("projects")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(4);
+
   return (
-    <div className="min-h-screen animated-gradient">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="#" className="text-lg font-bold gradient-text">
-            Portofolio
-          </a>
-          <div className="flex items-center gap-6">
-            <a
-              href="#about"
-              className="text-sm text-text-muted hover:text-foreground transition-colors"
-            >
-              Tentang
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary">
+      {/* Navbar Brutalist */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b-4 border-foreground w-full overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 h-16 md:h-20 flex items-center justify-between">
+          <div className="flex items-center gap-2 md:gap-3">
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-primary flex items-center justify-center border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all">
+              <Code2 className="w-4 h-4 md:w-6 md:h-6 text-primary-foreground" />
+            </div>
+            <span className="text-xl md:text-2xl font-black uppercase tracking-widest text-foreground">Nexus<span className="text-primary hidden sm:inline">Tech.</span><span className="text-primary sm:hidden">.</span></span>
+          </div>
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#services" className="text-sm font-black uppercase tracking-wider text-foreground hover:text-primary transition-colors">Layanan</a>
+            <a href="#work" className="text-sm font-black uppercase tracking-wider text-foreground hover:text-primary transition-colors">Portfolio</a>
+            <a href="#contact" className="text-sm font-black uppercase tracking-wider px-6 py-2.5 bg-[#fff133] text-foreground border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center gap-2">
+              Konsultasi <ArrowRight className="w-5 h-5" />
             </a>
-            <a
-              href="#services"
-              className="text-sm text-text-muted hover:text-foreground transition-colors"
-            >
-              Layanan
-            </a>
-            <a
-              href="#contact"
-              className="text-sm px-4 py-2 rounded-lg bg-primary/10 text-primary-light hover:bg-primary/20 transition-all"
-            >
-              Kontak
+          </div>
+          <div className="flex md:hidden items-center">
+            {/* Simple Mobile Menu Trigger For Now */}
+            <a href="#contact" className="text-[10px] sm:text-xs font-black uppercase tracking-wider px-3 sm:px-4 py-1.5 sm:py-2 bg-[#fff133] text-foreground border-2 sm:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center">
+              Mulai <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1" />
             </a>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse-ring" />
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl animate-pulse-ring" style={{ animationDelay: "1.5s" }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[100px]" />
-        </div>
+      <main className="pt-20 pb-16">
+        {/* HERO SECTION - Bento Brutalism & Partner Copy */}
+        <section className="min-h-screen pt-4 sm:pt-8 md:pt-12 pb-16 md:pb-24 px-4 sm:px-6 md:px-12 bg-background border-b-4 border-foreground flex items-center">
+          <div className="max-w-[1400px] w-full mx-auto grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-4 md:gap-6 mt-16 md:mt-0">
 
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <div className="animate-fade-in-up">
-            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary-light border border-primary/20 mb-6">
-              🚀 Selamat Datang di Portofolio Website Tim Kami
-            </span>
-          </div>
-
-          <h1
-            className="text-5xl md:text-7xl font-bold leading-tight mb-6 animate-fade-in-up"
-            style={{ animationDelay: "0.1s" }}
-          >
-            Kami Membangun{" "}
-            <span className="gradient-text">Solusi Digital</span>{" "}
-            yang Berdampak
-          </h1>
-
-          <p
-            className="text-lg md:text-xl text-text-muted max-w-2xl mx-auto mb-10 animate-fade-in-up"
-            style={{ animationDelay: "0.2s" }}
-          >
-            Tim developer & designer yang berdedikasi untuk menciptakan
-            pengalaman web modern, cepat, dan memukau.
-          </p>
-
-          <div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up"
-            style={{ animationDelay: "0.3s" }}
-          >
-            <a
-              href="#contact"
-              className="px-8 py-3.5 rounded-xl font-medium text-sm text-white transition-all duration-300
-                bg-gradient-to-r from-primary to-primary-dark hover:from-primary-light hover:to-primary
-                hover:shadow-[0_0_25px_rgba(99,102,241,0.4)] active:scale-[0.98]"
-            >
-              Hubungi Kami →
-            </a>
-            <a
-              href="#about"
-              className="px-8 py-3.5 rounded-xl font-medium text-sm text-text-muted transition-all duration-200
-                border border-surface-border hover:border-text-dim hover:text-foreground"
-            >
-              Pelajari Lebih Lanjut
-            </a>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 rounded-full border-2 border-surface-border flex items-start justify-center p-1.5">
-            <div className="w-1.5 h-2.5 rounded-full bg-text-dim" />
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs font-medium text-accent uppercase tracking-widest">
-              Tentang Kami
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
-              Tim yang <span className="gradient-text">Passionate</span>
-            </h2>
-            <p className="text-text-muted max-w-xl mx-auto">
-              Kami adalah sekelompok developer dan designer yang percaya bahwa
-              teknologi bisa membuat perbedaan nyata.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: "⚡",
-                title: "Cepat & Performa Tinggi",
-                desc: "Website yang kami buat dioptimasi untuk kecepatan dan performa terbaik.",
-              },
-              {
-                icon: "🎨",
-                title: "Desain Modern",
-                desc: "UI/UX yang clean, intuitif, dan mengikuti tren desain terkini.",
-              },
-              {
-                icon: "🔒",
-                title: "Aman & Terpercaya",
-                desc: "Keamanan data menjadi prioritas utama dalam setiap proyek yang kami kerjakan.",
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="glass rounded-2xl p-6 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
-                  {item.icon}
+            {/* Main Typo Box (Takes most space) */}
+            <ScrollReveal delay={0.1} className="md:col-span-4 lg:col-span-8 bg-[#fdfbf7] dark:bg-card border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 lg:p-16 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between group transform hover:-translate-y-1 transition-transform">
+              <div>
+                <div className="inline-flex items-center mb-6 md:mb-8 border-b-2 md:border-b-4 border-foreground pb-2 w-max max-w-full overflow-hidden">
+                  <span className="text-xs sm:text-sm font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] text-foreground truncate">Strategic Partner</span>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-text-muted leading-relaxed">
-                  {item.desc}
+
+                <h1 className="text-[3.5rem] sm:text-6xl md:text-7xl lg:text-[7rem] font-black tracking-tighter text-foreground mb-6 md:mb-8 leading-[0.9] md:leading-[0.85] uppercase">
+                  Kerja <br className="hidden sm:block" />
+                  <span className="text-primary italic font-serif lowercase">Jadi</span><br />
+                  Mudah.
+                </h1>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-6 md:mt-8">
+                <a href="#contact" className="inline-flex h-12 md:h-16 items-center justify-between px-6 md:px-8 bg-foreground text-background font-black uppercase tracking-wider text-xs md:text-sm hover:bg-primary transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,0.5)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] border-2 border-transparent hover:border-foreground min-w-[200px] md:min-w-[240px]">
+                  <span>Pesan Sekarang</span>
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 md:group-hover:translate-x-2 transition-transform" />
+                </a>
+              </div>
+            </ScrollReveal>
+
+            {/* Side Mission Box */}
+            <ScrollReveal delay={0.2} direction="left" className="md:col-span-2 lg:col-span-4 bg-[#fff133] border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-center transform hover:-translate-y-1 transition-transform">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-background border-2 md:border-4 border-foreground rounded-full flex items-center justify-center mb-6 md:mb-8 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <CheckCircle2 className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
+              </div>
+              <h3 className="font-black text-2xl md:text-3xl mb-3 md:mb-4 uppercase text-foreground">The Mission</h3>
+              <p className="text-foreground font-bold text-base md:text-lg leading-relaxed">
+                Mendampingi digitalisasi bisnis dan instansi Anda. Mengubah proses manual menjadi ekosistem digital otomatis yang tak merepotkan.
+              </p>
+            </ScrollReveal>
+
+            {/* Bottom Graphic Box */}
+            <ScrollReveal delay={0.3} className="md:col-span-2 lg:col-span-4 bg-[#4a9eff] border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 overflow-hidden relative shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center min-h-[200px] md:min-h-[300px] transform hover:-translate-y-1 transition-transform group">
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-white uppercase leading-none text-center relative z-10 group-hover:scale-110 transition-transform">
+                Apps & <br /> Web
+              </h3>
+              <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b')] bg-cover bg-center mix-blend-overlay"></div>
+            </ScrollReveal>
+
+            {/* Bottom Approach Box */}
+            <ScrollReveal delay={0.4} direction="up" className="md:col-span-4 lg:col-span-8 bg-[#bbf7d0] border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 lg:p-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-center transform hover:-translate-y-1 transition-transform">
+              <h3 className="font-black text-2xl md:text-3xl mb-3 md:mb-4 uppercase text-foreground">The Approach</h3>
+              <p className="text-foreground font-bold text-base sm:text-lg md:text-xl leading-relaxed max-w-3xl">
+                Partner strategis jangka panjang. Kami bantu dari riset, desain, eksekusi, hingga pemeliharaan sistem secara menyeluruh.
+              </p>
+            </ScrollReveal>
+
+          </div>
+        </section>
+
+        {/* BRAND TICKER */}
+        <div className="border-b-4 border-foreground bg-primary py-4 md:py-6 overflow-hidden flex whitespace-nowrap">
+          <div className="flex gap-8 md:gap-16 items-center uppercase font-black tracking-widest text-primary-foreground text-lg sm:text-xl md:text-2xl px-4 md:px-6">
+            <span className="hover:text-background transition-colors cursor-pointer">AcmeCorp</span>
+            <span className="text-foreground">•</span>
+            <span className="hover:text-background transition-colors cursor-pointer">GlobalTech</span>
+            <span className="text-foreground">•</span>
+            <span className="hover:text-background transition-colors cursor-pointer">Quantum</span>
+            <span className="text-foreground">•</span>
+            <span className="hover:text-background transition-colors cursor-pointer">NEXUS_</span>
+            <span className="text-foreground">•</span>
+            <span className="hover:text-background transition-colors cursor-pointer">DevOps Indonesia</span>
+          </div>
+        </div>
+
+        {/* SERVICES - Bento Grid */}
+        <section id="services" className="py-16 md:py-24 px-4 sm:px-6 md:px-12 bg-background border-b-4 border-foreground">
+          <div className="max-w-[1400px] mx-auto">
+            <div className="mb-10 md:mb-16 bg-foreground text-background border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 transform hover:-translate-y-1 transition-transform">
+              <div>
+                <h2 className="text-lg md:text-xl font-black tracking-widest text-[#bbf7d0] uppercase mb-3 md:mb-4">Layanan Utama</h2>
+                <p className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter text-background max-w-3xl leading-[1] md:leading-[0.9] uppercase">
+                  EKOSISTEM INTEGRASI <span className="text-[#bbf7d0] italic font-serif lowercase">untuk</span> SEMUA.
                 </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
 
-      {/* Services Section */}
-      <section id="services" className="py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs font-medium text-accent uppercase tracking-widest">
-              Layanan Kami
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
-              Apa yang Bisa <span className="gradient-text">Kami Bantu</span>?
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              {
-                icon: "🌐",
-                title: "Web Development",
-                desc: "Membangun website modern dengan teknologi terkini seperti React, Next.js, dan Node.js.",
-                tags: ["React", "Next.js", "TypeScript"],
-              },
-              {
-                icon: "📱",
-                title: "Responsive Design",
-                desc: "Desain yang tampil sempurna di semua perangkat — desktop, tablet, maupun mobile.",
-                tags: ["Tailwind CSS", "Figma", "UI/UX"],
-              },
-              {
-                icon: "🗄️",
-                title: "Backend & API",
-                desc: "Arsitektur backend yang scalable dan aman menggunakan teknologi serverless.",
-                tags: ["Supabase", "PostgreSQL", "REST API"],
-              },
-              {
-                icon: "🚀",
-                title: "Deployment & CI/CD",
-                desc: "Proses deploy otomatis dengan integrasi GitHub dan Vercel untuk alur kerja yang efisien.",
-                tags: ["Vercel", "GitHub Actions", "CI/CD"],
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="glass rounded-2xl p-6 hover:border-accent/30 transition-all duration-300 group"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                    <p className="text-sm text-text-muted leading-relaxed mb-3">
-                      {item.desc}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {item.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2.5 py-1 rounded-md text-xs bg-surface-light text-text-dim border border-surface-border"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+            <div className="grid md:grid-cols-3 gap-6 md:gap-8 text-left">
+              {/* Card 1 */}
+              <ScrollReveal delay={0.1} className="bg-[#bbf7d0] rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10 border-2 md:border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-2 md:border-4 border-foreground flex items-center justify-center mb-6 md:mb-8 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                  <Laptop className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+                <h3 className="text-2xl md:text-3xl font-black mb-3 md:mb-4 uppercase text-foreground">Sistem<br className="hidden sm:block" /> Terpadu</h3>
+                <p className="text-foreground font-bold text-base md:text-lg leading-relaxed">
+                  Membangun ekosistem utuh. Dari sistem keuangan sekolah, manajemen siswa, hingga operasional kantor skala besar.
+                </p>
+              </ScrollReveal>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            {/* Left side - Info */}
-            <div>
-              <span className="text-xs font-medium text-accent uppercase tracking-widest">
-                Kontak
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
-                Mari <span className="gradient-text">Berkolaborasi</span>
+              {/* Card 2 */}
+              <ScrollReveal delay={0.2} className="bg-[#fef08a] rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10 border-2 md:border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-2 md:border-4 border-foreground flex items-center justify-center mb-6 md:mb-8 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                  <Layout className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-black mb-3 md:mb-4 uppercase text-foreground">User<br className="hidden sm:block" /> Friendly</h3>
+                <p className="text-foreground font-bold text-base md:text-lg leading-relaxed">
+                  Antarmuka yang dipahami seketika. Kami merancang sistem yang sangat ramah bagi pengguna awam teknologi sekalipun.
+                </p>
+              </ScrollReveal>
+
+              {/* Card 3 */}
+              <ScrollReveal delay={0.3} className="bg-[#ff4a4a] text-white rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10 border-2 md:border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-2 md:border-4 border-foreground flex items-center justify-center mb-6 md:mb-8 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                  <Database className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-black mb-3 md:mb-4 uppercase text-white">Infrastruktur<br className="hidden sm:block" /> Aman</h3>
+                <p className="text-white font-bold text-base md:text-lg leading-relaxed">
+                  Perlindungan data mutakhir. Sistem Anda akan terus bisa diakses dengan stabil mesipun ribuan pengunjung masuk bersamaan.
+                </p>
+              </ScrollReveal>
+            </div>
+          </div>
+        </section>
+
+        {/* PORTFOLIO - Bento Style */}
+        <section id="work" className="py-16 md:py-24 px-4 sm:px-6 md:px-12 bg-[#ff4a4a] border-b-4 border-foreground">
+          <div className="max-w-[1400px] mx-auto">
+            <ScrollReveal className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6 bg-background border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transform hover:-translate-y-1 transition-transform">
+              <div>
+                <h2 className="text-lg md:text-xl font-black tracking-widest text-[#ff4a4a] uppercase mb-3 md:mb-4">Katalog Karya</h2>
+                <p className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter text-foreground uppercase leading-[1] md:leading-[0.85]">
+                  Telah <span className="text-[#ff4a4a] italic font-serif lowercase">ter-</span><br className="hidden sm:block" />selesaikan.
+                </p>
+              </div>
+              <a href="#" className="inline-flex h-12 md:h-14 items-center justify-center px-6 md:px-8 border-2 md:border-4 border-foreground bg-[#fff133] text-foreground font-black uppercase tracking-wider text-xs md:text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
+                All Projects <ChevronRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+              </a>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {!projects || projects.length === 0 ? (
+                <div className="col-span-1 md:col-span-2 py-24 md:py-32 text-center border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2.5rem] bg-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                  <p className="text-xl md:text-2xl font-black uppercase tracking-widest text-foreground">KOSONG.</p>
+                  <p className="text-base md:text-lg font-bold text-muted-foreground mt-4 px-4">Belum ada proyek yang diterbitkan admin.</p>
+                </div>
+              ) : (
+                projects.map((project, index) => (
+                  <ScrollReveal delay={index * 0.1} key={project.id} className="group relative rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border-2 md:border-4 border-foreground bg-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 md:hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all flex flex-col">
+                    <div className="aspect-[4/3] bg-muted relative overflow-hidden border-b-2 md:border-b-4 border-foreground">
+                      {project.image_url ? (
+                        <Image src={project.image_url} alt={project.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center bg-secondary">
+                          <Laptop className="w-12 h-12 md:w-16 md:h-16 text-foreground opacity-30" />
+                        </div>
+                      )}
+
+                      <div className="absolute top-4 left-4 bg-[#fff133] border-2 md:border-4 border-foreground px-3 md:px-4 py-1 md:py-2 text-xs md:text-sm font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        {new Date(project.created_at).getFullYear()}
+                      </div>
+
+                      {project.live_link && (
+                        <div className="absolute bottom-4 right-4 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 z-10">
+                          <a href={project.live_link} target="_blank" rel="noreferrer" className="inline-flex h-10 md:h-12 items-center justify-center bg-[#bbf7d0] px-4 md:px-6 text-xs md:text-sm font-black uppercase text-foreground border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-primary hover:text-primary-foreground transition-colors">
+                            Kunjungi Situs
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-2xl md:text-3xl font-black mb-2 md:mb-3 text-foreground uppercase leading-tight">{project.title}</h3>
+                        <p className="text-foreground font-bold mb-6 md:mb-8 line-clamp-3 leading-relaxed text-sm md:text-base">
+                          {project.description}
+                        </p>
+                      </div>
+                      {project.tech_stack && project.tech_stack.length > 0 && (
+                        <div className="flex flex-wrap gap-2 pt-4 md:pt-6 border-t-2 md:border-t-4 border-foreground">
+                          {project.tech_stack.map((tech: string) => (
+                            <span key={tech} className="px-3 md:px-4 py-1 md:py-2 bg-secondary text-foreground text-[10px] md:text-xs font-black uppercase tracking-wider rounded-full border-2 md:border-4 border-foreground">
+                              {tech.trim()}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </ScrollReveal>
+                ))
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* CONTACT SECTION - Bento Brutalism */}
+        <section id="contact" className="py-16 md:py-24 px-4 sm:px-6 md:px-12 bg-foreground text-background">
+          <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            <ScrollReveal delay={0.1} direction="right" className="lg:col-span-12 xl:col-span-5 bg-background text-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-12 border-2 md:border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] md:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] flex flex-col justify-center">
+              <div className="inline-flex items-center mb-6 md:mb-8 border-b-2 md:border-b-4 border-[#ff4a4a] pb-2 md:pb-3 w-max">
+                <span className="text-xs md:text-sm font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-[#ff4a4a]">Konsultasi Partner</span>
+              </div>
+
+              <h2 className="text-[3.5rem] sm:text-5xl md:text-7xl font-black tracking-tighter mb-6 md:mb-8 leading-[0.9] uppercase">
+                Mulai <br className="hidden sm:block" /><span className="font-serif italic text-primary lowercase mr-2">Langkah</span>Baru.
               </h2>
-              <p className="text-text-muted mb-8 leading-relaxed">
-                Punya proyek menarik atau ingin berdiskusi? Kirim pesan kepada
-                kami melalui formulir ini. Kami akan merespons secepat mungkin!
+              <p className="text-foreground font-bold text-base md:text-xl mb-10 md:mb-12 leading-relaxed">
+                Konsultasikan kebutuhan sistem Anda bersama kami. Kami mendampingi langkah Anda terlepas seberapa asing Anda dengan dunia teknologi.
               </p>
 
-              <div className="space-y-4">
-                {[
-                  { icon: "📧", label: "Email", value: "tim@portofolio.dev" },
-                  { icon: "📍", label: "Lokasi", value: "Indonesia" },
-                  { icon: "⏰", label: "Respons", value: "1-2 hari kerja" },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    className="flex items-center gap-3 text-sm"
-                  >
-                    <span className="w-10 h-10 rounded-lg bg-surface-light border border-surface-border flex items-center justify-center">
-                      {item.icon}
-                    </span>
-                    <div>
-                      <p className="text-text-dim text-xs">{item.label}</p>
-                      <p className="text-foreground">{item.value}</p>
-                    </div>
-                  </div>
-                ))}
+              <div className="inline-flex items-center gap-4 md:gap-6 p-4 md:p-6 rounded-[1.25rem] md:rounded-[1.5rem] bg-[#fff133] border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform -rotate-1 hover:rotate-0 transition-transform">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-2 md:border-4 border-foreground flex items-center justify-center shrink-0">
+                  <Globe className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
+                </div>
+                <div>
+                  <h4 className="font-black text-lg md:text-xl uppercase text-foreground">Seluruh Indonesia</h4>
+                  <p className="font-bold text-sm md:text-base text-foreground/80">Pendampingan Jarak Jauh (Online)</p>
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
 
-            {/* Right side - Form */}
-            <div className="glass rounded-2xl p-6 md:p-8 glow">
-              <h3 className="text-lg font-semibold mb-6">Kirim Pesan</h3>
-              <ContactForm />
+            <ScrollReveal delay={0.2} direction="left" className="lg:col-span-12 xl:col-span-7 bg-[#4a9eff] text-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-12 border-2 md:border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] md:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] flex flex-col justify-center mt-6 lg:mt-0">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black mb-6 md:mb-8 text-foreground uppercase bg-background inline-block px-3 md:px-4 py-1.5 md:py-2 border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-1 self-start">Kirim Pesan</h3>
+              <div className="brutalist-contact-form bg-background p-5 sm:p-6 md:p-8 rounded-[1rem] md:rounded-[1.5rem] border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <ContactForm />
+              </div>
+            </ScrollReveal>
+
+          </div>
+        </section>
+      </main>
+
+      <footer className="py-10 md:py-12 px-6 bg-primary text-primary-foreground border-t-4 border-foreground">
+        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-background flex items-center justify-center rounded-xl border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <Code2 className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+            </div>
+            <div className="flex items-center mt-2 sm:mt-0">
+              <p className="font-black uppercase tracking-widest text-background text-lg md:text-xl ml-2">Nexus<span className="text-foreground">Tech.</span></p>
+              <span className="font-bold border-l-2 md:border-l-4 border-foreground pl-3 md:pl-4 ml-3 md:ml-4 text-background text-sm md:text-base">© {new Date().getFullYear()}</span>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-6 border-t border-surface-border">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-text-dim">
-            © 2026 <span className="gradient-text font-medium">Portofolio Tim</span>. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4">
-            <a href="#" className="text-sm text-text-dim hover:text-foreground transition-colors">
-              GitHub
-            </a>
-            <a href="#" className="text-sm text-text-dim hover:text-foreground transition-colors">
-              LinkedIn
-            </a>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-xs md:text-sm font-black uppercase tracking-wider text-background">
+            <Link href="/admin/login" className="hover:text-foreground hover:underline transition-all">Admin Portal</Link>
+            <a href="#" className="hover:text-foreground hover:underline transition-all">Privacy Policy</a>
+            <a href="#" className="hover:text-foreground hover:underline transition-all">Terms of Service</a>
           </div>
         </div>
       </footer>

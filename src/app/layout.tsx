@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   keywords: ["portofolio", "web development", "tim", "proyek"],
 };
 
+import SmoothScroll from "@/components/SmoothScroll";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,8 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${jakarta.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
-        {children}
-        <Toaster theme="light" position="top-right" />
+        <SmoothScroll>
+          {children}
+          <Toaster theme="light" position="top-right" />
+        </SmoothScroll>
       </body>
     </html>
   );
