@@ -135,17 +135,24 @@ export async function getPublishedArticles(): Promise<Article[]> {
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
     const supabase = createPublicClient();
+    console.log(`[API] getArticleBySlug: Searching for slug ["${slug}"]`);
 
     const { data, error } = await supabase
         .from("articles")
         .select("*")
         .eq("slug", slug)
-        .single();
+        .maybeSingle();
 
     if (error) {
-        console.error("Error fetching article by slug:", error.message);
+        console.error(`[API] Error fetching article by slug ["${slug}"]:`, error.message);
         return null;
     }
 
+    if (!data) {
+        console.warn(`[API] No article found matching slug ["${slug}"]`);
+        return null;
+    }
+
+    console.log(`[API] Successfully found article: ${data.title}`);
     return data as Article;
 }

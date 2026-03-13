@@ -17,8 +17,9 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function ArticleDetailPage({ params }: { params: { slug: string } }) {
-    const article = await getArticleBySlug(params.slug);
+export default async function ArticleDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
+    const article = await getArticleBySlug(slug);
     const allArticles = await getPublishedArticles();
     const relatedArticles = allArticles
         .filter(a => a.id !== article?.id)
