@@ -96,7 +96,7 @@ export default async function Home() {
             <span className="text-foreground">•</span>
             <span className="hover:text-background transition-colors cursor-pointer">Quantum</span>
             <span className="text-foreground">•</span>
-            <span className="hover:text-background transition-colors cursor-pointer">NEXUS_</span>
+            <span className="hover:text-background transition-colors cursor-pointer">RBA_</span>
             <span className="text-foreground">•</span>
             <span className="hover:text-background transition-colors cursor-pointer">DevOps Indonesia</span>
           </div>
@@ -261,7 +261,7 @@ export default async function Home() {
               <Code2 className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
             </div>
             <div className="flex items-center mt-2 sm:mt-0">
-              <p className="font-black uppercase tracking-widest text-background text-lg md:text-xl ml-2">Nexus<span className="text-foreground">Tech.</span></p>
+              <p className="font-black uppercase tracking-widest text-background text-lg md:text-xl ml-2">RBA<span className="text-foreground">dev.</span></p>
               <span className="font-bold border-l-2 md:border-l-4 border-foreground pl-3 md:pl-4 ml-3 md:ml-4 text-background text-sm md:text-base">© {new Date().getFullYear()}</span>
             </div>
           </div>

@@ -78,7 +78,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
                             </div>
                             <div>
                                 <p className="text-xs font-black uppercase tracking-widest text-text-dim">Ditulis Oleh</p>
-                                <p className="font-black uppercase text-lg">Nexus Engineering Team</p>
+                                <p className="font-black uppercase text-lg">RBA Engineering Team</p>
                             </div>
                         </div>
 

@@ -33,7 +33,7 @@ export default function AdminSidebar() {
     return (
         <div className="w-64 border-r border-surface-border bg-surface min-h-screen flex-col hidden md:flex h-full fixed md:relative z-20">
             <div className="h-16 flex items-center px-6 border-b border-surface-border">
-                <span className="text-xl font-bold tracking-tight text-foreground">Nexus<span className="text-primary">Admin</span></span>
+                <span className="text-xl font-bold tracking-tight text-foreground">RBA<span className="text-primary-light">Admin</span></span>
             </div>
 
             <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto">

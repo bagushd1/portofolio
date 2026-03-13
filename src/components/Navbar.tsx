@@ -20,7 +20,7 @@ export default function Navbar() {
                         <Code2 className="w-4 h-4 md:w-6 md:h-6 text-primary-foreground" />
                     </div>
                     <span className="text-xl md:text-2xl font-black uppercase tracking-widest text-foreground">
-                        Nexus<span className="text-primary hidden sm:inline">Tech.</span>
+                        RBA<span className="text-primary hidden sm:inline">dev.</span>
                         <span className="text-primary sm:hidden">.</span>
                     </span>
                 </Link>
