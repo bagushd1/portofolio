@@ -81,7 +81,6 @@ export async function getPublicTestimonials(): Promise<Testimonial[]> {
 
 export async function getPublicServices(): Promise<Service[]> {
     const supabase = createPublicClient();
-    console.log("Fetching services from:", process.env.NEXT_PUBLIC_SUPABASE_URL);
 
     const { data, error } = await supabase
         .from("services")
@@ -93,7 +92,6 @@ export async function getPublicServices(): Promise<Service[]> {
         return [];
     }
 
-    console.log("Services fetched:", data?.length || 0);
     return data as Service[];
 }
 
@@ -116,7 +114,6 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 
 export async function getPublishedArticles(): Promise<Article[]> {
     const supabase = createPublicClient();
-    console.log("Fetching articles from:", process.env.NEXT_PUBLIC_SUPABASE_URL);
 
     const { data, error } = await supabase
         .from("articles")
@@ -129,7 +126,6 @@ export async function getPublishedArticles(): Promise<Article[]> {
         return [];
     }
 
-    console.log("Articles fetched count:", data?.length || 0);
     return data as Article[];
 }
 

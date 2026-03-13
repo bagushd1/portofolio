@@ -31,12 +31,13 @@ export default function Navbar() {
                     >
                         Layanan
                     </a>
-                    <a
-                        href={getLink("#work")}
-                        className="text-sm font-black uppercase tracking-wider text-foreground hover:text-primary transition-colors"
+                    <Link
+                        href="/work"
+                        className={`text-sm font-black uppercase tracking-wider transition-colors ${pathname.startsWith("/work") ? "text-primary" : "text-foreground hover:text-primary"
+                            }`}
                     >
                         Portfolio
-                    </a>
+                    </Link>
                     <Link
                         href="/blog"
                         className={`text-sm font-black uppercase tracking-wider transition-colors ${pathname.startsWith("/blog") ? "text-primary" : "text-foreground hover:text-primary"

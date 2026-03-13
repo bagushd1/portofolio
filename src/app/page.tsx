@@ -152,9 +152,9 @@ export default async function Home() {
                   Telah <span className="text-[#ff4a4a] italic font-serif lowercase">ter-</span><br className="hidden sm:block" />selesaikan.
                 </p>
               </div>
-              <a href="#" className="inline-flex h-12 md:h-14 items-center justify-center px-6 md:px-8 border-2 md:border-4 border-foreground bg-[#fff133] text-foreground font-black uppercase tracking-wider text-xs md:text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
+              <Link href="/work" className="inline-flex h-12 md:h-14 items-center justify-center px-6 md:px-8 border-2 md:border-4 border-foreground bg-[#fff133] text-foreground font-black uppercase tracking-wider text-xs md:text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
                 All Projects <ChevronRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
-              </a>
+              </Link>
             </ScrollReveal>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
