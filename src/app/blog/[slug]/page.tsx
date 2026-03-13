@@ -61,7 +61,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
                                 <Image src={article.image_url} alt={article.title} fill className="object-cover" />
                             ) : (
                                 <div className="absolute inset-0 bg-[#bbf7d0] flex items-center justify-center">
-                                    <span className="text-4xl font-black uppercase opacity-20 tracking-tighter">NEXUSTECH INSIGHTS</span>
+                                    <span className="text-4xl font-black uppercase opacity-20 tracking-tighter">RBADEV INSIGHTS</span>
                                 </div>
                             )}
                         </ScrollReveal>
@@ -74,7 +74,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
                     <footer className="mt-20 pt-10 border-t-8 border-foreground flex flex-col md:flex-row items-center justify-between gap-8">
                         <div className="flex items-center gap-4">
                             <div className="w-14 h-14 bg-[#fff133] border-4 border-foreground rounded-full flex items-center justify-center font-black text-xl">
-                                N
+                                R
                             </div>
                             <div>
                                 <p className="text-xs font-black uppercase tracking-widest text-text-dim">Ditulis Oleh</p>

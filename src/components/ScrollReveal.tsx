@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, LazyMotion, domAnimation } from "framer-motion";
 import { ReactNode } from "react";
 
 interface ScrollRevealProps {
@@ -22,14 +22,16 @@ export default function ScrollReveal({ children, className = "", delay = 0, dire
     };
 
     return (
-        <motion.div
-            initial={getInitialProps()}
-            whileInView={{ opacity: 1, y: 0, x: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-            className={className}
-        >
-            {children}
-        </motion.div>
+        <LazyMotion features={domAnimation}>
+            <motion.div
+                initial={getInitialProps()}
+                whileInView={{ opacity: 1, y: 0, x: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+                className={className}
+            >
+                {children}
+            </motion.div>
+        </LazyMotion>
     );
 }
