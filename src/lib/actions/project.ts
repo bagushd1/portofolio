@@ -9,11 +9,14 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 interface ProjectData {
     title: string;
+    slug?: string;
     description: string;
     tech_stack: string[];
     live_link?: string;
-    github_link?: string;
     image_url?: string;
+    content?: string;
+    challenge?: string;
+    solution?: string;
 }
 
 /**
@@ -54,13 +57,18 @@ async function ensureBucket() {
 export async function createProject(data: ProjectData) {
     const supabase = await createClient();
 
+    const slug = data.slug || data.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+
     const { error } = await supabase.from("projects").insert({
         title: data.title,
+        slug: slug,
         description: data.description,
         tech_stack: data.tech_stack,
         live_link: data.live_link || null,
-        github_link: data.github_link || null,
         image_url: data.image_url || null,
+        content: data.content || null,
+        challenge: data.challenge || null,
+        solution: data.solution || null,
     });
 
     if (error) {
@@ -75,15 +83,20 @@ export async function createProject(data: ProjectData) {
 export async function updateProject(id: string, data: ProjectData) {
     const supabase = await createClient();
 
+    const slug = data.slug || data.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+
     const { error } = await supabase
         .from("projects")
         .update({
             title: data.title,
+            slug: slug,
             description: data.description,
             tech_stack: data.tech_stack,
             live_link: data.live_link || null,
-            github_link: data.github_link || null,
             image_url: data.image_url || null,
+            content: data.content || null,
+            challenge: data.challenge || null,
+            solution: data.solution || null,
         })
         .eq("id", id);
 

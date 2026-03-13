@@ -1,46 +1,34 @@
 import ContactForm from "@/components/ContactForm";
 import ScrollReveal from "@/components/ScrollReveal";
-import { createClient } from "@/lib/supabase/server";
-import { ArrowRight, CheckCircle2, ChevronRight, Code2, Globe, Laptop, Layout, Server, Database, Smartphone } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import { getPublicProjects, getPublicServices } from "@/lib/api/portfolio";
+import { CheckCircle2, ChevronRight, Laptop, Layout, Server, Database, Smartphone, LucideIcon, ArrowRight, Globe, Code2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
+// Map string icon names to Lucide components
+const IconMap: Record<string, LucideIcon> = {
+  Laptop,
+  Layout,
+  Database,
+  Globe,
+  Server,
+  Code2,
+  Smartphone,
+  CheckCircle2,
+};
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export default async function Home() {
-  const supabase = await createClient();
-  const { data: projects } = await supabase
-    .from("projects")
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(4);
+  const [projects, services] = await Promise.all([
+    getPublicProjects(),
+    getPublicServices()
+  ]);
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary">
-      {/* Navbar Brutalist */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b-4 border-foreground w-full overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 h-16 md:h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2 md:gap-3">
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-primary flex items-center justify-center border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all">
-              <Code2 className="w-4 h-4 md:w-6 md:h-6 text-primary-foreground" />
-            </div>
-            <span className="text-xl md:text-2xl font-black uppercase tracking-widest text-foreground">Nexus<span className="text-primary hidden sm:inline">Tech.</span><span className="text-primary sm:hidden">.</span></span>
-          </div>
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#services" className="text-sm font-black uppercase tracking-wider text-foreground hover:text-primary transition-colors">Layanan</a>
-            <a href="#work" className="text-sm font-black uppercase tracking-wider text-foreground hover:text-primary transition-colors">Portfolio</a>
-            <a href="#contact" className="text-sm font-black uppercase tracking-wider px-6 py-2.5 bg-[#fff133] text-foreground border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center gap-2">
-              Konsultasi <ArrowRight className="w-5 h-5" />
-            </a>
-          </div>
-          <div className="flex md:hidden items-center">
-            {/* Simple Mobile Menu Trigger For Now */}
-            <a href="#contact" className="text-[10px] sm:text-xs font-black uppercase tracking-wider px-3 sm:px-4 py-1.5 sm:py-2 bg-[#fff133] text-foreground border-2 sm:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center">
-              Mulai <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1" />
-            </a>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <main className="pt-20 pb-16">
         {/* HERO SECTION - Bento Brutalism & Partner Copy */}
@@ -127,38 +115,29 @@ export default async function Home() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 md:gap-8 text-left">
-              {/* Card 1 */}
-              <ScrollReveal delay={0.1} className="bg-[#bbf7d0] rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10 border-2 md:border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-2 md:border-4 border-foreground flex items-center justify-center mb-6 md:mb-8 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                  <Laptop className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-black mb-3 md:mb-4 uppercase text-foreground">Sistem<br className="hidden sm:block" /> Terpadu</h3>
-                <p className="text-foreground font-bold text-base md:text-lg leading-relaxed">
-                  Membangun ekosistem utuh. Dari sistem keuangan sekolah, manajemen siswa, hingga operasional kantor skala besar.
-                </p>
-              </ScrollReveal>
+              {services.map((service, index) => {
+                const IconComponent = (service.icon && IconMap[service.icon]) || Laptop;
+                const bgColors = ["bg-[#bbf7d0]", "bg-[#fef08a]", "bg-[#ff4a4a]"];
+                const isRed = bgColors[index % bgColors.length] === "bg-[#ff4a4a]";
 
-              {/* Card 2 */}
-              <ScrollReveal delay={0.2} className="bg-[#fef08a] rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10 border-2 md:border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-2 md:border-4 border-foreground flex items-center justify-center mb-6 md:mb-8 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                  <Layout className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-black mb-3 md:mb-4 uppercase text-foreground">User<br className="hidden sm:block" /> Friendly</h3>
-                <p className="text-foreground font-bold text-base md:text-lg leading-relaxed">
-                  Antarmuka yang dipahami seketika. Kami merancang sistem yang sangat ramah bagi pengguna awam teknologi sekalipun.
-                </p>
-              </ScrollReveal>
-
-              {/* Card 3 */}
-              <ScrollReveal delay={0.3} className="bg-[#ff4a4a] text-white rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10 border-2 md:border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300">
-                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-2 md:border-4 border-foreground flex items-center justify-center mb-6 md:mb-8 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                  <Database className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-black mb-3 md:mb-4 uppercase text-white">Infrastruktur<br className="hidden sm:block" /> Aman</h3>
-                <p className="text-white font-bold text-base md:text-lg leading-relaxed">
-                  Perlindungan data mutakhir. Sistem Anda akan terus bisa diakses dengan stabil mesipun ribuan pengunjung masuk bersamaan.
-                </p>
-              </ScrollReveal>
+                return (
+                  <ScrollReveal
+                    key={service.id}
+                    delay={index * 0.1}
+                    className={`${bgColors[index % bgColors.length]} ${isRed ? 'text-white' : 'text-foreground'} rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10 border-2 md:border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300`}
+                  >
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-2 md:border-4 border-foreground flex items-center justify-center mb-6 md:mb-8 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                      <IconComponent className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
+                    </div>
+                    <h3 className={`text-2xl md:text-3xl font-black mb-3 md:mb-4 uppercase ${isRed ? 'text-white' : 'text-foreground'}`}>
+                      {service.title}
+                    </h3>
+                    <p className={`${isRed ? 'text-white' : 'text-foreground'} font-bold text-base md:text-lg leading-relaxed`}>
+                      {service.description}
+                    </p>
+                  </ScrollReveal>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -187,7 +166,7 @@ export default async function Home() {
               ) : (
                 projects.map((project, index) => (
                   <ScrollReveal delay={index * 0.1} key={project.id} className="group relative rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border-2 md:border-4 border-foreground bg-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 md:hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all flex flex-col">
-                    <div className="aspect-[4/3] bg-muted relative overflow-hidden border-b-2 md:border-b-4 border-foreground">
+                    <Link href={`/work/${project.slug || project.id}`} className="block aspect-[4/3] bg-muted relative overflow-hidden border-b-2 md:border-b-4 border-foreground">
                       {project.image_url ? (
                         <Image src={project.image_url} alt={project.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                       ) : (
@@ -200,17 +179,22 @@ export default async function Home() {
                         {new Date(project.created_at).getFullYear()}
                       </div>
 
-                      {project.live_link && (
-                        <div className="absolute bottom-4 right-4 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 z-10">
-                          <a href={project.live_link} target="_blank" rel="noreferrer" className="inline-flex h-10 md:h-12 items-center justify-center bg-[#bbf7d0] px-4 md:px-6 text-xs md:text-sm font-black uppercase text-foreground border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-primary hover:text-primary-foreground transition-colors">
-                            Kunjungi Situs
-                          </a>
+                      <div className="absolute bottom-4 right-4 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 z-10 flex gap-2">
+                        {project.live_link && (
+                          <div className="inline-flex h-10 md:h-12 items-center justify-center bg-[#bbf7d0] px-4 md:px-6 text-xs md:text-sm font-black uppercase text-foreground border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#fff133] transition-colors">
+                            Demo Live
+                          </div>
+                        )}
+                        <div className="inline-flex h-10 md:h-12 items-center justify-center bg-foreground px-4 md:px-6 text-xs md:text-sm font-black uppercase text-background border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-primary transition-colors">
+                          Lihat Detail
                         </div>
-                      )}
-                    </div>
+                      </div>
+                    </Link>
                     <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                       <div>
-                        <h3 className="text-2xl md:text-3xl font-black mb-2 md:mb-3 text-foreground uppercase leading-tight">{project.title}</h3>
+                        <Link href={`/work/${project.slug || project.id}`}>
+                          <h3 className="text-2xl md:text-3xl font-black mb-2 md:mb-3 text-foreground uppercase leading-tight hover:text-primary transition-colors">{project.title}</h3>
+                        </Link>
                         <p className="text-foreground font-bold mb-6 md:mb-8 line-clamp-3 leading-relaxed text-sm md:text-base">
                           {project.description}
                         </p>

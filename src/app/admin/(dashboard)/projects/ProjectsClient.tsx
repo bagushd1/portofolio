@@ -20,18 +20,24 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
 
     // Form stats
     const [title, setTitle] = useState("");
+    const [slug, setSlug] = useState("");
     const [description, setDescription] = useState("");
     const [techStack, setTechStack] = useState("");
     const [liveLink, setLiveLink] = useState("");
-    const [githubLink, setGithubLink] = useState("");
+    const [challenge, setChallenge] = useState("");
+    const [solution, setSolution] = useState("");
+    const [content, setContent] = useState("");
     const [file, setFile] = useState<File | null>(null);
 
     const resetForm = () => {
         setTitle("");
+        setSlug("");
         setDescription("");
         setTechStack("");
         setLiveLink("");
-        setGithubLink("");
+        setChallenge("");
+        setSolution("");
+        setContent("");
         setFile(null);
     }
 
@@ -66,10 +72,13 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
 
             const result = await createProject({
                 title,
+                slug,
                 description,
                 tech_stack: techStackArray,
                 live_link: liveLink,
-                github_link: githubLink,
+                challenge,
+                solution,
+                content,
                 image_url: imageUrl,
             });
 
@@ -134,13 +143,29 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
+                                    <Label htmlFor="slug" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Slug (Optional)</Label>
+                                    <Input id="slug" placeholder="nama-project" value={slug} onChange={e => setSlug(e.target.value)} className="bg-background border-surface-border" />
+                                </div>
+                                <div className="space-y-2">
                                     <Label htmlFor="live_link" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Live URL</Label>
                                     <Input id="live_link" type="url" placeholder="https://" value={liveLink} onChange={e => setLiveLink(e.target.value)} className="bg-background border-surface-border" />
                                 </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label htmlFor="github_link" className="text-xs text-text-dim uppercase tracking-wider font-semibold">GitHub URL</Label>
-                                    <Input id="github_link" type="url" placeholder="https://" value={githubLink} onChange={e => setGithubLink(e.target.value)} className="bg-background border-surface-border" />
+                                    <Label htmlFor="challenge" className="text-xs text-text-dim uppercase tracking-wider font-semibold">The Challenge</Label>
+                                    <Textarea id="challenge" rows={3} value={challenge} onChange={e => setChallenge(e.target.value)} className="bg-background border-surface-border resize-none" placeholder="Apa masalah yang dihadapi klien?" />
                                 </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="solution" className="text-xs text-text-dim uppercase tracking-wider font-semibold">The Solution</Label>
+                                    <Textarea id="solution" rows={3} value={solution} onChange={e => setSolution(e.target.value)} className="bg-background border-surface-border resize-none" placeholder="Bagaimana solusi dari tim?" />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label htmlFor="content" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Full Case Study Content (Markdown)</Label>
+                                <Textarea id="content" rows={5} value={content} onChange={e => setContent(e.target.value)} className="bg-background border-surface-border resize-none" placeholder="Tulis detail pengerjaan di sini..." />
                             </div>
 
                             <div className="space-y-2">
@@ -218,11 +243,6 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                                             {project.live_link && (
                                                 <a href={project.live_link} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-lg border border-surface-border bg-surface flex items-center justify-center text-text-dim hover:text-foreground hover:bg-surface-light transition-colors" title="Live Link">
                                                     <ExternalLink className="w-4 h-4" />
-                                                </a>
-                                            )}
-                                            {project.github_link && (
-                                                <a href={project.github_link} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-lg border border-surface-border bg-surface flex items-center justify-center text-text-dim hover:text-foreground hover:bg-surface-light transition-colors" title="Source Code">
-                                                    <Github className="w-4 h-4" />
                                                 </a>
                                             )}
                                         </div>

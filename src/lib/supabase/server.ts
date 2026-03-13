@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 
 export async function createClient() {
@@ -23,5 +24,16 @@ export async function createClient() {
         },
       },
     }
+  )
+}
+
+/**
+ * Client untuk fetching data publik yang tidak butuh session/cookies.
+ * Aman digunakan di generateStaticParams dan public fetchers.
+ */
+export function createPublicClient() {
+  return createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
 }
