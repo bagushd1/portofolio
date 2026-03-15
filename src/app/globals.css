@@ -43,49 +43,37 @@
 }
 
 :root {
-  /* Timnas System Aesthetic (Slate / Royal Blue) */
-  --background: #f8fafc;
-  /* slate-50 */
-  --foreground: #0f172a;
-  /* slate-900 */
+  /* RBAdev Brand Palette (Brutalist & Vibrant) */
+  --background: #fdfbf7;
+  --foreground: #000000;
 
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #000000;
 
   --popover: #ffffff;
-  --popover-foreground: #0f172a;
+  --popover-foreground: #000000;
 
-  --primary: #2563eb;
-  /* blue-600 */
-  --primary-foreground: #ffffff;
+  --primary: #fff133; 
+  --primary-foreground: #000000;
 
-  --secondary: #f1f5f9;
-  /* slate-100 */
-  --secondary-foreground: #1e293b;
-  /* slate-800 */
+  --secondary: #4a9eff; 
+  --secondary-foreground: #ffffff;
 
   --muted: #f1f5f9;
-  /* slate-100 */
   --muted-foreground: #64748b;
-  /* slate-500 */
-  --muted-border: #e2e8f0;
+  --muted-border: #000000;
 
-  --accent: #f1f5f9;
-  /* slate-100 */
-  --accent-foreground: #0f172a;
-  /* slate-900 */
+  --accent: #bbf7d0; 
+  --accent-foreground: #000000;
 
-  --destructive: #ef4444;
-  /* red-500 */
+  --destructive: #ff4a4a; 
   --destructive-foreground: #ffffff;
 
-  --border: #e2e8f0;
-  /* slate-200 */
-  --input: #e2e8f0;
-  --ring: #3b82f6;
-  /* blue-500 */
+  --border: #000000;
+  --input: #000000;
+  --ring: #000000;
 
-  --radius: 0.75rem;
+  --radius: 0rem;
 }
 
 @layer base {
@@ -94,6 +82,20 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased font-sans;
+  }
+}
+
+@layer components {
+  .brutalist-card {
+    @apply bg-card border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)];
+  }
+
+  .brutalist-button {
+    @apply bg-primary text-foreground border-4 border-foreground font-black uppercase tracking-widest px-6 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none hover:bg-primary/90;
+  }
+
+  .hard-shadow {
+    @apply shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
   }
 }

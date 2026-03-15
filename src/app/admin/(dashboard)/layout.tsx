@@ -5,11 +5,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="flex overflow-hidden bg-background text-foreground">
             <AdminSidebar />
             <div className="flex-1 flex flex-col h-screen overflow-hidden">
-                <header className="h-16 flex items-center justify-between px-6 border-b border-surface-border bg-surface/50 backdrop-blur-md md:hidden">
-                    <span className="text-xl font-bold tracking-tight">RBA<span className="text-primary-light">Admin</span></span>
+                <header className="h-16 flex items-center justify-between px-6 border-b-4 border-foreground bg-primary md:hidden shrink-0">
+                    <span className="text-xl font-black uppercase tracking-tighter">RBA<span className="italic font-serif lowercase">dev.</span></span>
                 </header>
-                <main className="flex-1 overflow-y-auto p-6 md:p-8">
-                    <div className="max-w-6xl mx-auto w-full">
+                <main className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-12">
+                    <div className="max-w-7xl mx-auto w-full">
                         {children}
                     </div>
                 </main>

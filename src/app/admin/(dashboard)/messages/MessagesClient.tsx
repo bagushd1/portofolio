@@ -42,39 +42,39 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
     return (
         <div className="flex flex-col md:flex-row gap-6 flex-1 min-h-0">
             {/* Left List */}
-            <div className="md:w-1/3 flex flex-col bg-surface border border-surface-border rounded-xl overflow-hidden shadow-sm">
-                <div className="p-4 border-b border-surface-border bg-surface-light font-medium text-sm flex items-center justify-between">
-                    All Messages
-                    <Badge variant="secondary" className="bg-surface border-surface-border text-text-dim text-xs">
-                        {initialMessages.length} Total
-                    </Badge>
+            <div className="md:w-1/3 flex flex-col bg-white border-4 border-foreground overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] h-[calc(100vh-200px)]">
+                <div className="p-6 border-b-4 border-foreground bg-foreground text-background font-black text-xs uppercase tracking-[0.2em] flex items-center justify-between">
+                    Kotak Masuk
+                    <span className="bg-primary text-foreground px-2 py-0.5 text-[10px] font-black">
+                        {initialMessages.length} PESAN
+                    </span>
                 </div>
-                <div className="flex-1 overflow-y-auto p-2 space-y-1">
+                <div className="flex-1 overflow-y-auto p-4 space-y-3">
                     {initialMessages.length === 0 ? (
-                        <div className="p-4 text-center text-sm text-text-muted mt-10">No messages found.</div>
+                        <div className="p-8 text-center text-sm font-bold text-text-muted mt-10 italic">Tidak ada pesan masuk.</div>
                     ) : (
                         initialMessages.map(msg => (
                             <button
                                 key={msg.id}
                                 onClick={() => handleSelect(msg)}
-                                className={`w-full text-left p-3 flex flex-col gap-1 transition-colors ${selectedMsgId === msg.id
-                                    ? "bg-primary/5 border-l-2 border-l-primary"
-                                    : "hover:bg-surface-light border-l-2 border-l-transparent"
+                                className={`w-full text-left p-4 border-2 transition-all flex flex-col gap-2 ${selectedMsgId === msg.id
+                                    ? "bg-primary border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] translate-x-[-2px] translate-y-[-2px]"
+                                    : "bg-background border-transparent hover:border-foreground hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                                     }`}
                             >
                                 <div className="flex justify-between items-start w-full gap-2">
-                                    <span className={`text-sm truncate ${msg.is_read ? 'text-text-dim' : 'font-semibold text-foreground'}`}>
+                                    <span className={`text-xs uppercase tracking-tighter truncate ${msg.is_read ? 'text-text-muted font-bold' : 'font-black text-foreground'}`}>
                                         {msg.name}
                                     </span>
-                                    <span className="text-[10px] text-text-dim whitespace-nowrap mt-0.5">
+                                    <span className="text-[8px] text-text-dim whitespace-nowrap font-black uppercase tracking-widest opacity-50">
                                         {formatDistanceToNow(new Date(msg.created_at), { addSuffix: true })}
                                     </span>
                                 </div>
-                                <div className={`text-xs truncate w-full ${msg.is_read ? 'text-text-dim' : 'text-foreground font-medium'}`}>
+                                <div className={`text-xs truncate w-full ${msg.is_read ? 'text-text-muted' : 'text-foreground font-bold'}`}>
                                     {msg.subject || "No Subject"}
                                 </div>
                                 {!msg.is_read && (
-                                    <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-primary hover:bg-primary/90 text-white text-[9px] h-3.5 mt-1.5 w-fit">NEW</span>
+                                    <span className="bg-destructive text-white text-[8px] font-black h-4 px-2 flex items-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] w-fit mt-1">BARU</span>
                                 )}
                             </button>
                         ))
@@ -83,62 +83,62 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
             </div>
 
             {/* Right Detail Pane */}
-            <div className="md:w-2/3 bg-surface border border-surface-border rounded-xl overflow-hidden shadow-sm flex flex-col">
+            <div className="md:w-2/3 bg-white border-4 border-foreground shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-[calc(100vh-200px)]">
                 {selectedMsg ? (
                     <>
-                        <div className="p-6 border-b border-surface-border space-y-5 bg-surface-light/30">
-                            <div className="flex justify-between items-start">
-                                <h2 className="text-xl font-bold tracking-tight">{selectedMsg.subject || "No Subject"}</h2>
-                                <div className="flex gap-2">
+                        <div className="p-8 border-b-4 border-foreground space-y-8 bg-surface">
+                            <div className="flex justify-between items-start gap-4">
+                                <h2 className="text-3xl font-black uppercase tracking-tighter leading-none">{selectedMsg.subject || "Tanpa Subjek"}</h2>
+                                <div className="flex gap-3 shrink-0">
                                     <Button
                                         variant="outline"
                                         size="sm"
-                                        className="h-8 border-surface-border text-xs bg-surface"
+                                        className="border-2 border-foreground bg-primary hover:translate-x-[2px] hover:translate-y-[2px] transition-all font-black uppercase text-[10px] tracking-widest h-10 px-4 rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none"
                                         onClick={() => window.open(`mailto:${selectedMsg.email}`)}
                                     >
-                                        <Reply className="w-3.5 h-3.5 mr-1" /> Reply
+                                        <Reply className="w-4 h-4 mr-2" /> BALAS
                                     </Button>
                                     <Button
                                         variant="ghost"
                                         size="icon"
-                                        className="h-8 w-8 text-text-dim hover:text-error hover:bg-error/10"
+                                        className="border-2 border-foreground bg-white hover:bg-destructive hover:text-white transition-all h-10 w-10 rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none"
                                         onClick={() => handleDelete(selectedMsg.id)}
                                         disabled={loadingAction === `delete-${selectedMsg.id}`}
                                     >
-                                        {loadingAction === `delete-${selectedMsg.id}` ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />}
+                                        {loadingAction === `delete-${selectedMsg.id}` ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
                                     </Button>
                                 </div>
                             </div>
 
-                            <div className="flex flex-wrap gap-3 text-sm text-text-dim">
-                                <div className="flex items-center gap-2 bg-surface px-3 py-1.5 rounded-lg border border-surface-border inner-glow">
-                                    <User className="w-4 h-4 text-text-dim" />
-                                    <span className="text-foreground font-medium text-xs">{selectedMsg.name}</span>
+                            <div className="flex flex-wrap gap-4 text-sm font-bold">
+                                <div className="flex items-center gap-3 bg-white px-4 py-2 border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                    <User className="w-4 h-4 text-primary" />
+                                    <span className="uppercase text-[10px] tracking-widest">{selectedMsg.name}</span>
                                 </div>
-                                <div className="flex items-center gap-2 bg-surface px-3 py-1.5 rounded-lg border border-surface-border inner-glow">
-                                    <Mail className="w-4 h-4 text-text-dim" />
-                                    <a href={`mailto:${selectedMsg.email}`} className="text-foreground hover:underline text-xs">{selectedMsg.email}</a>
+                                <div className="flex items-center gap-3 bg-white px-4 py-2 border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                    <Mail className="w-4 h-4 text-secondary" />
+                                    <a href={`mailto:${selectedMsg.email}`} className="hover:underline text-[10px] tracking-widest">{selectedMsg.email}</a>
                                 </div>
-                                <div className="flex items-center gap-2 bg-surface px-3 py-1.5 rounded-lg border border-surface-border inner-glow hidden lg:flex">
-                                    <Calendar className="w-4 h-4 text-text-dim" />
-                                    <span className="text-foreground text-xs">{new Date(selectedMsg.created_at).toLocaleString()}</span>
+                                <div className="flex items-center gap-3 bg-white px-4 py-2 border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hidden lg:flex">
+                                    <Calendar className="w-4 h-4 text-destructive" />
+                                    <span className="text-[10px] tracking-widest">{new Date(selectedMsg.created_at).toLocaleString()}</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="p-6 flex-1 overflow-y-auto">
-                            <div className="whitespace-pre-wrap text-sm leading-8 text-text-muted">
-                                {selectedMsg.message}
+                        <div className="p-10 flex-1 overflow-y-auto bg-white">
+                            <div className="whitespace-pre-wrap text-lg leading-loose text-foreground font-medium italic font-serif">
+                                "{selectedMsg.message}"
                             </div>
                         </div>
                     </>
                 ) : (
-                    <div className="flex-1 flex flex-col items-center justify-center text-text-muted p-6 text-center">
-                        <div className="w-16 h-16 bg-surface-light rounded-2xl flex items-center justify-center border border-surface-border mb-4 inner-glow">
-                            <Mail className="w-8 h-8 text-text-dim" />
+                    <div className="flex-1 flex flex-col items-center justify-center p-12 text-center bg-slate-50">
+                        <div className="w-24 h-24 bg-primary border-4 border-foreground shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center mb-8 rotate-3">
+                            <Mail className="w-12 h-12 text-foreground" />
                         </div>
-                        <p className="font-medium text-foreground">No message selected</p>
-                        <p className="text-sm mt-1 max-w-[250px]">Select a message from the list on the left to read its contents.</p>
+                        <h3 className="text-2xl font-black uppercase tracking-tight mb-2">Pilih Pesan</h3>
+                        <p className="font-bold text-text-muted opacity-70 max-w-[300px]">Silakan pilih korespondensi dari kolom sebelah kiri untuk meninjau isi pesan.</p>
                     </div>
                 )}
             </div>

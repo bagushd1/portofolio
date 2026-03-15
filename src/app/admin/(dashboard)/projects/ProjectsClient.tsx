@@ -140,15 +140,15 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
             <div className="flex justify-end">
                 <Dialog open={isOpen} onOpenChange={handleOpenChange}>
                     <DialogTrigger
-                        render={<Button className="bg-foreground text-background hover:bg-foreground/90 font-medium h-10 px-4 rounded-xl" />}
+                        render={<button className="brutalist-button flex items-center gap-2 h-12 transform hover:-translate-x-1 hover:-translate-y-1" />}
                     >
-                        <Plus className="w-4 h-4 mr-2" /> Add Project
+                        <Plus className="w-5 h-5" /> PASANG PROYEK BARU
                     </DialogTrigger>
-                    <DialogContent className="max-w-2xl bg-surface border-surface-border rounded-xl shadow-lg h-[90vh] flex flex-col p-0 overflow-hidden">
-                        <DialogHeader className="p-6 border-b border-surface-border bg-surface shrink-0">
-                            <DialogTitle>{editingId ? "Edit Project" : "Deploy New Project"}</DialogTitle>
-                            <DialogDescription className="text-text-muted">
-                                Add or edit a project in your public portfolio showcase.
+                    <DialogContent className="max-w-3xl bg-white border-4 border-foreground rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-[90vh] flex flex-col p-0 overflow-hidden">
+                        <DialogHeader className="p-8 border-b-4 border-foreground bg-primary shrink-0 text-left">
+                            <DialogTitle className="text-3xl font-black uppercase tracking-tighter">Konfigurasi Proyek</DialogTitle>
+                            <DialogDescription className="text-foreground font-bold opacity-70">
+                                Tambahkan atau perbarui karya portofolio publik RBAdev.
                             </DialogDescription>
                         </DialogHeader>
                         <div className="overflow-y-auto flex-1 p-6">
@@ -191,46 +191,40 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                                 </div>
                             </div>
 
-                            <div className="space-y-2">
-                                <Label htmlFor="content" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Full Case Study Content (Markdown)</Label>
-                                <Textarea id="content" rows={5} value={content} onChange={e => setContent(e.target.value)} className="bg-background border-surface-border resize-none" placeholder="Tulis detail pengerjaan di sini..." />
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="image" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Thumbnail Cover</Label>
-                                <div className="flex items-center gap-4">
+                            <div className="space-y-6 pt-4 border-t-2 border-slate-100">
+                                <Label htmlFor="image" className="text-xs font-black uppercase tracking-widest text-foreground">Thumbnail Cover / Visual Proyek</Label>
+                                <div className="flex items-center gap-6 p-4 bg-slate-50 border-2 border-dashed border-slate-200">
                                     {currentImageUrl && !file && (
-                                        <div className="relative w-16 h-16 rounded-lg overflow-hidden border border-surface-border flex-shrink-0">
+                                        <div className="relative w-20 h-20 border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex-shrink-0 overflow-hidden">
                                             <Image src={currentImageUrl} alt="Current project cover" fill className="object-cover" />
                                         </div>
                                     )}
-                                    <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="bg-background border-surface-border cursor-pointer flex-1" />
+                                    <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="bg-white border-2 border-foreground cursor-pointer flex-1 font-bold file:bg-primary file:font-black file:uppercase file:text-[10px]" />
                                 </div>
                             </div>
                         </form>
                         </div>
 
-                        <DialogFooter className="p-6 border-t border-surface-border bg-surface shrink-0">
-                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-surface-border bg-surface hover:bg-surface-light hover:text-foreground">
-                                Cancel
+                        <DialogFooter className="p-8 border-t-4 border-foreground bg-surface shrink-0">
+                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-2 border-foreground bg-white hover:bg-muted font-bold uppercase text-xs tracking-widest px-6 h-12 rounded-none">
+                                Batalkan
                             </Button>
-                            <Button type="submit" form="project-form" disabled={loading} className="bg-foreground text-background hover:bg-foreground/90">
-                                {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-                                {editingId ? "Save Changes" : "Deploy Project"}
-                            </Button>
+                            <button type="submit" form="project-form" disabled={loading} className="brutalist-button h-12 flex items-center justify-center min-w-[160px]">
+                                {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : "AKTIFKAN PROYEK"}
+                            </button>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
             </div>
 
-            <div className="border border-surface-border rounded-xl overflow-hidden bg-surface shadow-sm">
-                <Table>
-                    <TableHeader className="bg-surface border-b border-surface-border">
-                        <TableRow className="hover:bg-transparent border-0">
-                            <TableHead className="text-text-muted font-semibold h-12 text-xs uppercase tracking-wider">Project</TableHead>
-                            <TableHead className="text-text-muted font-semibold h-12 text-xs uppercase tracking-wider hidden md:table-cell">Stack</TableHead>
-                            <TableHead className="text-text-muted font-semibold h-12 text-xs uppercase tracking-wider w-[120px]">Links</TableHead>
-                            <TableHead className="text-text-muted font-semibold h-12 text-xs uppercase tracking-wider text-right w-[80px]">Actions</TableHead>
+            <div className="brutalist-card bg-white overflow-hidden">
+                <Table className="border-collapse">
+                    <TableHeader className="bg-foreground text-background border-b-4 border-foreground">
+                        <TableRow className="hover:bg-transparent border-0 h-16">
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] px-8">PROYEK / ENTITAS</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] hidden md:table-cell">TEKNOLOGI</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] w-[120px]">TAUTAN</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] text-right w-[120px] px-8">KENDALI</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -283,13 +277,13 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                                             )}
                                         </div>
                                     </TableCell>
-                                    <TableCell className="text-right py-4">
-                                        <div className="flex items-center justify-end gap-1">
+                                    <TableCell className="text-right py-6 px-8">
+                                        <div className="flex items-center justify-end gap-3">
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
                                                 onClick={() => handleEdit(project)}
-                                                className="text-text-dim hover:text-foreground hover:bg-surface-light h-8 w-8 rounded-lg"
+                                                className="border-2 border-foreground bg-white hover:bg-secondary hover:text-white h-10 w-10 rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                                             >
                                                 <Pencil className="w-4 h-4" />
                                             </Button>
@@ -298,7 +292,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                                                 size="icon"
                                                 onClick={() => handleDelete(project.id)}
                                                 disabled={deleteLoading === project.id}
-                                                className="text-text-dim hover:text-error hover:bg-error/10 h-8 w-8 rounded-lg"
+                                                className="border-2 border-foreground bg-white hover:bg-destructive hover:text-white h-10 w-10 rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                                             >
                                                 {deleteLoading === project.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
                                             </Button>

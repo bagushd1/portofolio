@@ -127,15 +127,15 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
             <div className="flex justify-end">
                 <Dialog open={isOpen} onOpenChange={handleOpenChange}>
                     <DialogTrigger
-                        render={<Button className="bg-foreground text-background hover:bg-foreground/90 font-medium h-10 px-4 rounded-xl" />}
+                        render={<button className="brutalist-button flex items-center gap-2 h-12 transform hover:-translate-x-1 hover:-translate-y-1" />}
                     >
-                        <Plus className="w-4 h-4 mr-2" /> Write Article
+                        <Plus className="w-5 h-5" /> TULIS ARTIKEL BARU
                     </DialogTrigger>
-                    <DialogContent className="max-w-4xl bg-surface border-surface-border rounded-xl shadow-lg h-[90vh] flex flex-col p-0 overflow-hidden">
-                        <DialogHeader className="p-6 border-b border-surface-border bg-surface shrink-0">
-                            <DialogTitle>{editingId ? "Edit Article" : "Write New Article"}</DialogTitle>
-                            <DialogDescription className="text-text-muted">
-                                Use Markdown for content formatting.
+                    <DialogContent className="max-w-5xl bg-white border-4 border-foreground rounded-none shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] h-[90vh] flex flex-col p-0 overflow-hidden">
+                        <DialogHeader className="p-8 border-b-4 border-foreground bg-[#fff133] shrink-0 text-left">
+                            <DialogTitle className="text-4xl font-black uppercase tracking-tighter text-foreground">Redaksi Konten</DialogTitle>
+                            <DialogDescription className="text-foreground font-bold opacity-70 italic">
+                                Tuangkan pemikiran dan wawasan terbaru ke dalam platform RBAdev.
                             </DialogDescription>
                         </DialogHeader>
                         
@@ -196,26 +196,25 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                             </form>
                         </div>
 
-                        <DialogFooter className="p-6 border-t border-surface-border bg-surface shrink-0">
-                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-surface-border bg-surface hover:bg-surface-light hover:text-foreground">
-                                Cancel
+                        <DialogFooter className="p-8 border-t-4 border-foreground bg-surface shrink-0">
+                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-2 border-foreground bg-white hover:bg-muted font-bold uppercase text-xs tracking-widest px-6 h-12 rounded-none">
+                                Batalkan
                             </Button>
-                            <Button type="submit" form="article-form" disabled={loading} className="bg-foreground text-background hover:bg-foreground/90">
-                                {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-                                {editingId ? "Save Changes" : "Create Article"}
-                            </Button>
+                            <button type="submit" form="article-form" disabled={loading} className="brutalist-button h-12 flex items-center justify-center min-w-[180px]">
+                                {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : "TERBITKAN KARYA"}
+                            </button>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
             </div>
 
-            <div className="border border-surface-border rounded-xl overflow-hidden bg-surface shadow-sm">
-                <Table>
-                    <TableHeader className="bg-surface border-b border-surface-border">
-                        <TableRow className="hover:bg-transparent border-0">
-                            <TableHead className="text-text-muted font-semibold h-12 text-xs uppercase tracking-wider">Article</TableHead>
-                            <TableHead className="text-text-muted font-semibold h-12 text-xs uppercase tracking-wider w-[120px]">Status</TableHead>
-                            <TableHead className="text-text-muted font-semibold h-12 text-xs uppercase tracking-wider text-right w-[100px]">Actions</TableHead>
+            <div className="brutalist-card bg-white overflow-hidden">
+                <Table className="border-collapse">
+                    <TableHeader className="bg-foreground text-background border-b-4 border-foreground">
+                        <TableRow className="hover:bg-transparent border-0 h-16">
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] px-8">DAFTAR ARTIKEL</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] w-[140px]">STATUS</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] text-right w-[150px] px-8">KENDALI</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -254,13 +253,13 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                                             <Badge variant="secondary" className="bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 shadow-none border-0 font-semibold px-2">Draft</Badge>
                                         )}
                                     </TableCell>
-                                    <TableCell className="text-right py-4">
-                                        <div className="flex items-center justify-end gap-1">
+                                    <TableCell className="text-right py-6 px-8">
+                                        <div className="flex items-center justify-end gap-3">
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
                                                 onClick={() => handleEdit(article)}
-                                                className="text-text-dim hover:text-foreground hover:bg-surface-light h-8 w-8 rounded-lg"
+                                                className="border-2 border-foreground bg-white hover:bg-secondary hover:text-white h-10 w-10 rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                                             >
                                                 <Pencil className="w-4 h-4" />
                                             </Button>
@@ -269,7 +268,7 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                                                 size="icon"
                                                 onClick={() => handleDelete(article.id)}
                                                 disabled={deleteLoading === article.id}
-                                                className="text-text-dim hover:text-error hover:bg-error/10 h-8 w-8 rounded-lg"
+                                                className="border-2 border-foreground bg-white hover:bg-destructive hover:text-white h-10 w-10 rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                                             >
                                                 {deleteLoading === article.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
                                             </Button>

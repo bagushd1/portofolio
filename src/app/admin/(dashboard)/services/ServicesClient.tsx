@@ -100,15 +100,15 @@ export default function ServicesClient({ initialServices }: { initialServices: a
             <div className="flex justify-end">
                 <Dialog open={isOpen} onOpenChange={handleOpenChange}>
                     <DialogTrigger
-                        render={<Button className="bg-foreground text-background hover:bg-foreground/90 font-medium h-10 px-4 rounded-xl" />}
+                        render={<button className="brutalist-button flex items-center gap-2 h-12 transform hover:-translate-x-1 hover:-translate-y-1" />}
                     >
-                        <Plus className="w-4 h-4 mr-2" /> Add Service
+                        <Plus className="w-5 h-5" /> TAMBAH LAYANAN
                     </DialogTrigger>
-                    <DialogContent className="max-w-xl bg-surface border-surface-border rounded-xl shadow-lg">
-                        <DialogHeader>
-                            <DialogTitle>{editingId ? "Edit Service" : "Add New Service"}</DialogTitle>
-                            <DialogDescription className="text-text-muted">
-                                Configure the services shown on the homepage.
+                    <DialogContent className="max-w-2xl bg-white border-4 border-foreground rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col p-0 overflow-hidden">
+                        <DialogHeader className="p-8 border-b-4 border-foreground bg-[#4a9eff] shrink-0 text-left">
+                            <DialogTitle className="text-3xl font-black uppercase tracking-tighter text-white">{editingId ? "Edit Layanan" : "Layanan Baru"}</DialogTitle>
+                            <DialogDescription className="text-white font-bold opacity-80">
+                                Konfigurasi jenis layanan yang muncul di beranda RBAdev.
                             </DialogDescription>
                         </DialogHeader>
                         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
@@ -133,27 +133,26 @@ export default function ServicesClient({ initialServices }: { initialServices: a
                                 </div>
                             </div>
 
-                            <DialogFooter className="mt-6 border-t border-surface-border pt-4">
-                                <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-surface-border bg-surface hover:bg-surface-light hover:text-foreground">
-                                    Cancel
+                            <DialogFooter className="p-8 border-t-4 border-foreground bg-surface shrink-0 mt-4">
+                                <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-2 border-foreground bg-white hover:bg-muted font-bold uppercase text-xs tracking-widest px-6 h-12 rounded-none">
+                                    Batalkan
                                 </Button>
-                                <Button type="submit" disabled={loading} className="bg-foreground text-background hover:bg-foreground/90">
-                                    {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-                                    {editingId ? "Save Changes" : "Create Service"}
-                                </Button>
+                                <button type="submit" disabled={loading} className="brutalist-button h-12 flex items-center justify-center min-w-[160px]">
+                                    {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : "SIMPAN LAYANAN"}
+                                </button>
                             </DialogFooter>
                         </form>
                     </DialogContent>
                 </Dialog>
             </div>
 
-            <div className="border border-surface-border rounded-xl overflow-hidden bg-surface shadow-sm">
-                <Table>
-                    <TableHeader className="bg-surface border-b border-surface-border">
-                        <TableRow className="hover:bg-transparent border-0">
-                            <TableHead className="text-text-muted font-semibold h-12 text-xs uppercase tracking-wider w-[80px]">Order</TableHead>
-                            <TableHead className="text-text-muted font-semibold h-12 text-xs uppercase tracking-wider">Service</TableHead>
-                            <TableHead className="text-text-muted font-semibold h-12 text-xs uppercase tracking-wider text-right w-[100px]">Actions</TableHead>
+            <div className="brutalist-card bg-white overflow-hidden">
+                <Table className="border-collapse">
+                    <TableHeader className="bg-foreground text-background border-b-4 border-foreground">
+                        <TableRow className="hover:bg-transparent border-0 h-16">
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] px-8 w-[100px]">URUTAN</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em]">JENIS LAYANAN</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] text-right w-[150px] px-8">KENDALI</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -185,13 +184,13 @@ export default function ServicesClient({ initialServices }: { initialServices: a
                                             </div>
                                         </div>
                                     </TableCell>
-                                    <TableCell className="text-right py-4">
-                                        <div className="flex items-center justify-end gap-1">
+                                    <TableCell className="text-right py-6 px-8">
+                                        <div className="flex items-center justify-end gap-3">
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
                                                 onClick={() => handleEdit(service)}
-                                                className="text-text-dim hover:text-foreground hover:bg-surface-light h-8 w-8 rounded-lg"
+                                                className="border-2 border-foreground bg-white hover:bg-secondary hover:text-white h-10 w-10 rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                                             >
                                                 <Pencil className="w-4 h-4" />
                                             </Button>
@@ -200,7 +199,7 @@ export default function ServicesClient({ initialServices }: { initialServices: a
                                                 size="icon"
                                                 onClick={() => handleDelete(service.id)}
                                                 disabled={deleteLoading === service.id}
-                                                className="text-text-dim hover:text-error hover:bg-error/10 h-8 w-8 rounded-lg"
+                                                className="border-2 border-foreground bg-white hover:bg-destructive hover:text-white h-10 w-10 rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                                             >
                                                 {deleteLoading === service.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
                                             </Button>
