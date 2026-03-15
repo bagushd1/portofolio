@@ -10,13 +10,15 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2, ExternalLink, Github, Loader2, FolderKanban } from "lucide-react";
-import { createProject, deleteProject, uploadImage } from "@/lib/actions/project";
+import { createProject, updateProject, deleteProject, uploadImage } from "@/lib/actions/project";
 import Image from "next/image";
 
 export default function ProjectsClient({ initialProjects }: { initialProjects: any[] }) {
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [deleteLoading, setDeleteLoading] = useState<string | null>(null);
+    const [editingId, setEditingId] = useState<string | null>(null);
+    const [currentImageUrl, setCurrentImageUrl] = useState("");
 
     // Form stats
     const [title, setTitle] = useState("");
@@ -39,6 +41,8 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
         setSolution("");
         setContent("");
         setFile(null);
+        setCurrentImageUrl("");
+        setEditingId(null);
     }
 
     const handleOpenChange = (open: boolean) => {
@@ -48,12 +52,26 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
         }
     }
 
+    const handleEdit = (project: any) => {
+        setTitle(project.title || "");
+        setSlug(project.slug || "");
+        setDescription(project.description || "");
+        setTechStack(project.tech_stack?.join(", ") || "");
+        setLiveLink(project.live_link || "");
+        setChallenge(project.challenge || "");
+        setSolution(project.solution || "");
+        setContent(project.content || "");
+        setCurrentImageUrl(project.image_url || "");
+        setEditingId(project.id);
+        setIsOpen(true);
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
 
         try {
-            let imageUrl = "";
+            let imageUrl = currentImageUrl;
 
             if (file) {
                 const formData = new FormData();
@@ -70,7 +88,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
 
             const techStackArray = techStack.split(",").map(t => t.trim()).filter(Boolean);
 
-            const result = await createProject({
+            const projectData = {
                 title,
                 slug,
                 description,
@@ -80,13 +98,22 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                 solution,
                 content,
                 image_url: imageUrl,
-            });
+            };
+
+            let result;
+            if (editingId) {
+                // We need to import updateProject, I'll add that below
+                result = await updateProject(editingId, projectData);
+            } else {
+                result = await createProject(projectData);
+            }
 
             if (result.error) {
-                toast.error("Failed to create project: " + result.error);
+                toast.error(result.error);
             } else {
-                toast.success("Project created successfully!");
+                toast.success(editingId ? "Project updated successfully!" : "Project created successfully!");
                 setIsOpen(false);
+                resetForm();
             }
         } catch (error: any) {
             toast.error(error.message);
@@ -117,14 +144,15 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                     >
                         <Plus className="w-4 h-4 mr-2" /> Add Project
                     </DialogTrigger>
-                    <DialogContent className="max-w-2xl bg-surface border-surface-border rounded-xl shadow-lg">
-                        <DialogHeader>
-                            <DialogTitle>Deploy New Project</DialogTitle>
+                    <DialogContent className="max-w-2xl bg-surface border-surface-border rounded-xl shadow-lg h-[90vh] flex flex-col p-0 overflow-hidden">
+                        <DialogHeader className="p-6 border-b border-surface-border bg-surface shrink-0">
+                            <DialogTitle>{editingId ? "Edit Project" : "Deploy New Project"}</DialogTitle>
                             <DialogDescription className="text-text-muted">
-                                Add a new project to your public portfolio showcase.
+                                Add or edit a project in your public portfolio showcase.
                             </DialogDescription>
                         </DialogHeader>
-                        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+                        <div className="overflow-y-auto flex-1 p-6">
+                            <form id="project-form" onSubmit={handleSubmit} className="space-y-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="title" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Title</Label>
@@ -170,19 +198,27 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
 
                             <div className="space-y-2">
                                 <Label htmlFor="image" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Thumbnail Cover</Label>
-                                <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="bg-background border-surface-border cursor-pointer" />
+                                <div className="flex items-center gap-4">
+                                    {currentImageUrl && !file && (
+                                        <div className="relative w-16 h-16 rounded-lg overflow-hidden border border-surface-border flex-shrink-0">
+                                            <Image src={currentImageUrl} alt="Current project cover" fill className="object-cover" />
+                                        </div>
+                                    )}
+                                    <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="bg-background border-surface-border cursor-pointer flex-1" />
+                                </div>
                             </div>
-
-                            <DialogFooter className="mt-6 border-t border-surface-border pt-4">
-                                <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-surface-border bg-surface hover:bg-surface-light hover:text-foreground">
-                                    Cancel
-                                </Button>
-                                <Button type="submit" disabled={loading} className="bg-foreground text-background hover:bg-foreground/90">
-                                    {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-                                    Deploy Project
-                                </Button>
-                            </DialogFooter>
                         </form>
+                        </div>
+
+                        <DialogFooter className="p-6 border-t border-surface-border bg-surface shrink-0">
+                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-surface-border bg-surface hover:bg-surface-light hover:text-foreground">
+                                Cancel
+                            </Button>
+                            <Button type="submit" form="project-form" disabled={loading} className="bg-foreground text-background hover:bg-foreground/90">
+                                {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                                {editingId ? "Save Changes" : "Deploy Project"}
+                            </Button>
+                        </DialogFooter>
                     </DialogContent>
                 </Dialog>
             </div>
@@ -248,15 +284,25 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                                         </div>
                                     </TableCell>
                                     <TableCell className="text-right py-4">
-                                        <Button
-                                            variant="ghost"
-                                            size="icon"
-                                            onClick={() => handleDelete(project.id)}
-                                            disabled={deleteLoading === project.id}
-                                            className="text-text-dim hover:text-error hover:bg-error/10 h-8 w-8 rounded-lg"
-                                        >
-                                            {deleteLoading === project.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
-                                        </Button>
+                                        <div className="flex items-center justify-end gap-1">
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                onClick={() => handleEdit(project)}
+                                                className="text-text-dim hover:text-foreground hover:bg-surface-light h-8 w-8 rounded-lg"
+                                            >
+                                                <Pencil className="w-4 h-4" />
+                                            </Button>
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                onClick={() => handleDelete(project.id)}
+                                                disabled={deleteLoading === project.id}
+                                                className="text-text-dim hover:text-error hover:bg-error/10 h-8 w-8 rounded-lg"
+                                            >
+                                                {deleteLoading === project.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+                                            </Button>
+                                        </div>
                                     </TableCell>
                                 </TableRow>
                             ))

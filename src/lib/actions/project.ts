@@ -57,7 +57,8 @@ async function ensureBucket() {
 export async function createProject(data: ProjectData) {
     const supabase = await createClient();
 
-    const slug = data.slug || data.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+    let rawSlug = data.slug || data.title;
+    const slug = rawSlug.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
 
     const { error } = await supabase.from("projects").insert({
         title: data.title,
@@ -83,7 +84,8 @@ export async function createProject(data: ProjectData) {
 export async function updateProject(id: string, data: ProjectData) {
     const supabase = await createClient();
 
-    const slug = data.slug || data.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+    let rawSlug = data.slug || data.title;
+    const slug = rawSlug.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
 
     const { error } = await supabase
         .from("projects")

@@ -1,17 +1,18 @@
-import { createClient } from "@/lib/supabase/server";
-import ServicesClient from "./ServicesClient";
 import { getPublicServices } from "@/lib/api/portfolio";
+import ServicesClient from "./ServicesClient";
 
-export default async function ServicesPage() {
+export const revalidate = 0; // Don't cache admin pages
+
+export default async function ServicesAdminPage() {
     const services = await getPublicServices();
 
     return (
-        <div className="p-6">
-            <div className="mb-8">
-                <h1 className="text-3xl font-black uppercase tracking-tight text-foreground">Service Management</h1>
-                <p className="text-text-muted mt-2">Manage the services displayed on your landing page.</p>
+        <div className="space-y-6">
+            <div className="flex flex-col gap-2">
+                <h1 className="text-3xl font-black uppercase tracking-tight">Services Management</h1>
+                <p className="text-text-muted font-medium">Manage the services displayed on the homepage.</p>
             </div>
-
+            
             <ServicesClient initialServices={services} />
         </div>
     );

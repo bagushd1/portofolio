@@ -15,7 +15,8 @@ interface ArticleData {
 export async function createArticle(data: ArticleData) {
     const supabase = await createClient();
 
-    const slug = data.slug || data.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+    let rawSlug = data.slug || data.title;
+    const slug = rawSlug.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
 
     const { error } = await supabase.from("articles").insert({
         title: data.title,
@@ -38,7 +39,8 @@ export async function createArticle(data: ArticleData) {
 export async function updateArticle(id: string, data: ArticleData) {
     const supabase = await createClient();
 
-    const slug = data.slug || data.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+    let rawSlug = data.slug || data.title;
+    const slug = rawSlug.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
 
     const { error } = await supabase
         .from("articles")
@@ -73,4 +75,19 @@ export async function deleteArticle(id: string) {
     revalidatePath("/admin/articles");
     revalidatePath("/blog");
     return { success: true };
+}
+
+export async function getAdminArticles() {
+    const supabase = await createClient();
+
+    const { data, error } = await supabase
+        .from("articles")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        return { error: error.message, data: [] };
+    }
+
+    return { data, error: null };
 }
