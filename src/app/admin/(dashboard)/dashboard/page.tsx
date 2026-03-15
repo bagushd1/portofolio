@@ -19,7 +19,7 @@ export default async function DashboardOverview() {
     return (
         <div className="space-y-12 animate-fade-in-up pb-20">
             <div>
-                <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">Kendali <span className="text-primary italic font-serif lowercase">Dashboard</span></h1>
+                <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">Kendali <span className="text-foreground italic font-serif lowercase">Dashboard</span></h1>
                 <p className="text-text-muted mt-4 font-bold text-lg">Pusat komando digital platform RBAdev Anda.</p>
             </div>
 
@@ -45,9 +45,9 @@ export default async function DashboardOverview() {
 
             <div className="grid gap-10 md:grid-cols-2">
                 <div className="brutalist-card p-8 flex flex-col bg-white overflow-hidden">
-                    <div className="flex justify-between items-center mb-8 bg-foreground text-background -mx-8 -mt-8 p-6 px-8 rounded-t-[1.8rem]">
+                    <div className="flex justify-between items-center mb-8 bg-foreground text-background -mx-8 -mt-8 p-6 px-8 rounded-t-[1.75rem]">
                         <h3 className="text-xl font-black uppercase tracking-widest">Pesan Terbaru</h3>
-                        <Link href="/admin/messages" className="text-[10px] font-black uppercase bg-primary text-foreground px-4 py-1.5 border-2 border-foreground rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-white transition-colors">Lihat Semua</Link>
+                        <Link href="/admin/messages" className="text-[10px] font-black uppercase bg-primary text-foreground px-4 py-1.5 border-2 border-foreground rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-white hover:text-foreground transition-all">Lihat Semua</Link>
                     </div>
                     <div className="space-y-6">
                         {recentMessages?.length === 0 ? (

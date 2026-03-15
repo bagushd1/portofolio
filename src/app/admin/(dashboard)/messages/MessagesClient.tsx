@@ -43,7 +43,7 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
         <div className="flex flex-col md:flex-row gap-6 flex-1 min-h-0">
             {/* Left List */}
             <div className="md:w-1/3 flex flex-col bg-white border-4 border-foreground overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] h-[calc(100vh-200px)] rounded-[2rem]">
-                <div className="p-6 border-b-4 border-foreground bg-foreground text-background font-black text-xs uppercase tracking-[0.2em] flex items-center justify-between first:rounded-t-[1.8rem]">
+                <div className="p-6 border-b-4 border-foreground bg-foreground text-background font-black text-xs uppercase tracking-[0.2em] flex items-center justify-between first:rounded-t-[1.75rem]">
                     Kotak Masuk
                     <span className="bg-primary text-foreground px-3 py-1 text-[10px] font-black rounded-full">
                         {initialMessages.length} PESAN
@@ -58,19 +58,19 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
                                 key={msg.id}
                                 onClick={() => handleSelect(msg)}
                                 className={`w-full text-left p-4 border-2 transition-all flex flex-col gap-2 rounded-2xl ${selectedMsgId === msg.id
-                                    ? "bg-primary border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] translate-x-[-2px] translate-y-[-2px]"
+                                    ? "bg-primary border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-foreground translate-x-[-2px] translate-y-[-2px]"
                                     : "bg-background border-transparent hover:border-foreground hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                                     }`}
                             >
                                 <div className="flex justify-between items-start w-full gap-2">
-                                    <span className={`text-xs uppercase tracking-tighter truncate ${msg.is_read ? 'text-text-muted font-bold' : 'font-black text-foreground'}`}>
+                                    <span className={`text-xs uppercase tracking-tighter truncate ${msg.is_read ? (selectedMsgId === msg.id ? 'text-foreground/60' : 'text-text-muted') + ' font-bold' : (selectedMsgId === msg.id ? 'text-foreground' : 'text-foreground') + ' font-black'}`}>
                                         {msg.name}
                                     </span>
                                     <span className="text-[8px] text-text-dim whitespace-nowrap font-black uppercase tracking-widest opacity-50">
                                         {formatDistanceToNow(new Date(msg.created_at), { addSuffix: true })}
                                     </span>
                                 </div>
-                                <div className={`text-xs truncate w-full ${msg.is_read ? 'text-text-muted' : 'text-foreground font-bold'}`}>
+                                <div className={`text-xs truncate w-full ${msg.is_read ? (selectedMsgId === msg.id ? 'text-foreground/50' : 'text-text-muted') : (selectedMsgId === msg.id ? 'text-foreground font-bold' : 'text-foreground font-bold')}`}>
                                     {msg.subject || "No Subject"}
                                 </div>
                                 {!msg.is_read && (
@@ -93,7 +93,7 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
                                     <Button
                                         variant="outline"
                                         size="sm"
-                                        className="border-2 border-foreground bg-primary hover:translate-x-[2px] hover:translate-y-[2px] transition-all font-black uppercase text-[10px] tracking-widest h-10 px-4 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none"
+                                        className="border-2 border-foreground bg-primary text-foreground hover:translate-x-[2px] hover:translate-y-[2px] transition-all font-black uppercase text-[10px] tracking-widest h-10 px-4 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none"
                                         onClick={() => window.open(`mailto:${selectedMsg.email}`)}
                                     >
                                         <Reply className="w-4 h-4 mr-2" /> BALAS

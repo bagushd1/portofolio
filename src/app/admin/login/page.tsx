@@ -50,14 +50,14 @@ export default function LoginPage() {
                 </div>
 
                 <div className="bg-white border-4 border-foreground shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] overflow-hidden rounded-[2.5rem]">
-                    <div className="p-8 border-b-4 border-foreground bg-primary first:rounded-t-[2.3rem]">
+                    <div className="p-8 border-b-4 border-foreground bg-foreground first:rounded-t-[2.3rem]">
                         <div className="flex items-center gap-4 mb-2">
                             <div className="w-12 h-12 bg-white border-4 border-foreground flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shrink-0 rounded-2xl">
                                 <Lock className="w-6 h-6 text-foreground" />
                             </div>
                             <div>
-                                <h1 className="text-3xl font-black uppercase tracking-tighter leading-none">RBA<span className="italic font-serif lowercase">dev.</span></h1>
-                                <p className="text-[10px] font-black uppercase tracking-widest mt-1 opacity-70">Secured Control Center</p>
+                                <h1 className="text-3xl font-black uppercase tracking-tighter leading-none text-white">RBA<span className="text-secondary italic font-serif lowercase">dev.</span></h1>
+                                <p className="text-[10px] font-black uppercase tracking-widest mt-1 text-white opacity-70">Secured Control Center</p>
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@ export default function LoginPage() {
 
                             <button
                                 type="submit"
-                                className="brutalist-button w-full h-14 flex items-center justify-center gap-3 group mt-4"
+                                className="brutalist-button w-full h-14 flex items-center justify-center gap-3 group mt-4 bg-secondary text-white"
                                 disabled={loading}
                             >
                                 {loading ? (
@@ -111,8 +111,8 @@ export default function LoginPage() {
                                     </div>
                                 ) : (
                                     <>
-                                        <span className="font-black uppercase tracking-widest text-sm text-foreground">MASUK KE DASHBOARD</span>
-                                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform text-foreground" />
+                                        <span className="font-black uppercase tracking-widest text-sm text-white">MASUK KE DASHBOARD</span>
+                                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform text-white" />
                                     </>
                                 )}
                             </button>

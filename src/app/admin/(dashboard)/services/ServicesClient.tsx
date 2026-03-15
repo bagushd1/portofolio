@@ -100,12 +100,12 @@ export default function ServicesClient({ initialServices }: { initialServices: a
             <div className="flex justify-end">
                 <Dialog open={isOpen} onOpenChange={handleOpenChange}>
                     <DialogTrigger
-                        render={<button className="brutalist-button flex items-center gap-2 h-12 transform hover:-translate-x-1 hover:-translate-y-1" />}
+                        render={<button className="brutalist-button flex items-center gap-2 h-12 transform hover:-translate-x-1 hover:-translate-y-1 bg-primary text-foreground" />}
                     >
-                        <Plus className="w-5 h-5" /> TAMBAH LAYANAN
+                        <Plus className="w-5 h-5 text-foreground" /> TAMBAH LAYANAN
                     </DialogTrigger>
                     <DialogContent className="max-w-4xl bg-white border-4 border-foreground rounded-[2.5rem] shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col p-0 overflow-hidden h-fit max-h-[90vh]">
-                        <DialogHeader className="p-8 border-b-4 border-foreground bg-secondary shrink-0 text-left">
+                        <DialogHeader className="p-8 border-b-4 border-foreground bg-foreground shrink-0 text-left">
                             <DialogTitle className="text-4xl font-black uppercase tracking-tighter text-white">Manajemen Layanan</DialogTitle>
                             <DialogDescription className="text-white font-bold opacity-90 italic">
                                 Konfigurasi jenis layanan dan keunggulan yang ditawarkan RBAdev.
@@ -160,9 +160,9 @@ export default function ServicesClient({ initialServices }: { initialServices: a
                 <Table className="border-collapse">
                     <TableHeader className="bg-foreground text-background border-b-4 border-foreground">
                         <TableRow className="hover:bg-transparent border-0 h-16">
-                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] px-8 w-[120px] first:rounded-tl-2xl text-center">URUTAN</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] px-8 w-[120px] first:rounded-tl-[1.75rem] text-center">URUTAN</TableHead>
                             <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em]">JENIS LAYANAN</TableHead>
-                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] text-right w-[150px] px-8 last:rounded-tr-2xl">KENDALI</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] text-right w-[150px] px-8 last:rounded-tr-[1.75rem]">KENDALI</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>

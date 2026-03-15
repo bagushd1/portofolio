@@ -38,7 +38,7 @@ export default function AdminSidebar() {
                         <LayoutDashboard size={16} className="text-foreground" />
                     </div>
                     <span className="text-2xl font-black uppercase tracking-widest text-foreground">
-                        RBA<span className="text-primary italic font-serif lowercase">dev.</span>
+                        RBA<span className="text-foreground italic font-serif lowercase">dev.</span>
                     </span>
                 </Link>
             </div>
