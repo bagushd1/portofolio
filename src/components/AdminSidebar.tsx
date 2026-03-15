@@ -34,7 +34,7 @@ export default function AdminSidebar() {
         <div className="w-72 border-r-4 border-foreground bg-background min-h-screen flex-col hidden md:flex h-full fixed md:relative z-20">
             <div className="h-20 flex items-center px-8 border-b-4 border-foreground">
                 <Link href="/" className="flex items-center gap-2 group">
-                    <div className="w-8 h-8 bg-primary flex items-center justify-center border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    <div className="w-8 h-8 bg-primary flex items-center justify-center border-2 border-foreground rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                         <LayoutDashboard size={16} className="text-foreground" />
                     </div>
                     <span className="text-2xl font-black uppercase tracking-widest text-foreground">
@@ -52,7 +52,7 @@ export default function AdminSidebar() {
                         <Link
                             key={item.href}
                             href={item.href}
-                            className={`flex items-center gap-3 px-4 py-3 border-2 transition-all font-bold uppercase text-xs tracking-widest ${isActive
+                            className={`flex items-center gap-3 px-4 py-3 border-2 transition-all font-bold uppercase text-xs tracking-widest rounded-xl ${isActive
                                 ? "bg-primary border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-foreground translate-x-[-2px] translate-y-[-2px]"
                                 : "bg-white border-transparent text-text-muted hover:border-foreground hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:text-foreground"
                                 }`}
@@ -68,14 +68,14 @@ export default function AdminSidebar() {
                 <Link
                     href="/"
                     target="_blank"
-                    className="flex items-center gap-3 px-4 py-3 border-2 border-foreground bg-secondary text-background font-bold uppercase text-[10px] tracking-widest shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all mt-auto"
+                    className="flex items-center gap-3 px-4 py-3 border-2 border-foreground bg-secondary text-background font-bold uppercase text-[10px] tracking-widest rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all mt-auto"
                 >
                     <Globe size={16} className="text-background" />
                     Buka Website
                 </Link>
                 <button
                     onClick={handleLogout}
-                    className="w-full flex items-center gap-3 px-4 py-3 border-2 border-foreground bg-destructive text-background font-bold uppercase text-[10px] tracking-widest shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
+                    className="w-full flex items-center gap-3 px-4 py-3 border-2 border-foreground bg-destructive text-background font-bold uppercase text-[10px] tracking-widest rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
                 >
                     <LogOut size={16} className="text-background" />
                     Keluar Sistem

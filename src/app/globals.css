@@ -73,7 +73,7 @@
   --input: #000000;
   --ring: #000000;
 
-  --radius: 0rem;
+  --radius: 1rem;
 }
 
 @layer base {
@@ -88,14 +88,18 @@
 
 @layer components {
   .brutalist-card {
-    @apply bg-card border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)];
+    @apply bg-card border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rounded-[2rem] transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)];
   }
 
   .brutalist-button {
-    @apply bg-primary text-foreground border-4 border-foreground font-black uppercase tracking-widest px-6 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none hover:bg-primary/90;
+    @apply bg-primary text-foreground border-4 border-foreground font-black uppercase tracking-widest px-6 py-3 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none hover:bg-primary/90;
   }
 
   .hard-shadow {
     @apply shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
+  }
+
+  .brutalist-input {
+    @apply bg-white border-2 border-foreground rounded-xl h-12 font-bold focus-visible:ring-0 focus-visible:border-primary transition-all px-4;
   }
 }

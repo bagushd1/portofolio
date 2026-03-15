@@ -42,10 +42,10 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
     return (
         <div className="flex flex-col md:flex-row gap-6 flex-1 min-h-0">
             {/* Left List */}
-            <div className="md:w-1/3 flex flex-col bg-white border-4 border-foreground overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] h-[calc(100vh-200px)]">
-                <div className="p-6 border-b-4 border-foreground bg-foreground text-background font-black text-xs uppercase tracking-[0.2em] flex items-center justify-between">
+            <div className="md:w-1/3 flex flex-col bg-white border-4 border-foreground overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] h-[calc(100vh-200px)] rounded-[2rem]">
+                <div className="p-6 border-b-4 border-foreground bg-foreground text-background font-black text-xs uppercase tracking-[0.2em] flex items-center justify-between first:rounded-t-[1.8rem]">
                     Kotak Masuk
-                    <span className="bg-primary text-foreground px-2 py-0.5 text-[10px] font-black">
+                    <span className="bg-primary text-foreground px-3 py-1 text-[10px] font-black rounded-full">
                         {initialMessages.length} PESAN
                     </span>
                 </div>
@@ -57,7 +57,7 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
                             <button
                                 key={msg.id}
                                 onClick={() => handleSelect(msg)}
-                                className={`w-full text-left p-4 border-2 transition-all flex flex-col gap-2 ${selectedMsgId === msg.id
+                                className={`w-full text-left p-4 border-2 transition-all flex flex-col gap-2 rounded-2xl ${selectedMsgId === msg.id
                                     ? "bg-primary border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] translate-x-[-2px] translate-y-[-2px]"
                                     : "bg-background border-transparent hover:border-foreground hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                                     }`}
@@ -74,7 +74,7 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
                                     {msg.subject || "No Subject"}
                                 </div>
                                 {!msg.is_read && (
-                                    <span className="bg-destructive text-white text-[8px] font-black h-4 px-2 flex items-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] w-fit mt-1">BARU</span>
+                                    <span className="bg-destructive text-white text-[8px] font-black h-4 px-2 flex items-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] w-fit mt-1 rounded-full">BARU</span>
                                 )}
                             </button>
                         ))
@@ -83,7 +83,7 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
             </div>
 
             {/* Right Detail Pane */}
-            <div className="md:w-2/3 bg-white border-4 border-foreground shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-[calc(100vh-200px)]">
+            <div className="md:w-2/3 bg-white border-4 border-foreground shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-[calc(100vh-200px)] rounded-[2rem]">
                 {selectedMsg ? (
                     <>
                         <div className="p-8 border-b-4 border-foreground space-y-8 bg-surface">
@@ -93,7 +93,7 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
                                     <Button
                                         variant="outline"
                                         size="sm"
-                                        className="border-2 border-foreground bg-primary hover:translate-x-[2px] hover:translate-y-[2px] transition-all font-black uppercase text-[10px] tracking-widest h-10 px-4 rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none"
+                                        className="border-2 border-foreground bg-primary hover:translate-x-[2px] hover:translate-y-[2px] transition-all font-black uppercase text-[10px] tracking-widest h-10 px-4 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none"
                                         onClick={() => window.open(`mailto:${selectedMsg.email}`)}
                                     >
                                         <Reply className="w-4 h-4 mr-2" /> BALAS
@@ -101,7 +101,7 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
                                     <Button
                                         variant="ghost"
                                         size="icon"
-                                        className="border-2 border-foreground bg-white hover:bg-destructive hover:text-white transition-all h-10 w-10 rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none"
+                                        className="border-2 border-foreground bg-white hover:bg-destructive hover:text-white transition-all h-10 w-10 rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none"
                                         onClick={() => handleDelete(selectedMsg.id)}
                                         disabled={loadingAction === `delete-${selectedMsg.id}`}
                                     >
@@ -111,17 +111,17 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
                             </div>
 
                             <div className="flex flex-wrap gap-4 text-sm font-bold">
-                                <div className="flex items-center gap-3 bg-white px-4 py-2 border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                <div className="flex items-center gap-3 bg-white px-4 py-2 border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-full text-xs">
                                     <User className="w-4 h-4 text-primary" />
-                                    <span className="uppercase text-[10px] tracking-widest">{selectedMsg.name}</span>
+                                    <span className="uppercase text-[10px] tracking-widest font-black">{selectedMsg.name}</span>
                                 </div>
-                                <div className="flex items-center gap-3 bg-white px-4 py-2 border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                <div className="flex items-center gap-3 bg-white px-4 py-2 border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-full text-xs">
                                     <Mail className="w-4 h-4 text-secondary" />
-                                    <a href={`mailto:${selectedMsg.email}`} className="hover:underline text-[10px] tracking-widest">{selectedMsg.email}</a>
+                                    <a href={`mailto:${selectedMsg.email}`} className="hover:underline text-[10px] tracking-widest font-black">{selectedMsg.email}</a>
                                 </div>
-                                <div className="flex items-center gap-3 bg-white px-4 py-2 border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hidden lg:flex">
+                                <div className="flex items-center gap-3 bg-white px-4 py-2 border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-full text-xs hidden lg:flex">
                                     <Calendar className="w-4 h-4 text-destructive" />
-                                    <span className="text-[10px] tracking-widest">{new Date(selectedMsg.created_at).toLocaleString()}</span>
+                                    <span className="text-[10px] tracking-widest font-black">{new Date(selectedMsg.created_at).toLocaleString()}</span>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +134,7 @@ export default function MessagesClient({ initialMessages }: { initialMessages: a
                     </>
                 ) : (
                     <div className="flex-1 flex flex-col items-center justify-center p-12 text-center bg-slate-50">
-                        <div className="w-24 h-24 bg-primary border-4 border-foreground shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center mb-8 rotate-3">
+                        <div className="w-24 h-24 bg-primary border-4 border-foreground shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center mb-8 rotate-3 rounded-2xl">
                             <Mail className="w-12 h-12 text-foreground" />
                         </div>
                         <h3 className="text-2xl font-black uppercase tracking-tight mb-2">Pilih Pesan</h3>

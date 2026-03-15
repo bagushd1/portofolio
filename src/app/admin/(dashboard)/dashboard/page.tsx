@@ -45,9 +45,9 @@ export default async function DashboardOverview() {
 
             <div className="grid gap-10 md:grid-cols-2">
                 <div className="brutalist-card p-8 flex flex-col bg-white overflow-hidden">
-                    <div className="flex justify-between items-center mb-8 bg-foreground text-background -mx-8 -mt-8 p-4 px-8">
+                    <div className="flex justify-between items-center mb-8 bg-foreground text-background -mx-8 -mt-8 p-6 px-8 rounded-t-[1.8rem]">
                         <h3 className="text-xl font-black uppercase tracking-widest">Pesan Terbaru</h3>
-                        <Link href="/admin/messages" className="text-[10px] font-black uppercase bg-primary text-foreground px-3 py-1 border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Lihat Semua</Link>
+                        <Link href="/admin/messages" className="text-[10px] font-black uppercase bg-primary text-foreground px-4 py-1.5 border-2 border-foreground rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-white transition-colors">Lihat Semua</Link>
                     </div>
                     <div className="space-y-6">
                         {recentMessages?.length === 0 ? (
@@ -59,7 +59,7 @@ export default async function DashboardOverview() {
                                         <div className="space-y-1">
                                             <p className="text-lg font-black uppercase tracking-tight flex items-center gap-2">
                                                 {msg.name}
-                                                {!msg.is_read && <span className="bg-destructive text-white text-[8px] font-black h-4 px-2 flex items-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">BARU</span>}
+                                                {!msg.is_read && <span className="bg-destructive text-white text-[8px] font-black h-4 px-2 flex items-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-full">BARU</span>}
                                             </p>
                                             <p className="text-xs font-bold text-text-muted">{msg.email}</p>
                                         </div>
@@ -75,7 +75,7 @@ export default async function DashboardOverview() {
                 </div>
 
                 <div className="brutalist-card p-10 bg-[#bbf7d0] flex flex-col items-center justify-center text-center space-y-6">
-                    <div className="w-20 h-20 bg-background border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center rotate-3">
+                    <div className="w-20 h-20 bg-background border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center rotate-3 rounded-2xl">
                         <Globe className="w-10 h-10 text-foreground" />
                     </div>
                     <div>

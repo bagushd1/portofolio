@@ -39,20 +39,20 @@ export default function LoginPage() {
     return (
         <div className="min-h-screen flex items-center justify-center relative bg-[#f0f0f0] overflow-hidden p-4 md:p-8">
             {/* Decorative Bento Background Elements */}
-            <div className="absolute top-[-5%] left-[-5%] w-[40%] h-[40%] bg-primary border-4 border-foreground rotate-3 opacity-10 hidden md:block" />
-            <div className="absolute bottom-[10%] right-[-10%] w-[30%] h-[50%] bg-secondary border-4 border-foreground -rotate-6 opacity-10 hidden md:block" />
+            <div className="absolute top-[-5%] left-[-5%] w-[40%] h-[40%] bg-primary border-4 border-foreground rotate-3 opacity-10 hidden md:block rounded-[3rem]" />
+            <div className="absolute bottom-[10%] right-[-10%] w-[30%] h-[50%] bg-secondary border-4 border-foreground -rotate-6 opacity-10 hidden md:block rounded-[4rem]" />
             <div className="absolute top-[20%] right-[5%] w-[100px] h-[100px] bg-foreground rounded-full opacity-5" />
             
             <div className="relative z-10 w-full max-w-[450px]">
                 {/* Brand Tag */}
-                <div className="absolute -top-6 -left-4 z-20 bg-foreground text-background px-4 py-2 font-black uppercase text-xs tracking-[0.2em] shadow-[4px_4px_0px_0px_rgba(74,158,255,1)]">
+                <div className="absolute -top-6 -left-4 z-20 bg-foreground text-background px-6 py-2 font-black uppercase text-xs tracking-[0.2em] shadow-[4px_4px_0px_0px_rgba(74,158,255,1)] rounded-full">
                     Admin Portal
                 </div>
 
-                <div className="bg-white border-4 border-foreground shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
-                    <div className="p-8 border-b-4 border-foreground bg-primary">
+                <div className="bg-white border-4 border-foreground shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] overflow-hidden rounded-[2.5rem]">
+                    <div className="p-8 border-b-4 border-foreground bg-primary first:rounded-t-[2.3rem]">
                         <div className="flex items-center gap-4 mb-2">
-                            <div className="w-12 h-12 bg-white border-4 border-foreground flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shrink-0">
+                            <div className="w-12 h-12 bg-white border-4 border-foreground flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shrink-0 rounded-2xl">
                                 <Lock className="w-6 h-6 text-foreground" />
                             </div>
                             <div>
@@ -75,7 +75,7 @@ export default function LoginPage() {
                                             placeholder="admin@rbadev.id"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
-                                            className="pl-12 bg-white border-2 border-foreground h-12 font-bold focus-visible:ring-0 focus-visible:border-primary transition-all"
+                                            className="brutalist-input pl-12"
                                             required
                                         />
                                     </div>
@@ -92,7 +92,7 @@ export default function LoginPage() {
                                             placeholder="••••••••"
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
-                                            className="pl-12 bg-white border-2 border-foreground h-12 font-bold focus-visible:ring-0 focus-visible:border-primary transition-all"
+                                            className="brutalist-input pl-12"
                                             required
                                         />
                                     </div>

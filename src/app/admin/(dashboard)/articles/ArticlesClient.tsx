@@ -131,7 +131,7 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                     >
                         <Plus className="w-5 h-5" /> TULIS ARTIKEL BARU
                     </DialogTrigger>
-                    <DialogContent className="max-w-5xl bg-white border-4 border-foreground rounded-none shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] h-[90vh] flex flex-col p-0 overflow-hidden">
+                    <DialogContent className="max-w-5xl bg-white border-4 border-foreground rounded-[2.5rem] shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] h-[90vh] flex flex-col p-0 overflow-hidden">
                         <DialogHeader className="p-8 border-b-4 border-foreground bg-primary shrink-0 text-left">
                             <DialogTitle className="text-4xl font-black uppercase tracking-tighter text-foreground">Redaksi Konten</DialogTitle>
                             <DialogDescription className="text-foreground font-bold opacity-70 italic">
@@ -145,32 +145,32 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                                     <div className="space-y-6">
                                         <div className="space-y-2">
                                             <Label htmlFor="title" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Judul Artikel</Label>
-                                            <Input id="title" required value={title} onChange={e => setTitle(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold focus-visible:ring-0 focus-visible:border-primary text-lg px-4" placeholder="E.g. Masa Depan Web Dev" />
+                                            <Input id="title" required value={title} onChange={e => setTitle(e.target.value)} className="brutalist-input text-lg px-4" placeholder="E.g. Masa Depan Web Dev" />
                                         </div>
 
                                         <div className="space-y-2">
                                             <Label htmlFor="slug" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Slug URL (Auto Generated)</Label>
-                                            <Input id="slug" value={slug} onChange={e => setSlug(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold px-4" placeholder="masa-depan-web-dev" />
+                                            <Input id="slug" value={slug} onChange={e => setSlug(e.target.value)} className="brutalist-input" placeholder="masa-depan-web-dev" />
                                         </div>
 
                                         <div className="space-y-2">
                                             <Label htmlFor="description" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Ringkasan / Excerpt</Label>
-                                            <Textarea id="description" rows={4} value={description} onChange={e => setDescription(e.target.value)} className="bg-white border-2 border-foreground font-medium resize-none p-4" placeholder="Ringkasan singkat untuk meta deskripsi..." />
+                                            <Textarea id="description" rows={4} value={description} onChange={e => setDescription(e.target.value)} className="bg-white border-2 border-foreground font-medium resize-none p-4 rounded-xl focus-visible:ring-0 focus-visible:border-primary transition-all" placeholder="Ringkasan singkat untuk meta deskripsi..." />
                                         </div>
                                         
                                         <div className="space-y-4 pt-4">
                                             <Label htmlFor="image" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Thumbnail Utama</Label>
-                                            <div className="flex items-center gap-6 p-4 bg-slate-50 border-2 border-dashed border-foreground/20">
+                                            <div className="flex items-center gap-6 p-4 bg-slate-50 border-2 border-dashed border-foreground/20 rounded-xl overflow-hidden">
                                                 {currentImageUrl && !file && (
-                                                    <div className="relative w-20 h-20 border-2 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
+                                                    <div className="relative w-20 h-20 border-2 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0 rounded-lg overflow-hidden">
                                                         <Image src={currentImageUrl} alt="Current cover" fill className="object-cover" />
                                                     </div>
                                                 )}
-                                                <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="bg-white border-2 border-foreground cursor-pointer h-12 flex-1 font-bold file:bg-primary file:font-black file:uppercase file:text-[10px] file:h-full file:border-0 file:border-r-2 file:border-foreground file:mr-4 file:px-4" />
+                                                <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="brutalist-input flex-1 file:bg-primary file:font-black file:uppercase file:text-[10px] file:h-full file:border-0 file:border-r-2 file:border-foreground file:mr-4 file:px-4 flex items-center" />
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center justify-between p-6 bg-slate-50 border-2 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                                        <div className="flex items-center justify-between p-6 bg-slate-50 border-2 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rounded-2xl">
                                             <div className="space-y-0.5">
                                                 <Label className="text-sm font-black uppercase text-foreground">Status Penerbitan</Label>
                                                 <p className="text-xs font-bold text-foreground/50 italic">Tampilkan artikel ke publik.</p>
@@ -186,7 +186,7 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                                             required 
                                             value={content} 
                                             onChange={e => setContent(e.target.value)} 
-                                            className="bg-white border-2 border-foreground resize-none flex-1 min-h-[400px] font-mono text-sm leading-relaxed p-6" 
+                                            className="bg-white border-2 border-foreground resize-none flex-1 min-h-[400px] font-mono text-sm leading-relaxed p-6 rounded-[2rem] focus-visible:ring-0 focus-visible:border-primary transition-all shadow-inner" 
                                             placeholder="# Hello World&#10;&#10;Tuliskan majestic markdown anda di sini..." 
                                         />
                                     </div>
@@ -195,7 +195,7 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                         </div>
 
                         <DialogFooter className="p-8 border-t-4 border-foreground bg-surface shrink-0">
-                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-2 border-foreground bg-white hover:bg-muted font-bold uppercase text-xs tracking-widest px-6 h-12 rounded-none">
+                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-2 border-foreground bg-white hover:bg-muted font-bold uppercase text-xs tracking-widest px-6 h-12 rounded-xl">
                                 Batalkan
                             </Button>
                             <button type="submit" form="article-form" disabled={loading} className="brutalist-button h-12 flex items-center justify-center min-w-[180px]">
@@ -210,9 +210,9 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                 <Table className="border-collapse">
                     <TableHeader className="bg-foreground text-background border-b-4 border-foreground">
                         <TableRow className="hover:bg-transparent border-0 h-16">
-                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] px-8">DAFTAR ARTIKEL</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] px-8 first:rounded-tl-2xl">DAFTAR ARTIKEL</TableHead>
                             <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] w-[140px]">STATUS</TableHead>
-                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] text-right w-[150px] px-8">KENDALI</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] text-right w-[150px] px-8 last:rounded-tr-2xl">KENDALI</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -257,7 +257,7 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                                                 variant="ghost"
                                                 size="icon"
                                                 onClick={() => handleEdit(article)}
-                                                className="border-2 border-foreground bg-white hover:bg-secondary hover:text-white h-10 w-10 rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
+                                                className="border-2 border-foreground bg-white hover:bg-secondary hover:text-white h-10 w-10 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                                             >
                                                 <Pencil className="w-4 h-4" />
                                             </Button>
@@ -266,7 +266,7 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                                                 size="icon"
                                                 onClick={() => handleDelete(article.id)}
                                                 disabled={deleteLoading === article.id}
-                                                className="border-2 border-foreground bg-white hover:bg-destructive hover:text-white h-10 w-10 rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
+                                                className="border-2 border-foreground bg-white hover:bg-destructive hover:text-white h-10 w-10 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                                             >
                                                 {deleteLoading === article.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
                                             </Button>

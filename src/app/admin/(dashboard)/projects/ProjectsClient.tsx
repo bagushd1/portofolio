@@ -144,7 +144,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                     >
                         <Plus className="w-5 h-5" /> PASANG PROYEK BARU
                     </DialogTrigger>
-                    <DialogContent className="max-w-5xl bg-white border-4 border-foreground rounded-none shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] h-[90vh] flex flex-col p-0 overflow-hidden">
+                    <DialogContent className="max-w-5xl bg-white border-4 border-foreground rounded-[2.5rem] shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] h-[90vh] flex flex-col p-0 overflow-hidden">
                         <DialogHeader className="p-8 border-b-4 border-foreground bg-primary shrink-0 text-left">
                             <DialogTitle className="text-4xl font-black uppercase tracking-tighter text-foreground">Konfigurasi Proyek</DialogTitle>
                             <DialogDescription className="text-foreground font-bold opacity-70 italic">
@@ -158,40 +158,40 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                                     <div className="space-y-6">
                                         <div className="space-y-2">
                                             <Label htmlFor="title" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Judul Proyek</Label>
-                                            <Input id="title" required value={title} onChange={e => setTitle(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold focus-visible:ring-0 focus-visible:border-primary px-4" placeholder="E.g. Nexus Dashboard v2" />
+                                            <Input id="title" required value={title} onChange={e => setTitle(e.target.value)} className="brutalist-input" placeholder="E.g. Nexus Dashboard v2" />
                                         </div>
                                         
                                         <div className="grid grid-cols-2 gap-4">
                                             <div className="space-y-2">
                                                 <Label htmlFor="slug" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Slug URL</Label>
-                                                <Input id="slug" placeholder="nexus-dashboard" value={slug} onChange={e => setSlug(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold px-4" />
+                                                <Input id="slug" placeholder="nexus-dashboard" value={slug} onChange={e => setSlug(e.target.value)} className="brutalist-input" />
                                             </div>
                                             <div className="space-y-2">
                                                 <Label htmlFor="live_link" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Live Link</Label>
-                                                <Input id="live_link" type="url" placeholder="https://..." value={liveLink} onChange={e => setLiveLink(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold px-4" />
+                                                <Input id="live_link" type="url" placeholder="https://..." value={liveLink} onChange={e => setLiveLink(e.target.value)} className="brutalist-input" />
                                             </div>
                                         </div>
 
                                         <div className="space-y-2">
                                             <Label htmlFor="tech_stack" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Tech Stack (Pisahkan dengan koma)</Label>
-                                            <Input id="tech_stack" placeholder="Next.js, Tailwind, Supabase" value={techStack} onChange={e => setTechStack(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold px-4" />
+                                            <Input id="tech_stack" placeholder="Next.js, Tailwind, Supabase" value={techStack} onChange={e => setTechStack(e.target.value)} className="brutalist-input" />
                                         </div>
                                     </div>
 
                                     <div className="space-y-2">
                                         <Label htmlFor="description" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Ringkasan Singkat</Label>
-                                        <Textarea id="description" required rows={7} value={description} onChange={e => setDescription(e.target.value)} className="bg-white border-2 border-foreground font-medium resize-none p-4 h-full min-h-[180px]" placeholder="Jelaskan proyek ini dalam beberapa kalimat..." />
+                                        <Textarea id="description" required rows={7} value={description} onChange={e => setDescription(e.target.value)} className="bg-white border-2 border-foreground font-medium resize-none p-4 h-full min-h-[180px] rounded-[1.5rem] focus-visible:ring-0 focus-visible:border-primary transition-all overflow-hidden" placeholder="Jelaskan proyek ini dalam beberapa kalimat..." />
                                     </div>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-8 border-t-2 border-slate-100">
                                     <div className="space-y-2">
                                         <Label htmlFor="challenge" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Tantangan (The Challenge)</Label>
-                                        <Textarea id="challenge" rows={4} value={challenge} onChange={e => setChallenge(e.target.value)} className="bg-slate-50 border-2 border-foreground font-medium resize-none p-4" placeholder="Apa masalah teknis atau bisnis utama?" />
+                                        <Textarea id="challenge" rows={4} value={challenge} onChange={e => setChallenge(e.target.value)} className="bg-slate-50 border-2 border-foreground font-medium resize-none p-4 rounded-2xl" placeholder="Apa masalah teknis atau bisnis utama?" />
                                     </div>
                                     <div className="space-y-2">
                                         <Label htmlFor="solution" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Solusi (The Solution)</Label>
-                                        <Textarea id="solution" rows={4} value={solution} onChange={e => setSolution(e.target.value)} className="bg-slate-50 border-2 border-foreground font-medium resize-none p-4" placeholder="Bagaimana tim RBAdev menyelesaikannya?" />
+                                        <Textarea id="solution" rows={4} value={solution} onChange={e => setSolution(e.target.value)} className="bg-slate-50 border-2 border-foreground font-medium resize-none p-4 rounded-2xl" placeholder="Bagaimana tim RBAdev menyelesaikannya?" />
                                     </div>
                                 </div>
 
@@ -205,7 +205,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                                         )}
                                         <div className="flex-1 space-y-2">
                                             <p className="text-[10px] font-black uppercase text-foreground/50 tracking-widest">Klik untuk mengganti thumbnail</p>
-                                            <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="bg-white border-2 border-foreground cursor-pointer h-12 font-bold file:bg-primary file:font-black file:uppercase file:text-[10px] file:h-full file:border-0 file:border-r-2 file:border-foreground file:mr-4 file:px-4" />
+                                            <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="brutalist-input file:bg-primary file:font-black file:uppercase file:text-[10px] file:h-full file:border-0 file:border-r-2 file:border-foreground file:mr-4 file:px-4 flex items-center" />
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                         </div>
 
                         <DialogFooter className="p-8 border-t-4 border-foreground bg-slate-50 shrink-0">
-                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-2 border-foreground bg-white hover:bg-muted font-bold uppercase text-xs tracking-widest px-8 h-12 rounded-none">
+                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-2 border-foreground bg-white hover:bg-muted font-bold uppercase text-xs tracking-widest px-8 h-12 rounded-xl">
                                 Batalkan
                             </Button>
                             <button type="submit" form="project-form" disabled={loading} className="brutalist-button h-12 flex items-center justify-center min-w-[200px]">
@@ -228,10 +228,10 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                 <Table className="border-collapse">
                     <TableHeader className="bg-foreground text-background border-b-4 border-foreground">
                         <TableRow className="hover:bg-transparent border-0 h-16">
-                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] px-8">PROYEK / ENTITAS</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] px-8 first:rounded-tl-2xl">PROYEK / ENTITAS</TableHead>
                             <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] hidden md:table-cell">TEKNOLOGI</TableHead>
                             <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] w-[120px]">TAUTAN</TableHead>
-                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] text-right w-[120px] px-8">KENDALI</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] text-right w-[120px] px-8 last:rounded-tr-2xl">KENDALI</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -290,7 +290,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                                                 variant="ghost"
                                                 size="icon"
                                                 onClick={() => handleEdit(project)}
-                                                className="border-2 border-foreground bg-white hover:bg-secondary hover:text-white h-10 w-10 rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
+                                                className="border-2 border-foreground bg-white hover:bg-secondary hover:text-white h-10 w-10 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                                             >
                                                 <Pencil className="w-4 h-4" />
                                             </Button>
@@ -299,7 +299,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                                                 size="icon"
                                                 onClick={() => handleDelete(project.id)}
                                                 disabled={deleteLoading === project.id}
-                                                className="border-2 border-foreground bg-white hover:bg-destructive hover:text-white h-10 w-10 rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
+                                                className="border-2 border-foreground bg-white hover:bg-destructive hover:text-white h-10 w-10 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
                                             >
                                                 {deleteLoading === project.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
                                             </Button>
