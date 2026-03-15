@@ -160,7 +160,7 @@ export default function ServicesClient({ initialServices }: { initialServices: a
                 <Table className="border-collapse">
                     <TableHeader className="bg-foreground text-background border-b-4 border-foreground">
                         <TableRow className="hover:bg-transparent border-0 h-16">
-                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] px-8 w-[100px] first:rounded-tl-2xl">URUTAN</TableHead>
+                            <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] px-8 w-[120px] first:rounded-tl-2xl text-center">URUTAN</TableHead>
                             <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em]">JENIS LAYANAN</TableHead>
                             <TableHead className="text-background font-black text-xs uppercase tracking-[0.2em] text-right w-[150px] px-8 last:rounded-tr-2xl">KENDALI</TableHead>
                         </TableRow>
@@ -175,8 +175,8 @@ export default function ServicesClient({ initialServices }: { initialServices: a
                         ) : (
                             initialServices.map((service) => (
                                 <TableRow key={service.id} className="border-b border-surface-border/50 hover:bg-surface/30 transition-colors">
-                                    <TableCell className="font-medium text-foreground py-4">
-                                        <div className="w-8 h-8 rounded-lg bg-background border border-surface-border flex items-center justify-center font-black text-xs text-text-dim">
+                                    <TableCell className="font-medium text-foreground py-6 text-center">
+                                        <div className="mx-auto w-10 h-10 rounded-xl bg-primary border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center font-black text-sm text-foreground">
                                             {service.order_index}
                                         </div>
                                     </TableCell>
