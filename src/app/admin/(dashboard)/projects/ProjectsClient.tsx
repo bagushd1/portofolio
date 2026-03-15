@@ -144,73 +144,80 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                     >
                         <Plus className="w-5 h-5" /> PASANG PROYEK BARU
                     </DialogTrigger>
-                    <DialogContent className="max-w-3xl bg-white border-4 border-foreground rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-[90vh] flex flex-col p-0 overflow-hidden">
+                    <DialogContent className="max-w-5xl bg-white border-4 border-foreground rounded-none shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] h-[90vh] flex flex-col p-0 overflow-hidden">
                         <DialogHeader className="p-8 border-b-4 border-foreground bg-primary shrink-0 text-left">
-                            <DialogTitle className="text-3xl font-black uppercase tracking-tighter">Konfigurasi Proyek</DialogTitle>
-                            <DialogDescription className="text-foreground font-bold opacity-70">
-                                Tambahkan atau perbarui karya portofolio publik RBAdev.
+                            <DialogTitle className="text-4xl font-black uppercase tracking-tighter text-foreground">Konfigurasi Proyek</DialogTitle>
+                            <DialogDescription className="text-foreground font-bold opacity-70 italic">
+                                Kelola detail proyek, tantangan, dan solusi untuk portofolio publik RBAdev.
                             </DialogDescription>
                         </DialogHeader>
-                        <div className="overflow-y-auto flex-1 p-6">
-                            <form id="project-form" onSubmit={handleSubmit} className="space-y-4">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="title" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Title</Label>
-                                    <Input id="title" required value={title} onChange={e => setTitle(e.target.value)} className="bg-background border-surface-border" />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="tech_stack" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Tech Stack</Label>
-                                    <Input id="tech_stack" placeholder="React, Node.js, Tailwind" value={techStack} onChange={e => setTechStack(e.target.value)} className="bg-background border-surface-border" />
-                                </div>
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="description" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Description</Label>
-                                <Textarea id="description" required rows={3} value={description} onChange={e => setDescription(e.target.value)} className="bg-background border-surface-border resize-none" />
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="slug" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Slug (Optional)</Label>
-                                    <Input id="slug" placeholder="nama-project" value={slug} onChange={e => setSlug(e.target.value)} className="bg-background border-surface-border" />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="live_link" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Live URL</Label>
-                                    <Input id="live_link" type="url" placeholder="https://" value={liveLink} onChange={e => setLiveLink(e.target.value)} className="bg-background border-surface-border" />
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="challenge" className="text-xs text-text-dim uppercase tracking-wider font-semibold">The Challenge</Label>
-                                    <Textarea id="challenge" rows={3} value={challenge} onChange={e => setChallenge(e.target.value)} className="bg-background border-surface-border resize-none" placeholder="Apa masalah yang dihadapi klien?" />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="solution" className="text-xs text-text-dim uppercase tracking-wider font-semibold">The Solution</Label>
-                                    <Textarea id="solution" rows={3} value={solution} onChange={e => setSolution(e.target.value)} className="bg-background border-surface-border resize-none" placeholder="Bagaimana solusi dari tim?" />
-                                </div>
-                            </div>
-
-                            <div className="space-y-6 pt-4 border-t-2 border-slate-100">
-                                <Label htmlFor="image" className="text-xs font-black uppercase tracking-widest text-foreground">Thumbnail Cover / Visual Proyek</Label>
-                                <div className="flex items-center gap-6 p-4 bg-slate-50 border-2 border-dashed border-slate-200">
-                                    {currentImageUrl && !file && (
-                                        <div className="relative w-20 h-20 border-2 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex-shrink-0 overflow-hidden">
-                                            <Image src={currentImageUrl} alt="Current project cover" fill className="object-cover" />
+                        
+                        <div className="overflow-y-auto flex-1 p-8 bg-white">
+                            <form id="project-form" onSubmit={handleSubmit} className="space-y-10">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                    <div className="space-y-6">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="title" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Judul Proyek</Label>
+                                            <Input id="title" required value={title} onChange={e => setTitle(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold focus-visible:ring-0 focus-visible:border-primary px-4" placeholder="E.g. Nexus Dashboard v2" />
                                         </div>
-                                    )}
-                                    <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="bg-white border-2 border-foreground cursor-pointer flex-1 font-bold file:bg-primary file:font-black file:uppercase file:text-[10px]" />
+                                        
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="slug" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Slug URL</Label>
+                                                <Input id="slug" placeholder="nexus-dashboard" value={slug} onChange={e => setSlug(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold px-4" />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="live_link" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Live Link</Label>
+                                                <Input id="live_link" type="url" placeholder="https://..." value={liveLink} onChange={e => setLiveLink(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold px-4" />
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="tech_stack" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Tech Stack (Pisahkan dengan koma)</Label>
+                                            <Input id="tech_stack" placeholder="Next.js, Tailwind, Supabase" value={techStack} onChange={e => setTechStack(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold px-4" />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="description" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Ringkasan Singkat</Label>
+                                        <Textarea id="description" required rows={7} value={description} onChange={e => setDescription(e.target.value)} className="bg-white border-2 border-foreground font-medium resize-none p-4 h-full min-h-[180px]" placeholder="Jelaskan proyek ini dalam beberapa kalimat..." />
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-8 border-t-2 border-slate-100">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="challenge" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Tantangan (The Challenge)</Label>
+                                        <Textarea id="challenge" rows={4} value={challenge} onChange={e => setChallenge(e.target.value)} className="bg-slate-50 border-2 border-foreground font-medium resize-none p-4" placeholder="Apa masalah teknis atau bisnis utama?" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="solution" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Solusi (The Solution)</Label>
+                                        <Textarea id="solution" rows={4} value={solution} onChange={e => setSolution(e.target.value)} className="bg-slate-50 border-2 border-foreground font-medium resize-none p-4" placeholder="Bagaimana tim RBAdev menyelesaikannya?" />
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4 pt-8 border-t-2 border-slate-100">
+                                    <Label className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Aset Visual Proyek</Label>
+                                    <div className="flex items-center gap-8 p-6 bg-slate-50 border-2 border-dashed border-foreground/20">
+                                        {currentImageUrl && !file && (
+                                            <div className="relative w-24 h-24 border-2 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
+                                                <Image src={currentImageUrl} alt="Current project cover" fill className="object-cover" />
+                                            </div>
+                                        )}
+                                        <div className="flex-1 space-y-2">
+                                            <p className="text-[10px] font-black uppercase text-foreground/50 tracking-widest">Klik untuk mengganti thumbnail</p>
+                                            <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="bg-white border-2 border-foreground cursor-pointer h-12 font-bold file:bg-primary file:font-black file:uppercase file:text-[10px] file:h-full file:border-0 file:border-r-2 file:border-foreground file:mr-4 file:px-4" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
 
-                        <DialogFooter className="p-8 border-t-4 border-foreground bg-surface shrink-0">
-                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-2 border-foreground bg-white hover:bg-muted font-bold uppercase text-xs tracking-widest px-6 h-12 rounded-none">
+                        <DialogFooter className="p-8 border-t-4 border-foreground bg-slate-50 shrink-0">
+                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-2 border-foreground bg-white hover:bg-muted font-bold uppercase text-xs tracking-widest px-8 h-12 rounded-none">
                                 Batalkan
                             </Button>
-                            <button type="submit" form="project-form" disabled={loading} className="brutalist-button h-12 flex items-center justify-center min-w-[160px]">
-                                {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : "AKTIFKAN PROYEK"}
+                            <button type="submit" form="project-form" disabled={loading} className="brutalist-button h-12 flex items-center justify-center min-w-[200px]">
+                                {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : "SIMPAN KONFIGURASI"}
                             </button>
                         </DialogFooter>
                     </DialogContent>

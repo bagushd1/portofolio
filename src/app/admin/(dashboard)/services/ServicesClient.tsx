@@ -104,44 +104,54 @@ export default function ServicesClient({ initialServices }: { initialServices: a
                     >
                         <Plus className="w-5 h-5" /> TAMBAH LAYANAN
                     </DialogTrigger>
-                    <DialogContent className="max-w-2xl bg-white border-4 border-foreground rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col p-0 overflow-hidden">
-                        <DialogHeader className="p-8 border-b-4 border-foreground bg-[#4a9eff] shrink-0 text-left">
-                            <DialogTitle className="text-3xl font-black uppercase tracking-tighter text-white">{editingId ? "Edit Layanan" : "Layanan Baru"}</DialogTitle>
-                            <DialogDescription className="text-white font-bold opacity-80">
-                                Konfigurasi jenis layanan yang muncul di beranda RBAdev.
+                    <DialogContent className="max-w-4xl bg-white border-4 border-foreground rounded-none shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col p-0 overflow-hidden h-fit max-h-[90vh]">
+                        <DialogHeader className="p-8 border-b-4 border-foreground bg-secondary shrink-0 text-left">
+                            <DialogTitle className="text-4xl font-black uppercase tracking-tighter text-white">Manajemen Layanan</DialogTitle>
+                            <DialogDescription className="text-white font-bold opacity-90 italic">
+                                Konfigurasi jenis layanan dan keunggulan yang ditawarkan RBAdev.
                             </DialogDescription>
                         </DialogHeader>
-                        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-                            <div className="space-y-2">
-                                <Label htmlFor="title" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Service Title</Label>
-                                <Input id="title" required value={title} onChange={e => setTitle(e.target.value)} className="bg-background border-surface-border" placeholder="e.g. Sistem Terpadu" />
-                            </div>
+                        
+                        <div className="overflow-y-auto flex-1 p-8">
+                            <form id="service-form" onSubmit={handleSubmit} className="space-y-8">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div className="space-y-6">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="title" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Nama Layanan</Label>
+                                            <Input id="title" required value={title} onChange={e => setTitle(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold focus-visible:ring-0 focus-visible:border-primary transition-all px-4" placeholder="E.g. Pengembangan Web Eksekutif" />
+                                        </div>
 
-                            <div className="space-y-2">
-                                <Label htmlFor="description" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Description</Label>
-                                <Textarea id="description" required rows={3} value={description} onChange={e => setDescription(e.target.value)} className="bg-background border-surface-border resize-none" placeholder="Brief description of the service..." />
-                            </div>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="icon" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Ikon (Lucide)</Label>
+                                                <div className="relative">
+                                                    <Input id="icon" placeholder="Laptop, Code, Rocket" value={icon} onChange={e => setIcon(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold pl-10" />
+                                                    <LayoutGrid className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" />
+                                                </div>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="order_index" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Urutan Tampil</Label>
+                                                <Input id="order_index" type="number" min="0" value={orderIndex} onChange={e => setOrderIndex(parseInt(e.target.value) || 0)} className="bg-white border-2 border-foreground h-12 font-bold" />
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="icon" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Icon Name (Lucide)</Label>
-                                    <Input id="icon" placeholder="Laptop, Layout, Database" value={icon} onChange={e => setIcon(e.target.value)} className="bg-background border-surface-border" />
+                                    <div className="space-y-2">
+                                        <Label htmlFor="description" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Deskripsi Layanan</Label>
+                                        <Textarea id="description" required rows={6} value={description} onChange={e => setDescription(e.target.value)} className="bg-white border-2 border-foreground font-medium resize-none p-4 min-h-[148px]" placeholder="Jelaskan secara mendalam tentang layanan ini..." />
+                                    </div>
                                 </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="order_index" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Display Order</Label>
-                                    <Input id="order_index" type="number" min="0" value={orderIndex} onChange={e => setOrderIndex(parseInt(e.target.value) || 0)} className="bg-background border-surface-border" />
-                                </div>
-                            </div>
+                            </form>
+                        </div>
 
-                            <DialogFooter className="p-8 border-t-4 border-foreground bg-surface shrink-0 mt-4">
-                                <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-2 border-foreground bg-white hover:bg-muted font-bold uppercase text-xs tracking-widest px-6 h-12 rounded-none">
-                                    Batalkan
-                                </Button>
-                                <button type="submit" disabled={loading} className="brutalist-button h-12 flex items-center justify-center min-w-[160px]">
-                                    {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : "SIMPAN LAYANAN"}
-                                </button>
-                            </DialogFooter>
-                        </form>
+                        <DialogFooter className="p-8 border-t-4 border-foreground bg-slate-50 shrink-0">
+                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-2 border-foreground bg-white hover:bg-muted font-bold uppercase text-xs tracking-widest px-8 h-12 rounded-none">
+                                Batalkan
+                            </Button>
+                            <button type="submit" form="service-form" disabled={loading} className="brutalist-button h-12 flex items-center justify-center min-w-[200px]">
+                                {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : "SIMPAN PERUBAHAN"}
+                            </button>
+                        </DialogFooter>
                     </DialogContent>
                 </Dialog>
             </div>

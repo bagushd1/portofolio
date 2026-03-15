@@ -132,64 +132,62 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                         <Plus className="w-5 h-5" /> TULIS ARTIKEL BARU
                     </DialogTrigger>
                     <DialogContent className="max-w-5xl bg-white border-4 border-foreground rounded-none shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] h-[90vh] flex flex-col p-0 overflow-hidden">
-                        <DialogHeader className="p-8 border-b-4 border-foreground bg-[#fff133] shrink-0 text-left">
+                        <DialogHeader className="p-8 border-b-4 border-foreground bg-primary shrink-0 text-left">
                             <DialogTitle className="text-4xl font-black uppercase tracking-tighter text-foreground">Redaksi Konten</DialogTitle>
                             <DialogDescription className="text-foreground font-bold opacity-70 italic">
                                 Tuangkan pemikiran dan wawasan terbaru ke dalam platform RBAdev.
                             </DialogDescription>
                         </DialogHeader>
                         
-                        <div className="overflow-y-auto flex-1 p-6">
-                            <form id="article-form" onSubmit={handleSubmit} className="space-y-6">
-                                <div className="grid grid-cols-2 gap-6">
-                                    <div className="space-y-4">
+                        <div className="overflow-y-auto flex-1 p-8 bg-white">
+                            <form id="article-form" onSubmit={handleSubmit} className="space-y-10">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                    <div className="space-y-6">
                                         <div className="space-y-2">
-                                            <Label htmlFor="title" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Title</Label>
-                                            <Input id="title" required value={title} onChange={e => setTitle(e.target.value)} className="bg-background border-surface-border text-lg font-medium" placeholder="E.g. The Future of Web Dev" />
+                                            <Label htmlFor="title" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Judul Artikel</Label>
+                                            <Input id="title" required value={title} onChange={e => setTitle(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold focus-visible:ring-0 focus-visible:border-primary text-lg px-4" placeholder="E.g. Masa Depan Web Dev" />
                                         </div>
 
                                         <div className="space-y-2">
-                                            <Label htmlFor="slug" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Slug (Optional - Auto Generated)</Label>
-                                            <Input id="slug" value={slug} onChange={e => setSlug(e.target.value)} className="bg-background border-surface-border" placeholder="the-future-of-web-dev" />
+                                            <Label htmlFor="slug" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Slug URL (Auto Generated)</Label>
+                                            <Input id="slug" value={slug} onChange={e => setSlug(e.target.value)} className="bg-white border-2 border-foreground h-12 font-bold px-4" placeholder="masa-depan-web-dev" />
                                         </div>
 
                                         <div className="space-y-2">
-                                            <Label htmlFor="description" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Excerpt / Meta Description</Label>
-                                            <Textarea id="description" rows={3} value={description} onChange={e => setDescription(e.target.value)} className="bg-background border-surface-border resize-none" placeholder="A short summary of the article..." />
+                                            <Label htmlFor="description" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Ringkasan / Excerpt</Label>
+                                            <Textarea id="description" rows={4} value={description} onChange={e => setDescription(e.target.value)} className="bg-white border-2 border-foreground font-medium resize-none p-4" placeholder="Ringkasan singkat untuk meta deskripsi..." />
                                         </div>
                                         
-                                        <div className="space-y-2">
-                                            <Label htmlFor="image" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Cover Image</Label>
-                                            <div className="flex items-center gap-4">
+                                        <div className="space-y-4 pt-4">
+                                            <Label htmlFor="image" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Thumbnail Utama</Label>
+                                            <div className="flex items-center gap-6 p-4 bg-slate-50 border-2 border-dashed border-foreground/20">
                                                 {currentImageUrl && !file && (
-                                                    <div className="relative w-16 h-16 rounded-lg overflow-hidden border border-surface-border flex-shrink-0">
+                                                    <div className="relative w-20 h-20 border-2 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
                                                         <Image src={currentImageUrl} alt="Current cover" fill className="object-cover" />
                                                     </div>
                                                 )}
-                                                <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="bg-background border-surface-border cursor-pointer flex-1" />
+                                                <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="bg-white border-2 border-foreground cursor-pointer h-12 flex-1 font-bold file:bg-primary file:font-black file:uppercase file:text-[10px] file:h-full file:border-0 file:border-r-2 file:border-foreground file:mr-4 file:px-4" />
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center justify-between p-4 bg-background border border-surface-border rounded-xl">
+                                        <div className="flex items-center justify-between p-6 bg-slate-50 border-2 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                                             <div className="space-y-0.5">
-                                                <Label className="text-sm font-semibold text-foreground">Publish Status</Label>
-                                                <p className="text-xs text-text-muted">Make this article visible to public.</p>
+                                                <Label className="text-sm font-black uppercase text-foreground">Status Penerbitan</Label>
+                                                <p className="text-xs font-bold text-foreground/50 italic">Tampilkan artikel ke publik.</p>
                                             </div>
-                                            <Switch checked={published} onCheckedChange={setPublished} />
+                                            <Switch checked={published} onCheckedChange={setPublished} className="data-[state=checked]:bg-primary" />
                                         </div>
                                     </div>
 
                                     <div className="space-y-2 h-full flex flex-col">
-                                        <div className="flex items-center justify-between">
-                                            <Label htmlFor="content" className="text-xs text-text-dim uppercase tracking-wider font-semibold">Content (Markdown)</Label>
-                                        </div>
+                                        <Label htmlFor="content" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Konten (Markdown)</Label>
                                         <Textarea 
                                             id="content" 
                                             required 
                                             value={content} 
                                             onChange={e => setContent(e.target.value)} 
-                                            className="bg-background border-surface-border resize-none flex-1 min-h-[400px] font-mono text-sm leading-relaxed" 
-                                            placeholder="# Hello World&#10;&#10;Write your majestic markdown here..." 
+                                            className="bg-white border-2 border-foreground resize-none flex-1 min-h-[400px] font-mono text-sm leading-relaxed p-6" 
+                                            placeholder="# Hello World&#10;&#10;Tuliskan majestic markdown anda di sini..." 
                                         />
                                     </div>
                                 </div>
