@@ -132,9 +132,9 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                         <Plus className="w-5 h-5 text-foreground" /> TULIS ARTIKEL BARU
                     </DialogTrigger>
                     <DialogContent className="max-w-5xl bg-white border-4 border-foreground rounded-[2.5rem] shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] h-[90vh] flex flex-col p-0 overflow-hidden">
-                        <DialogHeader className="p-8 border-b-4 border-foreground bg-foreground shrink-0 text-left">
-                            <DialogTitle className="text-4xl font-black uppercase tracking-tighter text-white">Redaksi Konten</DialogTitle>
-                            <DialogDescription className="text-white font-bold opacity-70 italic">
+                        <DialogHeader className="p-8 border-b-4 border-foreground bg-primary shrink-0 text-left">
+                            <DialogTitle className="text-4xl font-black uppercase tracking-tighter text-foreground">Redaksi Konten</DialogTitle>
+                            <DialogDescription className="text-foreground font-bold opacity-70 italic">
                                 Tuangkan pemikiran dan wawasan terbaru ke dalam platform RBAdev.
                             </DialogDescription>
                         </DialogHeader>
@@ -199,7 +199,7 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: a
                                 Batalkan
                             </Button>
                             <button type="submit" form="article-form" disabled={loading} className="brutalist-button h-12 flex items-center justify-center min-w-[180px]">
-                                {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : "TERBITKAN KARYA"}
+                                {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : "SIMPAN"}
                             </button>
                         </DialogFooter>
                     </DialogContent>
