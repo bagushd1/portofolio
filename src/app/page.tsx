@@ -29,7 +29,7 @@ export default function Home() {
 
                 <h1 className="text-[3.5rem] sm:text-6xl md:text-7xl lg:text-[7rem] font-black tracking-tighter text-foreground mb-6 md:mb-8 leading-[0.9] md:leading-[0.85] uppercase">
                   Kerja <br className="hidden sm:block" />
-                  <span className="text-primary italic font-serif lowercase">Jadi</span><br />
+                  <span className="text-secondary italic font-serif lowercase">Jadi</span><br />
                   Mudah.
                 </h1>
               </div>
@@ -142,7 +142,7 @@ export default function Home() {
               </div>
 
               <h2 className="text-[3.5rem] sm:text-5xl md:text-7xl font-black tracking-tighter mb-6 md:mb-8 leading-[0.9] uppercase">
-                Mulai <br className="hidden sm:block" /><span className="font-serif italic text-primary lowercase mr-2">Langkah</span>Baru.
+                Mulai <br className="hidden sm:block" /><span className="font-serif italic text-secondary lowercase mr-2">Langkah</span>Baru.
               </h2>
               <p className="text-foreground font-bold text-base md:text-xl mb-10 md:mb-12 leading-relaxed">
                 Konsultasikan kebutuhan sistem Anda bersama kami. Kami mendampingi langkah Anda terlepas seberapa asing Anda dengan dunia teknologi.

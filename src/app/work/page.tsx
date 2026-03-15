@@ -19,7 +19,7 @@ export default async function PortfolioPage() {
                         <ScrollReveal delay={0.1}>
                             <h1 className="text-6xl sm:text-7xl md:text-9xl font-black tracking-tighter uppercase leading-[0.85] mb-8">
                                 Selected <br />
-                                <span className="text-primary italic font-serif lowercase">Works.</span>
+                                <span className="text-secondary italic font-serif lowercase">Works.</span>
                             </h1>
                         </ScrollReveal>
                         <ScrollReveal delay={0.2} className="flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -77,7 +77,7 @@ export default async function PortfolioPage() {
                                                 )}
                                             </div>
                                             <Link href={`/work/${project.slug || project.id}`}>
-                                                <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter hover:text-primary transition-colors mb-4">
+                                                <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter hover:text-secondary transition-colors mb-4">
                                                     {project.title}
                                                 </h2>
                                             </Link>
@@ -92,7 +92,7 @@ export default async function PortfolioPage() {
                                                     href={project.live_link}
                                                     target="_blank"
                                                     rel="noreferrer"
-                                                    className="w-12 h-12 bg-background border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center hover:bg-primary hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+                                                    className="w-12 h-12 bg-background border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center hover:bg-secondary hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
                                                     title="Visit Live Site"
                                                 >
                                                     <ExternalLink className="w-5 h-5" />

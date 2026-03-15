@@ -20,27 +20,27 @@ export default function Navbar() {
                         <Code2 className="w-4 h-4 md:w-6 md:h-6 text-primary-foreground" />
                     </div>
                     <span className="text-xl md:text-2xl font-black uppercase tracking-widest text-foreground">
-                        RBA<span className="text-primary hidden sm:inline">dev.</span>
-                        <span className="text-primary sm:hidden">.</span>
+                        RBA<span className="text-secondary hidden sm:inline">dev.</span>
+                        <span className="text-secondary sm:hidden">.</span>
                     </span>
                 </Link>
                 <div className="hidden md:flex items-center gap-8">
                     <a
                         href={getLink("#services")}
-                        className="text-sm font-black uppercase tracking-wider text-foreground hover:text-primary transition-colors"
+                        className="text-sm font-black uppercase tracking-wider text-foreground hover:text-secondary transition-colors"
                     >
                         Layanan
                     </a>
                     <Link
                         href="/work"
-                        className={`text-sm font-black uppercase tracking-wider transition-colors ${pathname.startsWith("/work") ? "text-primary" : "text-foreground hover:text-primary"
+                        className={`text-sm font-black uppercase tracking-wider transition-colors ${pathname.startsWith("/work") ? "text-secondary" : "text-foreground hover:text-secondary"
                             }`}
                     >
                         Portfolio
                     </Link>
                     <Link
                         href="/blog"
-                        className={`text-sm font-black uppercase tracking-wider transition-colors ${pathname.startsWith("/blog") ? "text-primary" : "text-foreground hover:text-primary"
+                        className={`text-sm font-black uppercase tracking-wider transition-colors ${pathname.startsWith("/blog") ? "text-secondary" : "text-foreground hover:text-secondary"
                             }`}
                     >
                         Blog

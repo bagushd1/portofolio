@@ -19,7 +19,7 @@ export default async function BlogPage() {
                         <ScrollReveal delay={0.1}>
                             <h1 className="text-6xl sm:text-7xl md:text-9xl font-black tracking-tighter uppercase leading-[0.85] mb-8">
                                 Engineering <br />
-                                <span className="text-primary italic font-serif lowercase">Insights.</span>
+                                <span className="text-secondary italic font-serif lowercase">Insights.</span>
                             </h1>
                         </ScrollReveal>
                         <ScrollReveal delay={0.2}>
@@ -43,8 +43,8 @@ export default async function BlogPage() {
                                         {article.image_url ? (
                                             <Image src={article.image_url} alt={article.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                                         ) : (
-                                            <div className="absolute inset-0 bg-primary/20 flex items-center justify-center">
-                                                <FileText className="w-12 h-12 text-primary opacity-50" />
+                                            <div className="absolute inset-0 bg-secondary/20 flex items-center justify-center">
+                                                <FileText className="w-12 h-12 text-secondary opacity-50" />
                                             </div>
                                         )}
                                     </Link>
@@ -62,7 +62,7 @@ export default async function BlogPage() {
                                         </div>
 
                                         <Link href={`/blog/${article.slug}`}>
-                                            <h2 className="text-3xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors leading-tight">
+                                            <h2 className="text-3xl font-black uppercase tracking-tight mb-4 group-hover:text-secondary transition-colors leading-tight">
                                                 {article.title}
                                             </h2>
                                         </Link>
@@ -71,7 +71,7 @@ export default async function BlogPage() {
                                             {article.description || "Klik untuk membaca detail artikel selengkapnya..."}
                                         </p>
 
-                                        <Link href={`/blog/${article.slug}`} className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest hover:text-primary transition-colors group/link">
+                                        <Link href={`/blog/${article.slug}`} className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest hover:text-secondary transition-colors group/link">
                                             Baca Selengkapnya <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                                         </Link>
                                     </div>
