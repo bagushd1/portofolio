@@ -103,3 +103,17 @@
     @apply bg-white border-2 border-foreground rounded-xl h-12 font-bold focus-visible:ring-0 focus-visible:border-primary transition-all px-4;
   }
 }
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  .animate-marquee-slow {
+    animation: marquee 50s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+}

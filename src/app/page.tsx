@@ -81,42 +81,77 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* BRAND TICKER */}
-        <div className="border-b-4 border-foreground bg-primary py-6 md:py-8 overflow-hidden relative">
-          <div className="flex gap-12 md:gap-24 items-center whitespace-nowrap px-8 overflow-x-auto no-scrollbar">
-            {partners.length === 0 ? (
-              ["AcmeCorp", "GlobalTech", "Quantum", "RBA_", "DevOps"].map((name) => (
-                <span key={name} className="flex items-center gap-4 text-foreground font-black uppercase tracking-widest text-xl md:text-3xl opacity-30 italic">
-                  {name} <span className="text-foreground/20 not-italic">•</span>
-                </span>
-              ))
-            ) : (
-              partners.map((partner: any) => (
-                <div key={partner.id} className="flex items-center gap-6 group cursor-pointer">
-                  {partner.logo_url && (
-                    <div className="w-12 h-12 md:w-16 md:h-16 relative grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">
-                      <Image 
-                        src={partner.logo_url} 
-                        alt={partner.name} 
-                        fill 
-                        className="object-contain"
-                      />
-                    </div>
-                  )}
-                  <div className="flex flex-col">
-                    <span className="text-foreground font-black uppercase tracking-tighter text-2xl md:text-4xl leading-none group-hover:text-background transition-colors">
-                      {partner.name}
-                    </span>
-                    {partner.website_url && (
-                      <span className="text-[10px] font-bold text-foreground/40 hidden md:block uppercase tracking-tighter">View Partner</span>
-                    )}
+        {/* STRATEGIC PARTNERS SECTION - CONCEPT 3: SPLIT-BENTO MARQUEE */}
+        <section className="py-16 md:py-24 px-4 sm:px-6 md:px-12 bg-background border-b-4 border-foreground overflow-hidden">
+          <div className="max-w-[1400px] mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              {/* Left Side: Static Info Box */}
+              <ScrollReveal delay={0.1} direction="right" className="lg:col-span-5 bg-secondary border-4 border-foreground rounded-[2rem] p-8 md:p-12 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between group transform hover:-translate-y-1 transition-transform relative overflow-hidden">
+                <div className="relative z-10">
+                  <div className="inline-flex items-center px-3 py-1 bg-white border-2 border-foreground text-foreground text-[10px] font-black uppercase tracking-[0.2em] mb-6 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    Social Proof
                   </div>
-                  <span className="text-background md:text-3xl">•</span>
+                  <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-6">
+                    Strategic <br />
+                    <span className="italic font-serif text-primary lowercase">Partners.</span>
+                  </h2>
                 </div>
-              ))
-            )}
+
+                <div className="relative z-10">
+                  <p className="text-white/80 font-bold text-sm md:text-base mb-8 uppercase tracking-widest leading-relaxed">
+                    Membangun ekosistem teknologi bersama institusi terbaik.
+                  </p>
+                  <Link href="/partners" className="inline-flex items-center gap-3 px-6 py-4 bg-white border-2 border-foreground text-foreground font-black uppercase tracking-widest text-xs md:text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all group/btn">
+                    Read Stories <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+
+                {/* Decorative background text */}
+                <span className="absolute -bottom-10 -right-10 text-[12rem] font-black text-white/[0.05] select-none pointer-events-none transform -rotate-12">
+                  TRUST
+                </span>
+              </ScrollReveal>
+
+              {/* Right Side: Bento Badge Grid (More Reliable than Marquee) */}
+              <ScrollReveal delay={0.2} direction="left" className="lg:col-span-7 bg-white border-4 border-foreground rounded-[2rem] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col transform hover:-translate-y-1 transition-transform relative overflow-hidden">
+                <div className="p-6 md:p-8 grid grid-cols-2 sm:grid-cols-3 gap-4 h-full">
+                  {partners.length === 0 ? (
+                    [...Array(6)].map((_, i) => (
+                      <div key={i} className="aspect-square bg-slate-50 border-2 border-foreground/10 rounded-xl flex items-center justify-center italic text-[10px] opacity-20">
+                        PARTNER_PLACEHOLDER
+                      </div>
+                    ))
+                  ) : (
+                    partners.slice(0, 5).map((partner: any) => (
+                      <div key={partner.id} className="group/badge relative aspect-square bg-slate-50 border-2 border-foreground rounded-2xl flex flex-col items-center justify-center p-4 hover:bg-primary hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all text-center">
+                        {partner.logo_url ? (
+                          <div className="relative w-full h-full grayscale group-hover/badge:grayscale-0 transition-all scale-90 group-hover/badge:scale-105">
+                            <Image src={partner.logo_url} alt={partner.name} fill className="object-contain" />
+                          </div>
+                        ) : (
+                          <span className="font-black uppercase tracking-tighter text-xs md:text-sm leading-tight leading-none">
+                            {partner.name}
+                          </span>
+                        )}
+                      </div>
+                    ))
+                  )}
+
+                  {/* View All "Bento" Tile */}
+                  <Link href="/partners" className="aspect-square bg-foreground text-background border-2 border-foreground rounded-2xl flex flex-col items-center justify-center p-4 hover:bg-secondary transition-colors group/all">
+                    <span className="font-black uppercase tracking-widest text-[10px] md:text-xs mb-2">View All</span>
+                    <ArrowRight className="w-5 h-5 group-hover/all:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+                
+                {/* Visual Accent */}
+                <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+                  <Globe className="w-24 h-24" />
+                </div>
+              </ScrollReveal>
+            </div>
           </div>
-        </div>
+        </section>
 
         {/* SERVICES - Bento Grid */}
         <section id="services" className="py-16 md:py-24 px-4 sm:px-6 md:px-12 bg-background border-b-4 border-foreground">
