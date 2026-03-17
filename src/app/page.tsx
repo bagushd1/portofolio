@@ -4,7 +4,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Navbar from "@/components/Navbar";
 import ServiceList, { ServiceSkeleton } from "@/components/Home/ServiceList";
 import ProjectList, { ProjectSkeleton } from "@/components/Home/ProjectList";
-import { CheckCircle2, ChevronRight, Globe, Code2, ArrowRight, Laptop } from "lucide-react";
+import { CheckCircle2, ChevronRight, Globe, Code2, ArrowRight, Laptop, MessageCircle, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getPartners } from "@/lib/actions/partner";
@@ -17,67 +17,61 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary">
       <Navbar />
-
-      <main className="pt-20 pb-16">
-        {/* HERO SECTION - Bento Brutalism & Partner Copy */}
-        <section className="min-h-screen pt-4 sm:pt-8 md:pt-12 pb-16 md:pb-24 px-4 sm:px-6 md:px-12 bg-background border-b-4 border-foreground flex items-center">
-          <div className="max-w-[1400px] w-full mx-auto grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-4 md:gap-6 mt-16 md:mt-0">
-
-            {/* Main Typo Box (Takes most space) */}
-            <ScrollReveal delay={0.1} className="md:col-span-4 lg:col-span-8 bg-[#fdfbf7] dark:bg-card border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 lg:p-16 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between group transform hover:-translate-y-1 transition-transform">
-              <div>
-                <div className="inline-flex items-center mb-6 md:mb-8 border-b-2 md:border-b-4 border-foreground pb-2 w-max max-w-full overflow-hidden">
-                  <span className="text-xs sm:text-sm font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] text-foreground truncate">Strategic Partner</span>
+      <main>
+        {/* HERO SECTION - CONCEPT 5: THE PURE BENTO (REFINE) */}
+        <section className="pt-24 sm:pt-28 md:pt-32 pb-24 md:pb-32 px-4 sm:px-6 md:px-12 bg-background relative overflow-hidden flex items-center border-b-4 border-foreground">
+          <div className="max-w-[1400px] w-full mx-auto relative z-10">
+            {/* 3-Box Bento Layout */}
+            <div className="flex flex-col gap-6">
+              
+              {/* Box 1: The Statement (Top Full Width) */}
+              <ScrollReveal delay={0.1}>
+                <div className="bg-white border-4 border-foreground p-8 md:p-12 lg:p-14 rounded-[2.5rem] shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
+                  <div className="relative z-10">
+                    <h1 className="text-5xl md:text-7xl lg:text-[8rem] font-black tracking-tighter uppercase leading-[0.8] mb-0">
+                      Kerja <br />
+                      <span className="italic font-serif text-secondary lowercase">Jadi</span> <br />
+                      Mudah.
+                    </h1>
+                  </div>
+                  
+                  {/* Subtle Graphic Accent */}
+                  <div className="absolute top-0 right-0 p-8 md:p-12 opacity-[0.03] select-none pointer-events-none">
+                    <span className="text-[12rem] md:text-[16rem] font-black leading-none">RBA</span>
+                  </div>
                 </div>
+              </ScrollReveal>
 
-                <h1 className="text-[3.5rem] sm:text-6xl md:text-7xl lg:text-[7rem] font-black tracking-tighter text-foreground mb-6 md:mb-8 leading-[0.9] md:leading-[0.85] uppercase">
-                  Kerja <br className="hidden sm:block" />
-                  <span className="text-secondary italic font-serif lowercase">Jadi</span><br />
-                  Mudah.
-                </h1>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Box 2: The Mission (Bottom Left) */}
+                <ScrollReveal delay={0.2}>
+                  <div className="bg-[#fff133] border-4 border-foreground p-8 md:p-10 rounded-[2.5rem] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-full flex flex-col justify-center">
+                    <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-4 md:mb-6">The Mission</h3>
+                    <p className="font-bold text-lg md:text-xl lg:text-2xl leading-relaxed text-foreground/80">
+                      Mendampingi digitalisasi bisnis Anda. Mengubah proses manual menjadi ekosistem digital otomatis yang tak merepotkan.
+                    </p>
+                  </div>
+                </ScrollReveal>
+
+                {/* Box 3: The Approach & Action (Bottom Right) */}
+                <ScrollReveal delay={0.3}>
+                  <div className="bg-foreground text-background border-4 border-foreground p-8 md:p-10 rounded-[2.5rem] shadow-[8px_8px_0px_0px_rgba(0,0,0,0.2)] h-full flex flex-col justify-between group">
+                    <div>
+                      <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-4 md:mb-6">The Approach</h3>
+                      <p className="font-bold text-base md:text-lg leading-relaxed opacity-70 mb-8 md:mb-10">
+                        Kami adalah partner strategis jangka panjang. Membantu dari riset, desain, eksekusi, hingga pemeliharaan sistem secara menyeluruh.
+                      </p>
+                    </div>
+
+                    <a href="#contact" className="inline-flex items-center justify-between px-8 py-5 bg-primary text-foreground font-black uppercase tracking-[0.2em] text-sm border-4 border-foreground shadow-[6px_6px_0px_0px_rgba(255,255,255,0.2)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all group-hover:bg-white duration-300">
+                      Pesan Sekarang
+                      <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform" />
+                    </a>
+                  </div>
+                </ScrollReveal>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-6 md:mt-8">
-                <a href="#contact" className="inline-flex h-12 md:h-16 items-center justify-between px-6 md:px-8 bg-foreground text-background font-black uppercase tracking-wider text-xs md:text-sm hover:bg-primary transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,0.5)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] border-2 border-transparent hover:border-foreground min-w-[200px] md:min-w-[240px]">
-                  <span>Pesan Sekarang</span>
-                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 md:group-hover:translate-x-2 transition-transform" />
-                </a>
-              </div>
-            </ScrollReveal>
-
-            {/* Side Mission Box */}
-            <ScrollReveal delay={0.2} direction="left" className="md:col-span-2 lg:col-span-4 bg-[#fff133] border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-center transform hover:-translate-y-1 transition-transform">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-background border-2 md:border-4 border-foreground rounded-full flex items-center justify-center mb-6 md:mb-8 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                <CheckCircle2 className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
-              </div>
-              <h3 className="font-black text-2xl md:text-3xl mb-3 md:mb-4 uppercase text-foreground">The Mission</h3>
-              <p className="text-foreground font-bold text-base md:text-lg leading-relaxed">
-                Mendampingi digitalisasi bisnis dan instansi Anda. Mengubah proses manual menjadi ekosistem digital otomatis yang tak merepotkan.
-              </p>
-            </ScrollReveal>
-
-            {/* Bottom Graphic Box */}
-            <ScrollReveal delay={0.3} className="md:col-span-2 lg:col-span-4 bg-[#4a9eff] border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 overflow-hidden relative shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center min-h-[200px] md:min-h-[300px] transform hover:-translate-y-1 transition-transform group">
-              <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-white uppercase leading-none text-center relative z-10 group-hover:scale-110 transition-transform">
-                Apps & <br /> Web
-              </h3>
-              <Image
-                src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800"
-                alt="Tech graphic"
-                fill
-                sizes="(max-width: 1024px) 100vw, 33vw"
-                className="absolute inset-0 opacity-20 object-cover mix-blend-overlay"
-              />
-            </ScrollReveal>
-
-            {/* Bottom Approach Box */}
-            <ScrollReveal delay={0.4} direction="up" className="md:col-span-4 lg:col-span-8 bg-[#bbf7d0] border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 lg:p-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-center transform hover:-translate-y-1 transition-transform">
-              <h3 className="font-black text-2xl md:text-3xl mb-3 md:mb-4 uppercase text-foreground">The Approach</h3>
-              <p className="text-foreground font-bold text-base sm:text-lg md:text-xl leading-relaxed max-w-3xl">
-                Partner strategis jangka panjang. Kami bantu dari riset, desain, eksekusi, hingga pemeliharaan sistem secara menyeluruh.
-              </p>
-            </ScrollReveal>
-
+            </div>
           </div>
         </section>
 
@@ -232,40 +226,92 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* CONTACT SECTION - Bento Brutalism */}
-        <section id="contact" className="py-16 md:py-24 px-4 sm:px-6 md:px-12 bg-foreground text-background">
-          <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* CONSULTATION - CONCEPT 3: THE BLUEPRINT STRIP (TIMELINE CONTINUATION) */}
+        <section id="contact" className="py-24 md:py-32 lg:py-40 px-4 sm:px-6 md:px-12 bg-background border-b-4 border-foreground relative overflow-hidden">
+          {/* Blueprint Grid Background */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+               style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
+          </div>
 
-            <ScrollReveal delay={0.1} direction="right" className="lg:col-span-12 xl:col-span-5 bg-background text-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-12 border-2 md:border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] md:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] flex flex-col justify-center">
-              <div className="inline-flex items-center mb-6 md:mb-8 border-b-2 md:border-b-4 border-[#ff4a4a] pb-2 md:pb-3 w-max">
-                <span className="text-xs md:text-sm font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-[#ff4a4a]">Konsultasi Partner</span>
+          <div className="max-w-[1400px] mx-auto relative z-10">
+            <div className="flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-20 pt-16 md:pt-24">
+              
+              {/* Left: Headline & Manifesto - Aligned to Start */}
+              <div className="w-full lg:w-5/12 pt-8">
+                <ScrollReveal delay={0.1}>
+                  <div className="inline-flex items-center gap-3 mb-10">
+                    <div className="w-16 h-1 bg-primary"></div>
+                    <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.5em] text-foreground/40 text-glow-sm">Secure Implementation</span>
+                  </div>
+                  
+                  <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-[0.8] mb-12">
+                    Konsultasikan <br />
+                    <span className="italic font-serif text-secondary lowercase underline decoration-8 underline-offset-8">Visi</span> Anda.
+                  </h2>
+
+                  <div className="relative mb-16">
+                    <div className="absolute -left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-secondary via-secondary/20 to-transparent"></div>
+                    <p className="font-bold text-lg md:text-xl leading-relaxed text-foreground/70 max-w-lg italic font-serif">
+                      "Kami tidak sekadar membangun kode; kami merancang instrumen pertumbuhan yang adaptif bagi bisnis Anda di era digital."
+                    </p>
+                  </div>
+
+                  {/* New: Subtle Trust/Process Footer to fill space */}
+                  <div className="pt-12 border-t-2 border-foreground/5 grid grid-cols-2 gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest mb-3 text-secondary">Operational Hours</p>
+                      <p className="text-sm font-bold uppercase leading-tight">Mon — Fri <br /> 09:00 - 17:00 WIB</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest mb-3 text-secondary">Consultation Type</p>
+                      <p className="text-sm font-bold uppercase leading-tight">Remote First <br /> & On-Site Meeting</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
               </div>
 
-              <h2 className="text-[3.5rem] sm:text-5xl md:text-7xl font-black tracking-tighter mb-6 md:mb-8 leading-[0.9] uppercase">
-                Mulai <br className="hidden sm:block" /><span className="font-serif italic text-secondary lowercase mr-2">Langkah</span>Baru.
-              </h2>
-              <p className="text-foreground font-bold text-base md:text-xl mb-10 md:mb-12 leading-relaxed">
-                Konsultasikan kebutuhan sistem Anda bersama kami. Kami mendampingi langkah Anda terlepas seberapa asing Anda dengan dunia teknologi.
-              </p>
+              {/* Right: Floating Contact Center */}
+              <div className="w-full lg:w-6/12 xl:w-5/12">
+                <ScrollReveal delay={0.2} direction="left">
+                  <div className="bg-white border-4 border-foreground rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-10 shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[20px_20px_0px_0px_rgba(0,0,0,1)] transition-all duration-500">
+                    <div className="flex items-center justify-between mb-8 border-b-2 border-foreground/5 pb-6">
+                      <div>
+                        <h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter leading-none mb-1">Pesan Cepat</h3>
+                        <p className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest">Inquiry form</p>
+                      </div>
+                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary flex items-center justify-center border-2 md:border-4 border-foreground rotate-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        <ArrowRight className="w-6 h-6 md:w-7 md:h-7 text-foreground -rotate-45" />
+                      </div>
+                    </div>
+                    
+                    <div className="brutalist-contact-form mb-10">
+                      <ContactForm />
+                    </div>
 
-              <div className="inline-flex items-center gap-4 md:gap-6 p-4 md:p-6 rounded-[1.25rem] md:rounded-[1.5rem] bg-[#fff133] border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform -rotate-1 hover:rotate-0 transition-transform">
-                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-2 md:border-4 border-foreground flex items-center justify-center shrink-0">
-                  <Globe className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
-                </div>
-                <div>
-                  <h4 className="font-black text-lg md:text-xl uppercase text-foreground">Seluruh Indonesia</h4>
-                  <p className="font-bold text-sm md:text-base text-foreground/80">Pendampingan Jarak Jauh (Online)</p>
-                </div>
+                    <div className="border-t-2 border-foreground/10 pt-8 mt-8">
+                        <p className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.3em] mb-6 text-center">Atau Hubungi Kami Melalui</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <a 
+                                href="https://wa.me/" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center gap-3 px-6 py-4 bg-[#25D366] border-4 border-foreground rounded-xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all font-black uppercase text-xs tracking-widest text-foreground"
+                            >
+                                <MessageCircle className="w-5 h-5" /> WhatsApp
+                            </a>
+                            <a 
+                                href="mailto:hello@rbadev.com"
+                                className="flex items-center justify-center gap-3 px-6 py-4 bg-[#4a9eff] border-4 border-foreground rounded-xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all font-black uppercase text-xs tracking-widest text-foreground"
+                            >
+                                <Mail className="w-5 h-5" /> Email Direct
+                            </a>
+                        </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
               </div>
-            </ScrollReveal>
 
-            <ScrollReveal delay={0.2} direction="left" className="lg:col-span-12 xl:col-span-7 bg-[#4a9eff] text-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-12 border-2 md:border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] md:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] flex flex-col justify-center mt-6 lg:mt-0">
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black mb-6 md:mb-8 text-foreground uppercase bg-background inline-block px-3 md:px-4 py-1.5 md:py-2 border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-1 self-start">Kirim Pesan</h3>
-              <div className="brutalist-contact-form bg-background p-5 sm:p-6 md:p-8 rounded-[1rem] md:rounded-[1.5rem] border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                <ContactForm />
-              </div>
-            </ScrollReveal>
-
+            </div>
           </div>
         </section>
       </main>
