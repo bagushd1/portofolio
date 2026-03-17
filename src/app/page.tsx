@@ -17,9 +17,9 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary">
       <Navbar />
-      <main>
+      <main className="pt-24 md:pt-32">
         {/* HERO SECTION - CONCEPT 5: THE PURE BENTO (REFINE) */}
-        <section className="pt-24 sm:pt-28 md:pt-32 pb-24 md:pb-32 px-4 sm:px-6 md:px-12 bg-background relative overflow-hidden flex items-center border-b-4 border-foreground">
+        <section className="pt-12 sm:pt-14 md:pt-12 pb-24 md:pb-32 px-4 sm:px-6 md:px-12 bg-background relative overflow-hidden flex items-center border-b-4 border-foreground">
           <div className="max-w-[1400px] w-full mx-auto relative z-10">
             {/* 3-Box Bento Layout */}
             <div className="flex flex-col gap-6">
