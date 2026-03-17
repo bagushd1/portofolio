@@ -144,68 +144,69 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                     >
                         <Plus className="w-5 h-5 text-foreground" /> PASANG PROYEK BARU
                     </DialogTrigger>
-                    <DialogContent className="max-w-5xl bg-white border-4 border-foreground rounded-[2.5rem] shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] h-[90vh] flex flex-col p-0 overflow-hidden">
+                    <DialogContent className="max-w-7xl bg-white border-4 border-foreground rounded-[2.5rem] shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] h-[95vh] flex flex-col p-0 overflow-hidden">
                         <DialogHeader className="p-8 border-b-4 border-foreground bg-primary shrink-0 text-left">
-                            <DialogTitle className="text-4xl font-black uppercase tracking-tighter text-foreground">Konfigurasi Proyek</DialogTitle>
-                            <DialogDescription className="text-foreground font-bold opacity-70 italic">
-                                Kelola detail proyek, tantangan, dan solusi untuk portofolio publik RBAdev.
+                            <DialogTitle className="text-4xl font-black uppercase tracking-tighter text-foreground leading-[0.9]">Konfigurasi Proyek</DialogTitle>
+                            <DialogDescription className="text-foreground font-bold opacity-80 italic text-sm mt-1">
+                                Detail teknis dan solusi strategis untuk portofolio publik RBAdev.
                             </DialogDescription>
                         </DialogHeader>
                         
                         <div className="overflow-y-auto flex-1 p-8 bg-white">
                             <form id="project-form" onSubmit={handleSubmit} className="space-y-10">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                    <div className="space-y-6">
-                                        <div className="space-y-2">
-                                            <Label htmlFor="title" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Judul Proyek</Label>
-                                            <Input id="title" required value={title} onChange={e => setTitle(e.target.value)} className="brutalist-input" placeholder="E.g. Nexus Dashboard v2" />
-                                        </div>
-                                        
-                                        <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 xl:grid-cols-12 gap-10">
+                                    <div className="xl:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                                        <div className="space-y-5">
                                             <div className="space-y-2">
-                                                <Label htmlFor="slug" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Slug URL</Label>
-                                                <Input id="slug" placeholder="nexus-dashboard" value={slug} onChange={e => setSlug(e.target.value)} className="brutalist-input" />
+                                                <Label htmlFor="title" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Judul Proyek Utama</Label>
+                                                <Input id="title" required value={title} onChange={e => setTitle(e.target.value)} className="brutalist-input h-12 text-base font-bold" placeholder="E.g. Nexus Dashboard v2" />
                                             </div>
+                                            
+                                            <div className="grid grid-cols-2 gap-6">
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="slug" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Slug URL Path</Label>
+                                                    <Input id="slug" placeholder="nexus-dashboard" value={slug} onChange={e => setSlug(e.target.value)} className="brutalist-input h-12 text-sm" />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="live_link" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">External Live Link</Label>
+                                                    <Input id="live_link" type="url" placeholder="https://..." value={liveLink} onChange={e => setLiveLink(e.target.value)} className="brutalist-input h-12 text-sm" />
+                                                </div>
+                                            </div>
+
                                             <div className="space-y-2">
-                                                <Label htmlFor="live_link" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Live Link</Label>
-                                                <Input id="live_link" type="url" placeholder="https://..." value={liveLink} onChange={e => setLiveLink(e.target.value)} className="brutalist-input" />
+                                                <Label htmlFor="tech_stack" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Stack Teknologi</Label>
+                                                <Input id="tech_stack" placeholder="Next.js, Tailwind, Supabase" value={techStack} onChange={e => setTechStack(e.target.value)} className="brutalist-input h-12 text-sm" />
                                             </div>
                                         </div>
 
                                         <div className="space-y-2">
-                                            <Label htmlFor="tech_stack" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Tech Stack (Pisahkan dengan koma)</Label>
-                                            <Input id="tech_stack" placeholder="Next.js, Tailwind, Supabase" value={techStack} onChange={e => setTechStack(e.target.value)} className="brutalist-input" />
+                                            <Label htmlFor="description" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Ringkasan Eksekutif</Label>
+                                            <Textarea id="description" required rows={6} value={description} onChange={e => setDescription(e.target.value)} className="bg-white border-2 border-foreground font-medium resize-none p-5 h-full min-h-[160px] rounded-[2rem] focus-visible:ring-0 focus-visible:border-primary transition-all shadow-inner text-base leading-relaxed" placeholder="Jelaskan kontribusi proyek ini..." />
                                         </div>
                                     </div>
 
-                                    <div className="space-y-2">
-                                        <Label htmlFor="description" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Ringkasan Singkat</Label>
-                                        <Textarea id="description" required rows={7} value={description} onChange={e => setDescription(e.target.value)} className="bg-white border-2 border-foreground font-medium resize-none p-4 h-full min-h-[180px] rounded-[1.5rem] focus-visible:ring-0 focus-visible:border-primary transition-all overflow-hidden" placeholder="Jelaskan proyek ini dalam beberapa kalimat..." />
+                                    <div className="xl:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t-2 border-slate-100">
+                                        <div className="space-y-3">
+                                            <Label htmlFor="challenge" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Tantangan (The Challenge)</Label>
+                                            <Textarea id="challenge" rows={5} value={challenge} onChange={e => setChallenge(e.target.value)} className="bg-slate-50 border-2 border-foreground font-medium resize-none p-5 rounded-2xl text-sm leading-relaxed" placeholder="Apa kompleksitas teknisnya?" />
+                                        </div>
+                                        <div className="space-y-3">
+                                            <Label htmlFor="solution" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Solusi (The Solution)</Label>
+                                            <Textarea id="solution" rows={5} value={solution} onChange={e => setSolution(e.target.value)} className="bg-slate-50 border-2 border-foreground font-medium resize-none p-5 rounded-2xl text-sm leading-relaxed" placeholder="Bagaimana rekayasa sistemnya?" />
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-8 border-t-2 border-slate-100">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="challenge" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Tantangan (The Challenge)</Label>
-                                        <Textarea id="challenge" rows={4} value={challenge} onChange={e => setChallenge(e.target.value)} className="bg-slate-50 border-2 border-foreground font-medium resize-none p-4 rounded-2xl" placeholder="Apa masalah teknis atau bisnis utama?" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="solution" className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Solusi (The Solution)</Label>
-                                        <Textarea id="solution" rows={4} value={solution} onChange={e => setSolution(e.target.value)} className="bg-slate-50 border-2 border-foreground font-medium resize-none p-4 rounded-2xl" placeholder="Bagaimana tim RBAdev menyelesaikannya?" />
-                                    </div>
-                                </div>
-
-                                <div className="space-y-4 pt-8 border-t-2 border-slate-100">
-                                    <Label className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Aset Visual Proyek</Label>
-                                    <div className="flex items-center gap-8 p-6 bg-slate-50 border-2 border-dashed border-foreground/20">
-                                        {currentImageUrl && !file && (
-                                            <div className="relative w-24 h-24 border-2 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
-                                                <Image src={currentImageUrl} alt="Current project cover" fill className="object-cover" />
+                                    <div className="xl:col-span-12 space-y-4 pt-8 border-t-2 border-slate-100 text-center">
+                                        <Label className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Aset Visual Utama</Label>
+                                        <div className="flex flex-col items-center justify-center p-6 bg-slate-50 border-4 border-dashed border-foreground/10 rounded-[2rem]">
+                                            {currentImageUrl && !file && (
+                                                <div className="relative w-48 aspect-video border-2 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0 mb-4 rounded-2xl overflow-hidden">
+                                                    <Image src={currentImageUrl} alt="Current project cover" fill className="object-cover" />
+                                                </div>
+                                            )}
+                                            <div className="w-full max-w-lg space-y-2">
+                                                <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="brutalist-input file:bg-primary file:font-black file:uppercase file:text-[10px] file:h-full file:border-0 file:border-r-2 file:border-foreground file:mr-4 file:px-6 h-12 flex items-center" />
                                             </div>
-                                        )}
-                                        <div className="flex-1 space-y-2">
-                                            <p className="text-[10px] font-black uppercase text-foreground/50 tracking-widest">Klik untuk mengganti thumbnail</p>
-                                            <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="brutalist-input file:bg-primary file:font-black file:uppercase file:text-[10px] file:h-full file:border-0 file:border-r-2 file:border-foreground file:mr-4 file:px-4 flex items-center" />
                                         </div>
                                     </div>
                                 </div>
@@ -213,11 +214,11 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                         </div>
 
                         <DialogFooter className="p-8 border-t-4 border-foreground bg-slate-50 shrink-0">
-                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-2 border-foreground bg-white hover:bg-muted font-bold uppercase text-xs tracking-widest px-8 h-12 rounded-xl">
+                            <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="border-4 border-foreground bg-white hover:bg-muted font-black uppercase text-[10px] tracking-widest px-8 h-12 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all hover:shadow-none">
                                 Batalkan
                             </Button>
-                            <button type="submit" form="project-form" disabled={loading} className="brutalist-button h-12 flex items-center justify-center min-w-[200px]">
-                                {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : "SIMPAN"}
+                            <button type="submit" form="project-form" disabled={loading} className="brutalist-button h-12 flex items-center justify-center min-w-[200px] text-[10px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                                {loading ? <Loader2 className="w-5 h-5 mr-3 animate-spin" /> : "SIMPAN KONFIGURASI"}
                             </button>
                         </DialogFooter>
                     </DialogContent>
