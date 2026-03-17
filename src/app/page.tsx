@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import ContactForm from "@/components/ContactForm";
 import ScrollReveal from "@/components/ScrollReveal";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import ServiceList, { ServiceSkeleton } from "@/components/Home/ServiceList";
 import ProjectList, { ProjectSkeleton } from "@/components/Home/ProjectList";
 import { CheckCircle2, ChevronRight, Globe, Code2, ArrowRight, Laptop, MessageCircle, Mail } from "lucide-react";
@@ -316,27 +317,7 @@ export default async function Home() {
         </section>
       </main>
 
-      <footer className="py-12 md:py-16 px-6 bg-primary text-primary-foreground border-t-4 border-foreground">
-        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-10 md:gap-6">
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left">
-            <div className="w-12 h-12 md:w-14 md:h-14 bg-background flex items-center justify-center rounded-xl border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-              <Code2 className="w-6 h-6 md:w-7 md:h-7 text-foreground" />
-            </div>
-            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-0">
-              <p className="font-black uppercase tracking-widest text-background text-xl md:text-2xl">RBA<span className="text-foreground">dev.</span></p>
-              <span className="hidden md:block font-bold border-l-4 border-foreground pl-4 ml-4 text-background/60 text-base">© {new Date().getFullYear()}</span>
-              <span className="md:hidden font-bold text-background/60 text-sm">© {new Date().getFullYear()}</span>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-10 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-background">
-            <Link href="/admin/login" className="hover:text-foreground hover:underline transition-all">Admin</Link>
-            <a href="#" className="hover:text-foreground hover:underline transition-all">Privacy</a>
-            <a href="#" className="hover:text-foreground hover:underline transition-all">Terms</a>
-            <a href="#" className="hover:text-foreground hover:underline transition-all">Support</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
