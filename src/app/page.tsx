@@ -7,10 +7,13 @@ import ProjectList, { ProjectSkeleton } from "@/components/Home/ProjectList";
 import { CheckCircle2, ChevronRight, Globe, Code2, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { getPartners } from "@/lib/actions/partner";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
-export default function Home() {
+export default async function Home() {
+  const { data: partners = [] } = await getPartners();
+
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary">
       <Navbar />
@@ -79,17 +82,39 @@ export default function Home() {
         </section>
 
         {/* BRAND TICKER */}
-        <div className="border-b-4 border-foreground bg-primary py-4 md:py-6 overflow-hidden flex whitespace-nowrap">
-          <div className="flex gap-8 md:gap-16 items-center uppercase font-black tracking-widest text-primary-foreground text-lg sm:text-xl md:text-2xl px-4 md:px-6">
-            <span className="hover:text-background transition-colors cursor-pointer">AcmeCorp</span>
-            <span className="text-foreground">•</span>
-            <span className="hover:text-background transition-colors cursor-pointer">GlobalTech</span>
-            <span className="text-foreground">•</span>
-            <span className="hover:text-background transition-colors cursor-pointer">Quantum</span>
-            <span className="text-foreground">•</span>
-            <span className="hover:text-background transition-colors cursor-pointer">RBA_</span>
-            <span className="text-foreground">•</span>
-            <span className="hover:text-background transition-colors cursor-pointer">DevOps Indonesia</span>
+        <div className="border-b-4 border-foreground bg-primary py-6 md:py-8 overflow-hidden relative">
+          <div className="flex gap-12 md:gap-24 items-center whitespace-nowrap px-8 overflow-x-auto no-scrollbar">
+            {partners.length === 0 ? (
+              ["AcmeCorp", "GlobalTech", "Quantum", "RBA_", "DevOps"].map((name) => (
+                <span key={name} className="flex items-center gap-4 text-foreground font-black uppercase tracking-widest text-xl md:text-3xl opacity-30 italic">
+                  {name} <span className="text-foreground/20 not-italic">•</span>
+                </span>
+              ))
+            ) : (
+              partners.map((partner: any) => (
+                <div key={partner.id} className="flex items-center gap-6 group cursor-pointer">
+                  {partner.logo_url && (
+                    <div className="w-12 h-12 md:w-16 md:h-16 relative grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">
+                      <Image 
+                        src={partner.logo_url} 
+                        alt={partner.name} 
+                        fill 
+                        className="object-contain"
+                      />
+                    </div>
+                  )}
+                  <div className="flex flex-col">
+                    <span className="text-foreground font-black uppercase tracking-tighter text-2xl md:text-4xl leading-none group-hover:text-background transition-colors">
+                      {partner.name}
+                    </span>
+                    {partner.website_url && (
+                      <span className="text-[10px] font-bold text-foreground/40 hidden md:block uppercase tracking-tighter">View Partner</span>
+                    )}
+                  </div>
+                  <span className="text-background md:text-3xl">•</span>
+                </div>
+              ))
+            )}
           </div>
         </div>
 

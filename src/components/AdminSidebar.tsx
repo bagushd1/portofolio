@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, FolderKanban, MessageSquare, LogOut, Globe, Briefcase, FileText } from "lucide-react";
+import { LayoutDashboard, FolderKanban, MessageSquare, LogOut, Globe, Briefcase, FileText, Handshake } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 
@@ -26,6 +26,7 @@ export default function AdminSidebar() {
         { name: "Overview", href: "/admin/dashboard", icon: LayoutDashboard },
         { name: "Services", href: "/admin/services", icon: Briefcase },
         { name: "Projects", href: "/admin/projects", icon: FolderKanban },
+        { name: "Partners", href: "/admin/partners", icon: Handshake },
         { name: "Blog", href: "/admin/articles", icon: FileText },
         { name: "Messages", href: "/admin/messages", icon: MessageSquare },
     ];

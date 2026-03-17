@@ -45,6 +45,13 @@ export default function Navbar() {
                     >
                         Blog
                     </Link>
+                    <Link
+                        href="/partners"
+                        className={`text-sm font-black uppercase tracking-wider transition-colors ${pathname.startsWith("/partners") ? "text-secondary" : "text-foreground hover:text-secondary"
+                            }`}
+                    >
+                        Partners
+                    </Link>
                     <a
                         href={getLink("#contact")}
                         className="text-sm font-black uppercase tracking-wider px-6 py-2.5 bg-[#fff133] text-foreground border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center gap-2"
