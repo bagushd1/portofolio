@@ -4,7 +4,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Navbar from "@/components/Navbar";
 import ServiceList, { ServiceSkeleton } from "@/components/Home/ServiceList";
 import ProjectList, { ProjectSkeleton } from "@/components/Home/ProjectList";
-import { CheckCircle2, ChevronRight, Globe, Code2, ArrowRight } from "lucide-react";
+import { CheckCircle2, ChevronRight, Globe, Code2, ArrowRight, Laptop } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getPartners } from "@/lib/actions/partner";
@@ -196,24 +196,39 @@ export default async function Home() {
         </section>
 
 
-        {/* PORTFOLIO - Bento Style */}
-        <section id="work" className="py-16 md:py-24 px-4 sm:px-6 md:px-12 bg-[#ff4a4a] border-b-4 border-foreground">
-          <div className="max-w-[1400px] mx-auto">
-            <ScrollReveal className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6 bg-background border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transform hover:-translate-y-1 transition-transform">
-              <div>
-                <h2 className="text-lg md:text-xl font-black tracking-widest text-[#ff4a4a] uppercase mb-3 md:mb-4">Katalog Karya</h2>
-                <p className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter text-foreground uppercase leading-[1] md:leading-[0.85]">
-                  Telah <span className="text-[#ff4a4a] italic font-serif lowercase">ter-</span><br className="hidden sm:block" />selesaikan.
-                </p>
-              </div>
-              <Link href="/work" className="inline-flex h-12 md:h-14 items-center justify-center px-6 md:px-8 border-2 md:border-4 border-foreground bg-[#fff133] text-foreground font-black uppercase tracking-wider text-xs md:text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
-                All Projects <ChevronRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
-              </Link>
-            </ScrollReveal>
+        {/* PORTFOLIO - CONCEPT 2: THE PORTFOLIO TIMELINE (HORIZONTAL STRIP) */}
+        <section id="work" className="py-24 md:py-32 px-4 sm:px-6 md:px-12 bg-background border-b-4 border-foreground relative overflow-hidden">
+          <div className="max-w-[1400px] mx-auto relative z-10">
+            <div className="text-center mb-24 md:mb-40">
+              <ScrollReveal>
+                <div className="inline-flex items-center px-4 py-1.5 bg-foreground text-background text-[10px] font-black uppercase tracking-[0.3em] mb-8 shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] border border-foreground">
+                  Our Work
+                </div>
+                <h2 className="text-5xl md:text-[8rem] font-black tracking-tighter text-foreground uppercase leading-[0.85] mb-10">
+                  Katalog Karya <br />
+                  <span className="italic font-serif text-primary lowercase underline decoration-8 underline-offset-[-5px]">Terpilih</span> <br />
+                  Kami.
+                </h2>
+                <div className="flex items-center justify-center gap-4">
+                  <div className="h-px w-20 bg-foreground/10"></div>
+                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+                  <div className="h-px w-20 bg-foreground/10"></div>
+                </div>
+              </ScrollReveal>
+            </div>
 
             <Suspense fallback={<ProjectSkeleton />}>
               <ProjectList />
             </Suspense>
+
+            <div className="mt-20 text-center">
+              <ScrollReveal delay={0.3}>
+                <Link href="/work" className="inline-flex items-center gap-4 text-sm md:text-xl font-black uppercase tracking-[0.2em] group">
+                  <span className="border-b-4 border-primary group-hover:bg-primary group-hover:text-background transition-all px-2 py-1">Lihat Seluruh Arsip</span>
+                  <ChevronRight className="w-6 h-6 group-hover:translate-x-3 transition-transform" />
+                </Link>
+              </ScrollReveal>
+            </div>
           </div>
         </section>
 
