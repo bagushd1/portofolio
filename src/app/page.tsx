@@ -153,23 +153,48 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* SERVICES - Bento Grid */}
-        <section id="services" className="py-16 md:py-24 px-4 sm:px-6 md:px-12 bg-background border-b-4 border-foreground">
+        {/* SERVICES - CONCEPT 2: BENTO LAYER STACK (SPLIT HYBRID) */}
+        <section id="services" className="py-16 md:py-24 px-4 sm:px-6 md:px-12 bg-background border-b-4 border-foreground overflow-hidden">
           <div className="max-w-[1400px] mx-auto">
-            <div className="mb-10 md:mb-16 bg-foreground text-background border-2 md:border-4 border-foreground rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 transform hover:-translate-y-1 transition-transform">
-              <div>
-                <h2 className="text-lg md:text-xl font-black tracking-widest text-[#bbf7d0] uppercase mb-3 md:mb-4">Layanan Utama</h2>
-                <p className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter text-background max-w-3xl leading-[1] md:leading-[0.9] uppercase">
-                  EKOSISTEM INTEGRASI <span className="text-[#bbf7d0] italic font-serif lowercase">untuk</span> SEMUA.
-                </p>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              {/* Left Side: Manifesto Box */}
+              <ScrollReveal delay={0.1} direction="right" className="lg:col-span-5 bg-foreground border-4 border-foreground rounded-[2rem] p-8 md:p-12 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between transform hover:-translate-y-1 transition-transform relative overflow-hidden group">
+                <div className="relative z-10">
+                  <div className="inline-flex items-center px-3 py-1 bg-primary text-foreground text-[10px] font-black uppercase tracking-[0.2em] mb-6 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    Main Services
+                  </div>
+                  <h2 className="text-4xl md:text-6xl font-black text-background uppercase tracking-tighter leading-[0.9] mb-8">
+                    Ekosistem <br />
+                    Integrasi untuk <br />
+                    <span className="italic font-serif text-primary lowercase">Semua.</span>
+                  </h2>
+                </div>
+
+                <div className="relative z-10">
+                  <p className="text-background/60 font-bold text-sm md:text-base mb-10 uppercase tracking-widest leading-relaxed max-w-sm">
+                    Kami tidak hanya membangun software, kami membangun jalur aspirasi digital Anda.
+                  </p>
+                  <a href="#contact" className="inline-flex items-center gap-3 px-8 py-4 bg-primary border-2 border-foreground text-foreground font-black uppercase tracking-widest text-xs md:text-sm shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all group/btn">
+                    Get Consultation <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                  </a>
+                </div>
+
+                {/* Decorative background text */}
+                <span className="absolute -bottom-10 -right-10 text-[12rem] font-black text-white/[0.03] select-none pointer-events-none transform rotate-12">
+                  WORK
+                </span>
+              </ScrollReveal>
+
+              {/* Right Side: Service Grid */}
+              <div className="lg:col-span-7">
+                <Suspense fallback={<ServiceSkeleton />}>
+                  <ServiceList />
+                </Suspense>
               </div>
             </div>
-
-            <Suspense fallback={<ServiceSkeleton />}>
-              <ServiceList />
-            </Suspense>
           </div>
         </section>
+
 
         {/* PORTFOLIO - Bento Style */}
         <section id="work" className="py-16 md:py-24 px-4 sm:px-6 md:px-12 bg-[#ff4a4a] border-b-4 border-foreground">

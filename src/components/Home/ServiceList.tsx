@@ -20,27 +20,35 @@ export default async function ServiceList() {
     if (!services || services.length === 0) return null;
 
     return (
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 h-full">
+            {/* SERVICE TILES */}
             {services.map((service, index) => {
                 const IconComponent = (service.icon && IconMap[service.icon]) || Laptop;
-                const bgColors = ["bg-[#bbf7d0]", "bg-[#fef08a]", "bg-[#ff4a4a]"];
-                const isRed = bgColors[index % bgColors.length] === "bg-[#ff4a4a]";
+                // Rotating color palette for bento feel
+                const colors = [
+                    { bg: "bg-white", text: "text-foreground", accent: "bg-primary" },
+                    { bg: "bg-secondary", text: "text-white", accent: "bg-white" },
+                ];
+                const theme = colors[index % colors.length];
 
                 return (
                     <ScrollReveal
                         key={service.id}
-                        delay={index * 0.1}
-                        className={`${bgColors[index % bgColors.length]} ${isRed ? 'text-white' : 'text-foreground'} rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10 border-2 md:border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform duration-300`}
+                        delay={0.1 + (index * 0.05)}
+                        className={`${theme.bg} ${theme.text} border-4 border-foreground rounded-[2rem] p-6 md:p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex flex-col items-start min-h-[280px] group`}
                     >
-                        <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-2 md:border-4 border-foreground flex items-center justify-center mb-6 md:mb-8 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                            <IconComponent className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
+                        <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl ${theme.accent} border-2 border-foreground flex items-center justify-center mb-10 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] group-hover:scale-110 transition-transform`}>
+                            <IconComponent className="w-6 h-6 md:w-7 md:h-7 text-foreground" />
                         </div>
-                        <h3 className={`text-2xl md:text-3xl font-black mb-3 md:mb-4 uppercase ${isRed ? 'text-white' : 'text-foreground'}`}>
-                            {service.title}
-                        </h3>
-                        <p className={`${isRed ? 'text-white' : 'text-foreground'} font-bold text-base md:text-lg leading-relaxed`}>
-                            {service.description}
-                        </p>
+                        
+                        <div className="mt-auto">
+                            <h3 className="text-xl md:text-2xl font-black mb-3 uppercase tracking-tighter leading-none">
+                                {service.title}
+                            </h3>
+                            <p className="font-bold text-xs md:text-sm leading-relaxed opacity-70 uppercase tracking-tight">
+                                {service.description}
+                            </p>
+                        </div>
                     </ScrollReveal>
                 );
             })}
