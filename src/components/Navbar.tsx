@@ -51,6 +51,9 @@ export default function Navbar() {
                     </Link>
                 </div>
 
+                {/* Mobile Spacer: Pushes Box 3 to the right on mobile */}
+                <div className="flex-1 md:hidden bg-primary" />
+
                 {/* Box 2: Navigation (Desktop Only) */}
                 <div className="hidden md:flex flex-1 items-stretch justify-center border-r-4 border-foreground bg-white/50 backdrop-blur-sm px-2 lg:px-4">
                     {navLinks.map((link) => (
@@ -67,7 +70,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Box 3: Action & Mobile Toggle */}
-                <div className="flex-1 md:flex-none flex justify-end bg-primary hover:bg-white transition-colors duration-300 group">
+                <div className="flex items-center bg-primary hover:bg-white transition-colors duration-300 group">
                     {/* Desktop CTA */}
                     <a
                         href={getLink("#contact")}
