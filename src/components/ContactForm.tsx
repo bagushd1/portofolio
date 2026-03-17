@@ -46,7 +46,7 @@ export default function ContactForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5 px-1">
             {/* Nama */}
             <div>
                 <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-1.5">
@@ -58,7 +58,7 @@ export default function ContactForm() {
                     placeholder="Enter your name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className={`flex h-14 w-full rounded-[1rem] border-4 bg-background px-5 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-black placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-foreground disabled:cursor-not-allowed disabled:opacity-50 transition-all font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:translate-x-1 focus:translate-y-1 focus:shadow-none
+                    className={`flex h-12 md:h-14 w-full rounded-[1rem] border-4 bg-background px-4 md:px-5 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-black placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-foreground disabled:cursor-not-allowed disabled:opacity-50 transition-all font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:translate-x-1 focus:translate-y-1 focus:shadow-none
             ${fieldErrors.name ? "border-[#ff4a4a]" : "border-foreground"}`}
                 />
                 {fieldErrors.name && (
@@ -77,7 +77,7 @@ export default function ContactForm() {
                     placeholder="name@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className={`flex h-14 w-full rounded-[1rem] border-4 bg-background px-5 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-black placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-foreground disabled:cursor-not-allowed disabled:opacity-50 transition-all font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:translate-x-1 focus:translate-y-1 focus:shadow-none
+                    className={`flex h-12 md:h-14 w-full rounded-[1rem] border-4 bg-background px-4 md:px-5 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-black placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-foreground disabled:cursor-not-allowed disabled:opacity-50 transition-all font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:translate-x-1 focus:translate-y-1 focus:shadow-none
             ${fieldErrors.email ? "border-[#ff4a4a]" : "border-foreground"}`}
                 />
                 {fieldErrors.email && (
@@ -96,7 +96,7 @@ export default function ContactForm() {
                     placeholder="Project details?"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="flex h-14 w-full rounded-[1rem] border-4 border-foreground bg-background px-5 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-foreground disabled:cursor-not-allowed disabled:opacity-50 transition-all font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:translate-x-1 focus:translate-y-1 focus:shadow-none"
+                    className="flex h-12 md:h-14 w-full rounded-[1rem] border-4 border-foreground bg-background px-4 md:px-5 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-foreground disabled:cursor-not-allowed disabled:opacity-50 transition-all font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:translate-x-1 focus:translate-y-1 focus:shadow-none"
                 />
             </div>
 
@@ -111,7 +111,7 @@ export default function ContactForm() {
                     placeholder="How can we help you?"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className={`flex min-h-[140px] w-full rounded-[1rem] border-4 bg-background px-5 py-4 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-foreground disabled:cursor-not-allowed disabled:opacity-50 resize-none transition-all font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:translate-x-1 focus:translate-y-1 focus:shadow-none
+                    className={`flex min-h-[140px] w-full rounded-[1rem] border-4 bg-background px-4 md:px-5 py-4 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-foreground disabled:cursor-not-allowed disabled:opacity-50 resize-none transition-all font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:translate-x-1 focus:translate-y-1 focus:shadow-none
             ${fieldErrors.message ? "border-[#ff4a4a]" : "border-foreground"}`}
                 />
                 {fieldErrors.message && (
@@ -122,7 +122,7 @@ export default function ContactForm() {
             <button
                 type="submit"
                 disabled={status === "loading"}
-                className="inline-flex h-16 items-center justify-center rounded-[1rem] bg-[#ff4a4a] px-8 py-2 text-base font-black tracking-wider uppercase text-white border-4 border-foreground shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-foreground disabled:pointer-events-none disabled:opacity-50 w-full transition-all mt-6"
+                className="inline-flex h-14 md:h-16 items-center justify-center rounded-[1rem] bg-[#ff4a4a] px-8 py-2 text-sm md:text-base font-black tracking-wider uppercase text-white border-4 border-foreground shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-foreground disabled:pointer-events-none disabled:opacity-50 w-full transition-all mt-6"
             >
                 {status === "loading" ? (
                     <span className="flex items-center justify-center gap-2">

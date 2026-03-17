@@ -227,7 +227,7 @@ export default async function Home() {
         </section>
 
         {/* CONSULTATION - CONCEPT 3: THE BLUEPRINT STRIP (TIMELINE CONTINUATION) */}
-        <section id="contact" className="py-24 md:py-32 lg:py-40 px-4 sm:px-6 md:px-12 bg-background border-b-4 border-foreground relative overflow-hidden">
+        <section id="contact" className="py-24 md:py-32 lg:py-40 px-8 sm:px-10 md:px-12 bg-background border-b-4 border-foreground relative overflow-hidden">
           {/* Blueprint Grid Background */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
                style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
@@ -244,9 +244,9 @@ export default async function Home() {
                     <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.5em] text-foreground/40 text-glow-sm">Secure Implementation</span>
                   </div>
                   
-                  <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-[0.8] mb-12">
+                  <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-[0.9] md:leading-[0.8] mb-8 md:mb-12">
                     Konsultasikan <br />
-                    <span className="italic font-serif text-secondary lowercase underline decoration-8 underline-offset-8">Visi</span> Anda.
+                    <span className="italic font-serif text-secondary lowercase underline decoration-4 md:decoration-8 underline-offset-4 md:underline-offset-8">Visi</span> Anda.
                   </h2>
 
                   <div className="relative mb-16">
@@ -257,14 +257,14 @@ export default async function Home() {
                   </div>
 
                   {/* New: Subtle Trust/Process Footer to fill space */}
-                  <div className="pt-12 border-t-2 border-foreground/5 grid grid-cols-2 gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                  <div className="pt-8 md:pt-12 border-t-2 border-foreground/5 grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest mb-3 text-secondary">Operational Hours</p>
-                      <p className="text-sm font-bold uppercase leading-tight">Mon — Fri <br /> 09:00 - 17:00 WIB</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest mb-2 md:mb-3 text-secondary">Operational Hours</p>
+                      <p className="text-xs md:text-sm font-bold uppercase leading-tight">Mon — Fri <br /> 09:00 - 17:00 WIB</p>
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest mb-3 text-secondary">Consultation Type</p>
-                      <p className="text-sm font-bold uppercase leading-tight">Remote First <br /> & On-Site Meeting</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest mb-2 md:mb-3 text-secondary">Consultation Type</p>
+                      <p className="text-xs md:text-sm font-bold uppercase leading-tight">Remote First <br /> & On-Site Meeting</p>
                     </div>
                   </div>
                 </ScrollReveal>
@@ -273,7 +273,7 @@ export default async function Home() {
               {/* Right: Floating Contact Center */}
               <div className="w-full lg:w-6/12 xl:w-5/12">
                 <ScrollReveal delay={0.2} direction="left">
-                  <div className="bg-white border-4 border-foreground rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-10 shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[20px_20px_0px_0px_rgba(0,0,0,1)] transition-all duration-500">
+                  <div className="bg-white border-4 border-foreground rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-12 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[20px_20px_0px_0px_rgba(0,0,0,1)] transition-all duration-500">
                     <div className="flex items-center justify-between mb-8 border-b-2 border-foreground/5 pb-6">
                       <div>
                         <h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter leading-none mb-1">Pesan Cepat</h3>
@@ -316,22 +316,24 @@ export default async function Home() {
         </section>
       </main>
 
-      <footer className="py-10 md:py-12 px-6 bg-primary text-primary-foreground border-t-4 border-foreground">
-        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-col sm:flex-row items-center gap-3">
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-background flex items-center justify-center rounded-xl border-2 md:border-4 border-foreground shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-              <Code2 className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+      <footer className="py-12 md:py-16 px-6 bg-primary text-primary-foreground border-t-4 border-foreground">
+        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-10 md:gap-6">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left">
+            <div className="w-12 h-12 md:w-14 md:h-14 bg-background flex items-center justify-center rounded-xl border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <Code2 className="w-6 h-6 md:w-7 md:h-7 text-foreground" />
             </div>
-            <div className="flex items-center mt-2 sm:mt-0">
-              <p className="font-black uppercase tracking-widest text-background text-lg md:text-xl ml-2">RBA<span className="text-foreground">dev.</span></p>
-              <span className="font-bold border-l-2 md:border-l-4 border-foreground pl-3 md:pl-4 ml-3 md:ml-4 text-background text-sm md:text-base">© {new Date().getFullYear()}</span>
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-0">
+              <p className="font-black uppercase tracking-widest text-background text-xl md:text-2xl">RBA<span className="text-foreground">dev.</span></p>
+              <span className="hidden md:block font-bold border-l-4 border-foreground pl-4 ml-4 text-background/60 text-base">© {new Date().getFullYear()}</span>
+              <span className="md:hidden font-bold text-background/60 text-sm">© {new Date().getFullYear()}</span>
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-xs md:text-sm font-black uppercase tracking-wider text-background">
-            <Link href="/admin/login" className="hover:text-foreground hover:underline transition-all">Admin Portal</Link>
-            <a href="#" className="hover:text-foreground hover:underline transition-all">Privacy Policy</a>
-            <a href="#" className="hover:text-foreground hover:underline transition-all">Terms of Service</a>
+          <div className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-10 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-background">
+            <Link href="/admin/login" className="hover:text-foreground hover:underline transition-all">Admin</Link>
+            <a href="#" className="hover:text-foreground hover:underline transition-all">Privacy</a>
+            <a href="#" className="hover:text-foreground hover:underline transition-all">Terms</a>
+            <a href="#" className="hover:text-foreground hover:underline transition-all">Support</a>
           </div>
         </div>
       </footer>
