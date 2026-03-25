@@ -73,7 +73,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
 
                     <footer className="mt-20 pt-10 border-t-8 border-foreground flex flex-col md:flex-row items-center justify-between gap-8">
                         <div className="flex items-center gap-4">
-                            <div className="w-14 h-14 bg-[#fff133] border-4 border-foreground rounded-full flex items-center justify-center font-black text-xl">
+                            <div className="w-14 h-14 bg-primary border-4 border-foreground rounded-full flex items-center justify-center font-black text-xl">
                                 R
                             </div>
                             <div>

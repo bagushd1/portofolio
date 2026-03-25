@@ -46,7 +46,7 @@ export default async function Home() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Box 2: The Mission (Bottom Left) */}
                 <ScrollReveal delay={0.2}>
-                  <div className="bg-[#fff133] border-4 border-foreground p-8 md:p-10 rounded-[2.5rem] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-full flex flex-col justify-center">
+                  <div className="bg-primary border-4 border-foreground p-8 md:p-10 rounded-[2.5rem] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-full flex flex-col justify-center">
                     <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-4 md:mb-6">The Mission</h3>
                     <p className="font-bold text-lg md:text-xl lg:text-2xl leading-relaxed text-foreground/80">
                       Mendampingi digitalisasi bisnis Anda. Mengubah proses manual menjadi ekosistem digital otomatis yang tak merepotkan.
@@ -302,7 +302,7 @@ export default async function Home() {
                             </a>
                             <a 
                                 href="mailto:hello@rbadev.com"
-                                className="flex items-center justify-center gap-3 px-6 py-4 bg-[#4a9eff] border-4 border-foreground rounded-xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all font-black uppercase text-xs tracking-widest text-foreground"
+                                className="flex items-center justify-center gap-3 px-6 py-4 bg-secondary border-4 border-foreground rounded-xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all font-black uppercase text-xs tracking-widest text-foreground"
                             >
                                 <Mail className="w-5 h-5" /> Email Direct
                             </a>

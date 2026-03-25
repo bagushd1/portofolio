@@ -24,7 +24,7 @@ export default async function DashboardOverview() {
             </div>
 
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <div className="brutalist-card p-8 bg-[#4a9eff] text-white">
+                <div className="brutalist-card p-8 bg-secondary text-white">
                     <div className="flex justify-between items-start mb-6">
                         <span className="text-xs font-black uppercase tracking-widest opacity-80">Total Proyek</span>
                         <FolderKanban className="w-6 h-6" />
@@ -33,7 +33,7 @@ export default async function DashboardOverview() {
                     <p className="text-sm font-bold opacity-80 uppercase tracking-wider">Karya terpublikasi</p>
                 </div>
 
-                <div className="brutalist-card p-8 bg-[#fff133] text-foreground">
+                <div className="brutalist-card p-8 bg-primary text-foreground">
                     <div className="flex justify-between items-start mb-6">
                         <span className="text-xs font-black uppercase tracking-widest opacity-70">Pesan Baru</span>
                         <MessageSquare className="w-6 h-6" />

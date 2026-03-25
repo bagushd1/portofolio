@@ -64,7 +64,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     {/* Bento Grid Content */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 md:mb-24">
                         {/* Challenge Box */}
-                        <ScrollReveal delay={0.4} direction="right" className="bg-[#fff133] border-4 border-foreground rounded-[2rem] p-8 md:p-12 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                        <ScrollReveal delay={0.4} direction="right" className="bg-primary border-4 border-foreground rounded-[2rem] p-8 md:p-12 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                             <h2 className="text-3xl font-black uppercase tracking-tight mb-6">The Challenge</h2>
                             <p className="text-lg font-bold leading-relaxed text-foreground/80">
                                 {project.challenge || "Detail tantangan belum ditambahkan oleh admin."}
@@ -82,7 +82,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
                     {/* Main Content / Case Study Details */}
                     <ScrollReveal delay={0.6} className="prose prose-xl prose-invert max-w-none text-foreground font-medium leading-relaxed mb-24">
-                        <h2 className="text-4xl font-black uppercase tracking-tight mb-12 border-b-8 border-[#4a9eff] inline-block">Deep Dive & Analysis</h2>
+                        <h2 className="text-4xl font-black uppercase tracking-tight mb-12 border-b-8 border-secondary inline-block">Deep Dive & Analysis</h2>
                         <div className="whitespace-pre-wrap">
                             {project.content || "Tuliskan detail pengerjaan, arsitektur, dan dampak sistem di sini melalui admin panel."}
                         </div>

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 };
 
 import SmoothScroll from "@/components/SmoothScroll";
+import MotionProvider from "@/components/MotionProvider";
 
 export default function RootLayout({
   children,
@@ -24,10 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${jakarta.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
-        <SmoothScroll>
-          {children}
-          <Toaster theme="light" position="top-right" />
-        </SmoothScroll>
+        <MotionProvider>
+          <SmoothScroll>
+            {children}
+            <Toaster theme="light" position="top-right" />
+          </SmoothScroll>
+        </MotionProvider>
       </body>
     </html>
   );

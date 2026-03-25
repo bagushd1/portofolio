@@ -46,6 +46,22 @@ export interface Testimonial {
     created_at: string;
 }
 
+function formatSupabaseError(error: any): string {
+    if (!error) return "Unknown error";
+    
+    // Handle Cloudflare/Supabase 5xx HTML responses
+    if (error.status === 521 || (typeof error.message === 'string' && error.message.includes('<!DOCTYPE html>'))) {
+        return "Supabase service is currently unavailable or starting up (5xx response). Please try again in a few minutes.";
+    }
+    
+    // Handle stale schema cache after project resume
+    if (error.code === 'PGRST205') {
+        return "Database table not found in schema cache. The project was likely just resumed; please wait a few minutes for the API to initialize.";
+    }
+    
+    return error.message || "Unknown error";
+}
+
 export async function getPublicProjects(): Promise<Project[]> {
     const supabase = createPublicClient();
 
@@ -56,7 +72,7 @@ export async function getPublicProjects(): Promise<Project[]> {
         .order("created_at", { ascending: false });
 
     if (error) {
-        console.error("Error fetching projects:", error.message, error.details);
+        console.error("Error fetching projects:", formatSupabaseError(error));
         return [];
     }
 
@@ -72,7 +88,7 @@ export async function getPublicTestimonials(): Promise<Testimonial[]> {
         .order("created_at", { ascending: false });
 
     if (error) {
-        console.error("Error fetching testimonials:", error.message);
+        console.error("Error fetching testimonials:", formatSupabaseError(error));
         return [];
     }
 
@@ -88,7 +104,7 @@ export async function getPublicServices(): Promise<Service[]> {
         .order("order_index", { ascending: true });
 
     if (error) {
-        console.error("Error fetching services:", error.message);
+        console.error("Error fetching services:", formatSupabaseError(error));
         return [];
     }
 
@@ -105,7 +121,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
         .single();
 
     if (error) {
-        console.error("Error fetching project by slug:", error.message);
+        console.error("Error fetching project by slug:", formatSupabaseError(error));
         return null;
     }
 
@@ -122,7 +138,7 @@ export async function getPublishedArticles(): Promise<Article[]> {
         .order("created_at", { ascending: false });
 
     if (error) {
-        console.error("Error fetching articles:", error.message);
+        console.error("Error fetching articles:", formatSupabaseError(error));
         return [];
     }
 
@@ -140,7 +156,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
         .maybeSingle();
 
     if (error) {
-        console.error(`[API] Error fetching article by slug ["${slug}"]:`, error.message);
+        console.error(`[API] Error fetching article by slug ["${slug}"]:`, formatSupabaseError(error));
         return null;
     }
 
