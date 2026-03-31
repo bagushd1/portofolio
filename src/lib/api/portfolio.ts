@@ -66,10 +66,10 @@ function formatSupabaseError(error: any): string {
 export async function getPublicProjects(): Promise<Project[]> {
     const supabase = createPublicClient();
 
-    // Optimasi Fetching: Hanya select kolom yang dibutuhkan dan di-order berdasar waktu (terbaru dulu)
+    // Optimasi Fetching: Ambil semua kolom (robust terhadap perubahan schema)
     const { data, error } = await supabase
         .from("projects")
-        .select("id, title, slug, description, image_url, gallery_urls, tech_stack, live_link, content, challenge, solution, created_at")
+        .select("*")
         .order("created_at", { ascending: false });
 
     if (error) {
