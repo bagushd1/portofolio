@@ -7,6 +7,7 @@ export interface Project {
     slug: string | null;
     description: string;
     image_url: string | null;
+    gallery_urls: string[] | null;
     tech_stack: string[];
     live_link: string | null;
     content: string | null;
@@ -65,10 +66,10 @@ function formatSupabaseError(error: any): string {
 export async function getPublicProjects(): Promise<Project[]> {
     const supabase = createPublicClient();
 
-    // Optimasi Fetching: Hanya select kolom yang dibutuhkan dan di-order berdasar waktu (terbaru dulu)
+    // Optimasi Fetching: Ambil semua kolom (robust terhadap perubahan schema)
     const { data, error } = await supabase
         .from("projects")
-        .select("id, title, slug, description, image_url, tech_stack, live_link, content, challenge, solution, created_at")
+        .select("*")
         .order("created_at", { ascending: false });
 
     if (error) {

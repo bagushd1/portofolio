@@ -5,6 +5,7 @@ import { ArrowLeft, ExternalLink, Laptop, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ProjectGallery from "@/components/Project/ProjectGallery";
 
 export const revalidate = 60;
 
@@ -87,6 +88,11 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                             {project.content || "Tuliskan detail pengerjaan, arsitektur, dan dampak sistem di sini melalui admin panel."}
                         </div>
                     </ScrollReveal>
+
+                    {/* Project Gallery Showcase */}
+                    {project.gallery_urls && project.gallery_urls.length > 0 && (
+                        <ProjectGallery images={project.gallery_urls} />
+                    )}
 
                     {/* CTA / Results */}
                     <ScrollReveal delay={0.7} className="bg-foreground text-background rounded-[2rem] p-8 md:p-16 border-4 border-foreground shadow-[8px_8px_0px_0px_rgba(187,247,208,1)] text-center">
