@@ -14,6 +14,7 @@ interface ProjectData {
     tech_stack: string[];
     live_link?: string;
     image_url?: string;
+    gallery_urls?: string[];
     content?: string;
     challenge?: string;
     solution?: string;
@@ -67,6 +68,7 @@ export async function createProject(data: ProjectData) {
         tech_stack: data.tech_stack,
         live_link: data.live_link || null,
         image_url: data.image_url || null,
+        gallery_urls: data.gallery_urls || [],
         content: data.content || null,
         challenge: data.challenge || null,
         solution: data.solution || null,
@@ -96,6 +98,7 @@ export async function updateProject(id: string, data: ProjectData) {
             tech_stack: data.tech_stack,
             live_link: data.live_link || null,
             image_url: data.image_url || null,
+            gallery_urls: data.gallery_urls || [],
             content: data.content || null,
             challenge: data.challenge || null,
             solution: data.solution || null,

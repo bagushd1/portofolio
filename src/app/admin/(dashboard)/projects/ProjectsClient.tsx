@@ -9,7 +9,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, ExternalLink, Github, Loader2, FolderKanban } from "lucide-react";
+import { Plus, Pencil, Trash2, ExternalLink, Github, Loader2, FolderKanban, X, ImageIcon } from "lucide-react";
 import { createProject, updateProject, deleteProject, uploadImage } from "@/lib/actions/project";
 import Image from "next/image";
 
@@ -19,6 +19,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
     const [deleteLoading, setDeleteLoading] = useState<string | null>(null);
     const [editingId, setEditingId] = useState<string | null>(null);
     const [currentImageUrl, setCurrentImageUrl] = useState("");
+    const [galleryUrls, setGalleryUrls] = useState<string[]>([]);
 
     // Form stats
     const [title, setTitle] = useState("");
@@ -42,6 +43,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
         setContent("");
         setFile(null);
         setCurrentImageUrl("");
+        setGalleryUrls([]);
         setEditingId(null);
     }
 
@@ -62,6 +64,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
         setSolution(project.solution || "");
         setContent(project.content || "");
         setCurrentImageUrl(project.image_url || "");
+        setGalleryUrls(project.gallery_urls || []);
         setEditingId(project.id);
         setIsOpen(true);
     };
@@ -98,6 +101,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                 solution,
                 content,
                 image_url: imageUrl,
+                gallery_urls: galleryUrls,
             };
 
             let result;
@@ -120,6 +124,38 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleGalleryUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = Array.from(e.target.files || []);
+        if (files.length === 0) return;
+
+        setLoading(true);
+        const newUrls: string[] = [];
+
+        try {
+            for (const file of files) {
+                const formData = new FormData();
+                formData.append("file", file);
+                const uploadResult = await uploadImage(formData);
+
+                if (uploadResult.error || !uploadResult.success) {
+                    toast.error(`Failed to upload ${file.name}: ${uploadResult.error}`);
+                    continue;
+                }
+                newUrls.push(uploadResult.url as string);
+            }
+            setGalleryUrls(prev => [...prev, ...newUrls]);
+            toast.success(`${newUrls.length} image(s) uploaded to gallery`);
+        } catch (error: any) {
+            toast.error(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const removeGalleryImage = (index: number) => {
+        setGalleryUrls(prev => prev.filter((_, i) => i !== index));
     };
 
     const handleDelete = async (id: string) => {
@@ -196,16 +232,48 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                                         </div>
                                     </div>
 
-                                    <div className="xl:col-span-12 space-y-4 pt-8 border-t-2 border-slate-100 text-center">
-                                        <Label className="text-xs text-foreground uppercase tracking-[0.2em] font-black">Aset Visual Utama</Label>
-                                        <div className="flex flex-col items-center justify-center p-6 bg-slate-50 border-4 border-dashed border-foreground/10 rounded-[2rem]">
-                                            {currentImageUrl && !file && (
-                                                <div className="relative w-48 aspect-video border-2 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0 mb-4 rounded-2xl overflow-hidden">
-                                                    <Image src={currentImageUrl} alt="Current project cover" fill className="object-cover" />
+                                    <div className="xl:col-span-12 space-y-8 pt-8 border-t-2 border-slate-100">
+                                        <div className="text-center">
+                                            <Label className="text-xs text-foreground uppercase tracking-[0.2em] font-black block mb-4">Aset Visual Utama (Cover)</Label>
+                                            <div className="flex flex-col items-center justify-center p-6 bg-slate-50 border-4 border-dashed border-foreground/10 rounded-[2rem]">
+                                                {currentImageUrl && !file && (
+                                                    <div className="relative w-48 aspect-video border-2 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0 mb-4 rounded-2xl overflow-hidden">
+                                                        <Image src={currentImageUrl} alt="Current project cover" fill className="object-cover" />
+                                                    </div>
+                                                )}
+                                                <div className="w-full max-w-lg space-y-2">
+                                                    <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="brutalist-input file:bg-primary file:font-black file:uppercase file:text-[10px] file:h-full file:border-0 file:border-r-2 file:border-foreground file:mr-4 file:px-6 h-12 flex items-center" />
                                                 </div>
-                                            )}
-                                            <div className="w-full max-w-lg space-y-2">
-                                                <Input id="image" type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} className="brutalist-input file:bg-primary file:font-black file:uppercase file:text-[10px] file:h-full file:border-0 file:border-r-2 file:border-foreground file:mr-4 file:px-6 h-12 flex items-center" />
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-4">
+                                            <Label className="text-xs text-foreground uppercase tracking-[0.2em] font-black block text-center">Project Gallery (Portfolio Assets)</Label>
+                                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4 bg-slate-50 border-4 border-dashed border-foreground/10 rounded-[2rem]">
+                                                {galleryUrls.map((url, index) => (
+                                                    <div key={index} className="relative aspect-square border-2 border-foreground rounded-xl overflow-hidden group shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                                        <Image src={url} alt={`Gallery image ${index + 1}`} fill className="object-cover" />
+                                                        <button 
+                                                            onClick={() => removeGalleryImage(index)}
+                                                            type="button"
+                                                            className="absolute top-1 right-1 bg-destructive text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                                        >
+                                                            <X className="w-3 h-3" />
+                                                        </button>
+                                                    </div>
+                                                ))}
+                                                <label className="relative aspect-square border-2 border-dashed border-foreground/30 rounded-xl cursor-copy hover:border-primary hover:bg-primary/5 transition-all flex flex-col items-center justify-center gap-2 group">
+                                                    <ImageIcon className="w-6 h-6 text-foreground/30 group-hover:text-primary" />
+                                                    <span className="text-[10px] font-black uppercase text-foreground/30 group-hover:text-primary">Unggah Baru</span>
+                                                    <input 
+                                                        type="file" 
+                                                        multiple 
+                                                        accept="image/*" 
+                                                        className="hidden" 
+                                                        onChange={handleGalleryUpload}
+                                                        disabled={loading}
+                                                    />
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
